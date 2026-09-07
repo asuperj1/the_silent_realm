@@ -1,0 +1,359 @@
+[
+  {
+    "resId": "placeholder_dark",
+    "tags": [
+      "占位",
+      "黑暗",
+      "室内",
+      "通用"
+    ],
+    "url": "./assets/qingfeng_scenes/废都青峰山4号车正常.png"
+  },
+  {
+    "resId": "village_night",
+    "tags": [
+      "古代荒村",
+      "夜晚",
+      "雾气",
+      "破旧木屋",
+      "野外场景",
+      "副本场景",
+      "可触发SAN损耗",
+      "战斗切换背景"
+    ],
+    "url": "./assets/qingfeng_scenes/废都青峰山4号车正常.png"
+  },
+  {
+    "resId": "hospital_corridor",
+    "tags": [
+      "废弃精神病院",
+      "昏暗走廊",
+      "血迹",
+      "室内",
+      "潮湿",
+      "副本场景",
+      "可触发SAN损耗",
+      "战斗切换背景"
+    ],
+    "url": "./assets/qingfeng_scenes/废都青峰山4号车正常.png"
+  },
+  {
+    "resId": "ocean_ship",
+    "tags": [
+      "幽灵船",
+      "大海",
+      "雨夜",
+      "甲板",
+      "航海场景",
+      "副本场景",
+      "可触发SAN损耗",
+      "战斗切换背景"
+    ],
+    "url": "./assets/qingfeng_scenes/废都青峰山4号车正常.png"
+  },
+  {
+    "resId": "roman_arena",
+    "tags": [
+      "古罗马遗迹",
+      "角斗场",
+      "废墟",
+      "黄昏",
+      "古代建筑",
+      "副本场景",
+      "可触发SAN损耗",
+      "战斗切换背景"
+    ],
+    "url": "./assets/qingfeng_scenes/废都青峰山4号车正常.png"
+  },
+  {
+    "resId": "abandoned_house",
+    "tags": [
+      "废弃古宅",
+      "室内大厅",
+      "破败家具",
+      "阴影",
+      "陈旧",
+      "副本场景",
+      "可触发SAN损耗",
+      "战斗切换背景"
+    ],
+    "url": "./assets/qingfeng_scenes/废都青峰山4号车正常.png"
+  },
+  {
+    "resId": "cave_dark",
+    "tags": [
+      "黑暗洞穴",
+      "地下",
+      "潮湿岩壁",
+      "无光环境",
+      "探险",
+      "副本场景",
+      "可触发SAN损耗",
+      "战斗切换背景"
+    ],
+    "url": "./assets/qingfeng_scenes/废都青峰山4号车正常.png"
+  },
+  {
+    "resId": "submarine_station",
+    "tags": [
+      "深海殖民废弃站",
+      "水下",
+      "金属走廊",
+      "科技遗迹",
+      "诡异灯光",
+      "副本场景",
+      "可触发SAN损耗",
+      "战斗切换背景"
+    ],
+    "url": "./assets/qingfeng_scenes/废都青峰山4号车正常.png"
+  },
+  {
+    "resId": "lab_ruins",
+    "tags": [
+      "封闭废弃研究所",
+      "实验室",
+      "仪器残骸",
+      "昏暗",
+      "科技废墟",
+      "副本场景",
+      "可触发SAN损耗",
+      "战斗切换背景"
+    ],
+    "url": "./assets/qingfeng_scenes/废都青峰山4号车正常.png"
+  },
+  {
+    "resId": "city_ruins",
+    "tags": [
+      "失联都市无人区",
+      "城市废墟",
+      "迷雾",
+      "空荡街道",
+      "末日感",
+      "副本场景",
+      "可触发SAN损耗",
+      "战斗切换背景"
+    ],
+    "url": "./assets/qingfeng_scenes/废都青峰山4号车正常.png"
+  },
+  {
+    "resId": "twisted_space",
+    "tags": [
+      "轮回扭曲时空",
+      "异次元",
+      "扭曲光线",
+      "虚空",
+      "超自然",
+      "副本场景",
+      "可触发SAN损耗",
+      "战斗切换背景",
+      "扣散异象",
+      "高SAN消耗场景"
+    ],
+    "url": "./assets/qingfeng_scenes/废都青峰山4号车正常.png"
+  },
+  {
+    "resId": "panel_attr_bg",
+    "tags": [
+      "UI",
+      "面板",
+      "属性背景",
+      "单人属性面板",
+      "战斗属性弹窗"
+    ],
+    "url": "./assets/ui/equip_weapon.png"
+  },
+  {
+    "resId": "hp_icon",
+    "tags": [
+      "HP",
+      "生命",
+      "图标",
+      "战斗面板",
+      "小队信息"
+    ],
+    "url": "./assets/icons/skills/fangshi/001.png"
+  },
+  {
+    "resId": "san_icon",
+    "tags": [
+      "SAN",
+      "理智",
+      "图标",
+      "战斗面板",
+      "小队信息"
+    ],
+    "url": "./assets/icons/skills/fangshi/001.png"
+  },
+  {
+    "resId": "str_icon",
+    "tags": [
+      "STR",
+      "力量",
+      "图标",
+      "战斗面板",
+      "小队信息"
+    ],
+    "url": "./assets/icons/skills/fangshi/001.png"
+  },
+  {
+    "resId": "dex_icon",
+    "tags": [
+      "DEX",
+      "敏捷",
+      "图标",
+      "战斗面板",
+      "小队信息"
+    ],
+    "url": "./assets/icons/skills/fangshi/001.png"
+  },
+  {
+    "resId": "con_icon",
+    "tags": [
+      "CON",
+      "体质",
+      "图标",
+      "战斗面板",
+      "小队信息"
+    ],
+    "url": "./assets/icons/skills/fangshi/001.png"
+  },
+  {
+    "resId": "per_icon",
+    "tags": [
+      "PER",
+      "感知",
+      "图标",
+      "战斗面板",
+      "小队信息"
+    ],
+    "url": "./assets/icons/skills/fangshi/001.png"
+  },
+  {
+    "resId": "wil_icon",
+    "tags": [
+      "WIL",
+      "意志",
+      "图标",
+      "战斗面板",
+      "小队信息"
+    ],
+    "url": "./assets/icons/skills/fangshi/001.png"
+  },
+  {
+    "resId": "tunnel_crypt",
+    "tags": [
+      "地下石隧道",
+      "古老遗迹",
+      "昏暗",
+      "潮湿",
+      "克苏鲁",
+      "副本场景",
+      "可触发SAN损耗",
+      "战斗切换背景"
+    ],
+    "url": "./assets/qingfeng_scenes/废都青峰山4号车正常.png"
+  },
+  {
+    "resId": "village_house",
+    "tags": [
+      "荒村",
+      "民居",
+      "破旧",
+      "阴影",
+      "恐怖",
+      "副本场景",
+      "可触发SAN损耗",
+      "战斗切换背景"
+    ],
+    "url": "./assets/qingfeng_scenes/废都青峰山4号车正常.png"
+  },
+  {
+    "resId": "altar_ruin",
+    "tags": [
+      "古老祭坛",
+      "血迹",
+      "符文",
+      "废墟",
+      "祭祀",
+      "副本场景",
+      "可触发SAN损耗",
+      "战斗切换背景"
+    ],
+    "url": "./assets/qingfeng_scenes/废都青峰山4号车正常.png"
+  },
+  {
+    "resId": "rift_edge",
+    "tags": [
+      "异界裂隙",
+      "虚空",
+      "扭曲光线",
+      "超自然",
+      "疯狂",
+      "副本场景",
+      "可触发SAN损耗",
+      "战斗切换背景",
+      "扣散异象",
+      "高SAN消耗场景"
+    ],
+    "url": "./assets/qingfeng_scenes/废都青峰山4号车正常.png"
+  },
+  {
+    "resId": "shop_item_bg",
+    "tags": [
+      "商店",
+      "底板",
+      "木板"
+    ],
+    "url": "./assets/ui/equip_weapon.png"
+  },
+  {
+    "resId": "hourglass_action_icon",
+    "tags": [
+      "行动次数",
+      "图标",
+      "战斗面板"
+    ],
+    "url": "./assets/icons/skills/fangshi/001.png"
+  },
+  {
+    "resId": "check_done_icon",
+    "tags": [
+      "完成标记",
+      "对勾",
+      "图标",
+      "战斗面板"
+    ],
+    "url": "./assets/icons/skills/fangshi/001.png"
+  },
+  {
+    "resId": "down_icon",
+    "tags": [
+      "倒地",
+      "HP归零",
+      "图标",
+      "战斗面板"
+    ],
+    "url": "./assets/icons/skills/fangshi/001.png"
+  },
+  {
+    "resId": "mad_icon",
+    "tags": [
+      "疯狂",
+      "SAN归零",
+      "图标",
+      "战斗面板"
+    ],
+    "url": "./assets/icons/skills/fangshi/001.png"
+  },
+  {
+    "resId": "panel_team_bg",
+    "tags": [
+      "UI",
+      "面板",
+      "底板",
+      "小队信息",
+      "战斗面板"
+    ],
+    "url": "./assets/ui/equip_weapon.png"
+  }
+]

@@ -1,0 +1,1338 @@
+{
+  "dungeonId": "qingfengshan",
+  "prefix": "QFS",
+  "maxQuality": "purple",
+  "belongs": [
+    "白色薄层灵魂刻痕"
+  ],
+  "note": "青峰山虚空列车副本物品导入清单（对齐《青峰山虚空列车带物品数值 V5.0》第三部分）普通掉落≤紫；黑装仅修格斯幼体 bossDrop",
+  "customEffects": [
+    "qingfengshan.timelock",
+    "qingfengshan.radio",
+    "qingfengshan.chenhui",
+    "qingfengshan.shoggoth"
+  ],
+  "items": [
+    {
+      "itemId": "QFSD001",
+      "itemName": "泛黄G314进站车票",
+      "type": "plot",
+      "quality": "white",
+      "desc": "解锁1号门禁；全队感知+2",
+      "icon": "🎫",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "线索"
+      ],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "stat",
+          "stat": "per",
+          "value": 2,
+          "target": "ally"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSD002",
+      "itemName": "裂隙观测手记",
+      "type": "plot",
+      "quality": "green",
+      "desc": "全队精神抗性+15；显示怪物敏捷",
+      "icon": "📓",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "线索"
+      ],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "buff",
+          "label": "精神抗性",
+          "value": 15,
+          "target": "ally"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSD003",
+      "itemName": "列车制动铜钥匙",
+      "type": "plot",
+      "quality": "blue",
+      "desc": "修格斯「时空锁定」：减伤 60% → 20%",
+      "icon": "🗝️",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": true,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "线索",
+        "钥匙"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "custom",
+          "custom": "qingfengshan.timelock"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSD004",
+      "itemName": "乘务员残损执勤表",
+      "type": "plot",
+      "quality": "purple",
+      "desc": "全队体质+3，重算生命上限",
+      "icon": "📋",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "线索"
+      ],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "stat",
+          "stat": "con",
+          "value": 3,
+          "target": "ally"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSD005",
+      "itemName": "陈慧求救便签",
+      "type": "plot",
+      "quality": "green",
+      "desc": "揭示陈慧位置与米戈规律",
+      "icon": "📝",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": true,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "线索"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "dialog",
+          "msg": "便签上写着：陈慧在5号车末尾，左腿被座椅卡住。米戈只在2号车潜伏。"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSD006",
+      "itemName": "伪造安全广播稿",
+      "type": "plot",
+      "quality": "blue",
+      "desc": "感知≥35 识破 → 获得米戈证据",
+      "icon": "📻",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": true,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "线索"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "identify",
+          "msg": "广播稿是伪造的——这是米戈的拟态证据。"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSD007",
+      "itemName": "修格斯幼体目击记录",
+      "type": "plot",
+      "quality": "purple",
+      "desc": "揭示Boss弱点与逃离条件",
+      "icon": "📖",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": true,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "线索"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "custom",
+          "custom": "qingfengshan.shoggoth"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSD008",
+      "itemName": "逃生通道示意图",
+      "type": "plot",
+      "quality": "blue",
+      "desc": "揭示8号车尾侧壁紧急通道",
+      "icon": "🗺️",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": true,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "线索"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "identify",
+          "msg": "8号车尾侧壁有紧急逃生通道，需贴地爬行通过。注意：通道口有修格斯幼体盘踞。"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSC001",
+      "itemName": "密封矿泉水",
+      "type": "consumable",
+      "quality": "white",
+      "desc": "生命+12",
+      "icon": "💧",
+      "stackable": true,
+      "maxStack": 10,
+      "usable": true,
+      "cooldown": 2,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "治疗"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "hp",
+          "value": 12,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSC006",
+      "itemName": "列车压缩饼干",
+      "type": "consumable",
+      "quality": "white",
+      "desc": "生命+15",
+      "icon": "🍪",
+      "stackable": true,
+      "maxStack": 10,
+      "usable": true,
+      "cooldown": 2,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "治疗"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "hp",
+          "value": 15,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSC010",
+      "itemName": "9mm手枪弹匣",
+      "type": "consumable",
+      "quality": "white",
+      "desc": "手枪弹药，物攻×1.1",
+      "icon": "🔫",
+      "stackable": true,
+      "maxStack": 10,
+      "usable": false,
+      "cooldown": 2,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "弹药",
+        "子弹"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "damage",
+          "value": 0,
+          "msg": "装填9mm弹匣（简易手枪物攻×1.1）"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSC002",
+      "itemName": "镇静草药包",
+      "type": "consumable",
+      "quality": "green",
+      "desc": "理智+18抵消；精神抗性+12（3回合）",
+      "icon": "🌿",
+      "stackable": true,
+      "maxStack": 5,
+      "usable": true,
+      "cooldown": 3,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "理智"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "san",
+          "value": 18,
+          "target": "self"
+        },
+        {
+          "trigger": "use",
+          "kind": "buff",
+          "label": "精神抗性",
+          "value": 12,
+          "duration": 3,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSC005",
+      "itemName": "装甲润滑油脂",
+      "type": "consumable",
+      "quality": "green",
+      "desc": "力量+3（2回合）",
+      "icon": "🛢️",
+      "stackable": true,
+      "maxStack": 6,
+      "usable": true,
+      "cooldown": 3,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "增益"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "stat",
+          "stat": "str",
+          "value": 3,
+          "duration": 2,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSC007",
+      "itemName": "罐装列车咖啡",
+      "type": "consumable",
+      "quality": "green",
+      "desc": "敏捷+3（2回合）",
+      "icon": "☕",
+      "stackable": true,
+      "maxStack": 6,
+      "usable": true,
+      "cooldown": 3,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "增益"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "stat",
+          "stat": "dex",
+          "value": 3,
+          "duration": 2,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSC008",
+      "itemName": "消毒酒精棉",
+      "type": "consumable",
+      "quality": "green",
+      "desc": "理智+18",
+      "icon": "🧻",
+      "stackable": true,
+      "maxStack": 8,
+      "usable": true,
+      "cooldown": 3,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "理智"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "san",
+          "value": 18,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSC011",
+      "itemName": "12号霰弹",
+      "type": "consumable",
+      "quality": "green",
+      "desc": "霰弹枪弹药，物攻×0.9×2目标",
+      "icon": "💣",
+      "stackable": true,
+      "maxStack": 5,
+      "usable": false,
+      "cooldown": 3,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "弹药",
+        "霰弹"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "damage",
+          "value": 0,
+          "msg": "装填12号霰弹（双管霰弹枪物攻×0.9×2目标）"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSC009",
+      "itemName": "蒸馏提神药",
+      "type": "consumable",
+      "quality": "blue",
+      "desc": "感知+5（3回合）",
+      "icon": "🧪",
+      "stackable": true,
+      "maxStack": 3,
+      "usable": true,
+      "cooldown": 4,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "增益"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "stat",
+          "stat": "per",
+          "value": 5,
+          "duration": 3,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSC004",
+      "itemName": "锈蚀肾上腺素针剂",
+      "type": "consumable",
+      "quality": "blue",
+      "desc": "敏捷+5（3回合）；副作用 理智-5",
+      "icon": "💉",
+      "stackable": true,
+      "maxStack": 2,
+      "usable": true,
+      "cooldown": 6,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "增益",
+        "风险"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "stat",
+          "stat": "dex",
+          "value": 5,
+          "duration": 3,
+          "target": "self"
+        },
+        {
+          "trigger": "use",
+          "kind": "san",
+          "value": -5,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSC012",
+      "itemName": "精神稳定注射剂",
+      "type": "consumable",
+      "quality": "purple",
+      "desc": "理智+45",
+      "icon": "💊",
+      "stackable": true,
+      "maxStack": 2,
+      "usable": true,
+      "cooldown": 5,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "理智"
+      ],
+      "effects": [
+        {
+          "trigger": "use",
+          "kind": "san",
+          "value": 45,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSM001",
+      "itemName": "锈蚀列车螺丝",
+      "type": "material",
+      "quality": "white",
+      "desc": "维修7号设备间防护隔板",
+      "icon": "🔩",
+      "stackable": true,
+      "maxStack": 20,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "制造"
+      ],
+      "effects": []
+    },
+    {
+      "itemId": "QFSM004",
+      "itemName": "破碎列车玻璃",
+      "type": "material",
+      "quality": "white",
+      "desc": "切割工具/交易",
+      "icon": "🪟",
+      "stackable": true,
+      "maxStack": 20,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "制造"
+      ],
+      "effects": []
+    },
+    {
+      "itemId": "QFSM002",
+      "itemName": "绝缘电缆段",
+      "type": "material",
+      "quality": "green",
+      "desc": "修复电气机关",
+      "icon": "🔌",
+      "stackable": true,
+      "maxStack": 8,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "制造"
+      ],
+      "effects": []
+    },
+    {
+      "itemId": "QFSM005",
+      "itemName": "引擎传动零件",
+      "type": "material",
+      "quality": "blue",
+      "desc": "开启逃生通道阀",
+      "icon": "⚙️",
+      "stackable": true,
+      "maxStack": 5,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "制造"
+      ],
+      "effects": []
+    },
+    {
+      "itemId": "QFSM003",
+      "itemName": "旧乘务员徽章",
+      "type": "material",
+      "quality": "purple",
+      "desc": "兑换专属装备",
+      "icon": "🎖️",
+      "stackable": true,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "货币"
+      ],
+      "effects": []
+    },
+    {
+      "itemId": "QFSM006",
+      "itemName": "陈慧的旧怀表",
+      "type": "material",
+      "quality": "purple",
+      "desc": "陈慧获救赠予/剧情道具",
+      "icon": "⌚",
+      "stackable": true,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "tags": [
+        "纪念"
+      ],
+      "effects": []
+    },
+    {
+      "itemId": "QFSE001",
+      "itemName": "列车撬棍",
+      "type": "equipment",
+      "quality": "green",
+      "desc": "力量+4，物攻+18；【撬锁鉴定】开锁判定-10",
+      "icon": "🪓",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "slot": "weapon",
+      "weaponKind": "melee",
+      "tags": [
+        "工具"
+      ],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "stat",
+          "stat": "str",
+          "value": 4,
+          "target": "self"
+        },
+        {
+          "trigger": "passive",
+          "kind": "buff",
+          "label": "撬锁鉴定",
+          "value": -10,
+          "target": "self"
+        }
+      ],
+      "baseDmg": 26,
+      "ap": 3,
+      "hits": 1
+    },
+    {
+      "itemId": "QFSE002",
+      "itemName": "生锈拆解刀",
+      "type": "equipment",
+      "quality": "white",
+      "desc": "力量+2，物攻+10",
+      "icon": "🔪",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "slot": "weapon",
+      "weaponKind": "melee",
+      "tags": [],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "stat",
+          "stat": "str",
+          "value": 2,
+          "target": "self"
+        }
+      ],
+      "baseDmg": 18,
+      "ap": 3,
+      "hits": 1
+    },
+    {
+      "itemId": "QFSE003",
+      "itemName": "简易手枪",
+      "type": "equipment",
+      "quality": "green",
+      "desc": "敏捷+4，物攻+22（远程·耗弹匣）；【精准】命中+5",
+      "icon": "🔫",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "slot": "weapon",
+      "weaponKind": "ranged",
+      "tags": [
+        "弹药",
+        "子弹"
+      ],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "stat",
+          "stat": "dex",
+          "value": 4,
+          "target": "self"
+        },
+        {
+          "trigger": "passive",
+          "kind": "buff",
+          "label": "精准",
+          "value": 5,
+          "target": "self"
+        }
+      ],
+      "baseDmg": 34,
+      "ap": 4,
+      "hits": 2
+    },
+    {
+      "itemId": "QFSE004",
+      "itemName": "双管霰弹枪",
+      "type": "equipment",
+      "quality": "blue",
+      "desc": "力量+7，物攻+32（远程·打2目标）；【破甲】护甲-10%｜【震慑】敏捷-1",
+      "icon": "💥",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "slot": "weapon",
+      "weaponKind": "ranged",
+      "tags": [
+        "弹药",
+        "霰弹"
+      ],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "stat",
+          "stat": "str",
+          "value": 7,
+          "target": "self"
+        },
+        {
+          "trigger": "passive",
+          "kind": "buff",
+          "label": "破甲",
+          "value": -10,
+          "target": "self"
+        },
+        {
+          "trigger": "passive",
+          "kind": "debuff",
+          "label": "震慑",
+          "stat": "dex",
+          "value": -1,
+          "target": "enemy"
+        }
+      ],
+      "baseDmg": 55,
+      "ap": 4,
+      "hits": 1
+    },
+    {
+      "itemId": "QFSE009",
+      "itemName": "乘务员硬帽",
+      "type": "equipment",
+      "quality": "white",
+      "desc": "体质+2",
+      "icon": "⛑️",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "slot": "head",
+      "tags": [],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "stat",
+          "stat": "con",
+          "value": 2,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSE010",
+      "itemName": "旧式工装靴",
+      "type": "equipment",
+      "quality": "white",
+      "desc": "力量+2",
+      "icon": "🥾",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "slot": "foot",
+      "tags": [],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "stat",
+          "stat": "str",
+          "value": 2,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSE006",
+      "itemName": "绝缘胶皮手套",
+      "type": "equipment",
+      "quality": "green",
+      "desc": "力量+4；被动雷电-15%；主动「电缆束缚」敏捷-2(1回合)CD6｜「短路冲击」法伤CD7",
+      "icon": "🧤",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "slot": "hand",
+      "tags": [],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "stat",
+          "stat": "str",
+          "value": 4,
+          "target": "self"
+        },
+        {
+          "trigger": "passive",
+          "kind": "buff",
+          "label": "雷电抗性",
+          "value": -15,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSE005",
+      "itemName": "乘务员耐磨工装",
+      "type": "equipment",
+      "quality": "blue",
+      "desc": "体质+7；被动精神侵蚀-22%；主动「车厢格挡」CD5｜「紧急呼救」全队护甲+15(2回合)CD8",
+      "icon": "🧥",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "slot": "body",
+      "tags": [],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "stat",
+          "stat": "con",
+          "value": 7,
+          "target": "self"
+        },
+        {
+          "trigger": "passive",
+          "kind": "buff",
+          "label": "精神抗性",
+          "value": -22,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSE007",
+      "itemName": "褪色乘务员围巾",
+      "type": "equipment",
+      "quality": "blue",
+      "desc": "敏捷+7；主动「俯身规避」优先行动CD5｜「队伍示警」全队敏捷+2CD9",
+      "icon": "🧣",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "slot": "accessory",
+      "tags": [],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "stat",
+          "stat": "dex",
+          "value": 7,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSE008",
+      "itemName": "列车员对讲机",
+      "type": "equipment",
+      "quality": "blue",
+      "desc": "感知+7；词条【识破】+5；远程联系陈慧（对话冷却2回合）",
+      "icon": "📻",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": true,
+      "cooldown": 2,
+      "belongDungeon": "qingfengshan",
+      "slot": "accessory",
+      "tags": [],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "stat",
+          "stat": "per",
+          "value": 7,
+          "target": "self"
+        },
+        {
+          "trigger": "passive",
+          "kind": "buff",
+          "label": "识破",
+          "value": 5,
+          "target": "self"
+        },
+        {
+          "trigger": "use",
+          "kind": "custom",
+          "custom": "qingfengshan.radio"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSE011",
+      "itemName": "皮质巡逻腰带",
+      "type": "equipment",
+      "quality": "purple",
+      "desc": "体质+10；词条【稳健】全伤害-5%",
+      "icon": "🩹",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "slot": "accessory",
+      "tags": [],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "stat",
+          "stat": "con",
+          "value": 10,
+          "target": "self"
+        },
+        {
+          "trigger": "passive",
+          "kind": "buff",
+          "label": "稳健",
+          "value": -5,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "itemId": "QFSE012",
+      "itemName": "警用防刺背心",
+      "type": "equipment",
+      "quality": "purple",
+      "desc": "体质+10；被动全伤害-10%；主动「护体」护盾(120+2×体质)CD8｜「稳定站位」全队物抗+15%CD10",
+      "icon": "🦺",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "slot": "body",
+      "tags": [],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "stat",
+          "stat": "con",
+          "value": 10,
+          "target": "self"
+        },
+        {
+          "trigger": "passive",
+          "kind": "buff",
+          "label": "全伤害减免",
+          "value": -10,
+          "target": "self"
+        },
+        {
+          "trigger": "use",
+          "kind": "shield",
+          "value": 120,
+          "target": "self"
+        }
+      ]
+    }
+  ],
+  "bossDrop": [
+    {
+      "itemId": "QFSE013",
+      "itemName": "修格斯核心残片",
+      "type": "equipment",
+      "quality": "black",
+      "desc": "黑·成长型：力量+10（成长），物攻+40（对虚空畸变+30%）；每通关1次力量+1（上限+10）",
+      "icon": "🖤",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "cooldown": 0,
+      "belongDungeon": "qingfengshan",
+      "slot": "weapon",
+      "weaponKind": "melee",
+      "tags": [
+        "成长",
+        "黑装"
+      ],
+      "effects": [
+        {
+          "trigger": "passive",
+          "kind": "stat",
+          "stat": "str",
+          "value": 10,
+          "target": "self"
+        },
+        {
+          "trigger": "passive",
+          "kind": "buff",
+          "label": "虚空克制",
+          "value": 30,
+          "target": "self"
+        }
+      ],
+      "baseDmg": 72,
+      "ap": 3,
+      "hits": 1,
+      "growthConditions": [
+        {
+          "desc": "通关副本 1 次（力量+2）",
+          "type": "quest",
+          "target": "copy_clear",
+          "amount": 1,
+          "grant": {
+            "effects": [ { "trigger": "passive", "kind": "stat", "stat": "str", "value": 2, "target": "self" } ],
+            "msg": "修格斯核心残片成长：力量+2"
+          }
+        },
+        {
+          "desc": "累计通关副本 3 次（力量+3）",
+          "type": "quest",
+          "target": "copy_clear",
+          "amount": 3,
+          "grant": {
+            "effects": [ { "trigger": "passive", "kind": "stat", "stat": "str", "value": 3, "target": "self" } ],
+            "msg": "修格斯核心残片成长：力量+3"
+          }
+        },
+        {
+          "desc": "累计通关副本 6 次（力量+5，达到上限）",
+          "type": "quest",
+          "target": "copy_clear",
+          "amount": 6,
+          "grant": {
+            "effects": [ { "trigger": "passive", "kind": "stat", "stat": "str", "value": 5, "target": "self" } ],
+            "msg": "修格斯核心残片成长至上限：力量+5"
+          }
+        }
+      ]
+    }
+  ],
+  "lootTables": [
+    {
+      "scene": "car3",
+      "action": "search",
+      "entries": [
+        {
+          "itemId": "QFSE002",
+          "chance": 0.5
+        },
+        {
+          "itemId": "QFSC006",
+          "chance": 0.7
+        },
+        {
+          "itemId": "QFSC010",
+          "chance": 0.5
+        },
+        {
+          "itemId": "QFSE010",
+          "chance": 0.4
+        },
+        {
+          "itemId": "QFSM001",
+          "chance": 0.6,
+          "min": 1,
+          "max": 3
+        }
+      ]
+    },
+    {
+      "scene": "car3",
+      "action": "bigbox",
+      "required": {
+        "attr": "str",
+        "min": 45
+      },
+      "entries": [
+        {
+          "itemId": "QFSD008",
+          "chance": 1
+        }
+      ]
+    },
+    {
+      "scene": "car3",
+      "action": "toolbox",
+      "entries": [
+        {
+          "itemId": "QFSE003",
+          "chance": 0.6
+        },
+        {
+          "itemId": "QFSC011",
+          "chance": 0.7
+        },
+        {
+          "itemId": "QFSM002",
+          "chance": 0.8
+        }
+      ]
+    },
+    {
+      "scene": "car4",
+      "action": "clearRoof",
+      "entries": [
+        {
+          "itemId": "QFSM001",
+          "chance": 1,
+          "min": 2,
+          "max": 3
+        }
+      ]
+    },
+    {
+      "scene": "car4",
+      "action": "bar",
+      "entries": [
+        {
+          "itemId": "QFSC001",
+          "chance": 0.8
+        },
+        {
+          "itemId": "QFSC007",
+          "chance": 0.7
+        },
+        {
+          "itemId": "QFSE009",
+          "chance": 0.5
+        },
+        {
+          "itemId": "QFSC002",
+          "chance": 0.6
+        }
+      ]
+    },
+    {
+      "scene": "car4",
+      "action": "medicCabinet",
+      "entries": [
+        {
+          "itemId": "QFSC009",
+          "chance": 1
+        }
+      ]
+    },
+    {
+      "scene": "car7",
+      "action": "roomSearch",
+      "required": {
+        "attr": "per",
+        "min": 30
+      },
+      "entries": [
+        {
+          "itemId": "QFSD005",
+          "chance": 1
+        }
+      ]
+    },
+    {
+      "scene": "car6",
+      "action": "search",
+      "entries": [
+        {
+          "itemId": "QFSC006",
+          "chance": 0.6
+        },
+        {
+          "itemId": "QFSC007",
+          "chance": 0.5
+        },
+        {
+          "itemId": "QFSM003",
+          "chance": 0.6
+        }
+      ]
+    },
+    {
+      "scene": "car7",
+      "action": "search",
+      "entries": [
+        {
+          "itemId": "QFSE011",
+          "chance": 0.6
+        },
+        {
+          "itemId": "QFSC002",
+          "chance": 0.6
+        },
+        {
+          "itemId": "QFSM006",
+          "chance": 0.5
+        }
+      ]
+    },
+    {
+      "scene": "car5",
+      "action": "bed",
+      "entries": [
+        {
+          "itemId": "QFSE007",
+          "chance": 0.6
+        },
+        {
+          "itemId": "QFSC008",
+          "chance": 0.7
+        }
+      ]
+    },
+    {
+      "scene": "car5",
+      "action": "securityCabinet",
+      "entries": [
+        {
+          "itemId": "QFSE004",
+          "chance": 1
+        }
+      ]
+    },
+    {
+      "scene": "car5",
+      "action": "restRoom",
+      "required": {
+        "attr": "per",
+        "min": 35
+      },
+      "entries": [
+        {
+          "itemId": "QFSD004",
+          "chance": 1
+        },
+        {
+          "itemId": "QFSM003",
+          "chance": 1
+        },
+        {
+          "itemId": "QFSC012",
+          "chance": 1
+        }
+      ]
+    },
+    {
+      "scene": "car2",
+      "action": "search",
+      "required": {
+        "attr": "per",
+        "min": 40
+      },
+      "entries": [
+        {
+          "itemId": "QFSD007",
+          "chance": 0.7
+        },
+        {
+          "itemId": "QFSD002",
+          "chance": 0.7
+        },
+        {
+          "itemId": "QFSM004",
+          "chance": 0.8,
+          "min": 1,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "scene": "car1",
+      "action": "engine",
+      "required": {
+        "attr": "str",
+        "min": 35
+      },
+      "entries": [
+        {
+          "itemId": "QFSM005",
+          "chance": 1
+        },
+        {
+          "itemId": "QFSM002",
+          "chance": 0.7
+        }
+      ]
+    },
+    {
+      "scene": "car1",
+      "action": "emergencyCabinet",
+      "entries": [
+        {
+          "itemId": "QFSC004",
+          "chance": 1
+        }
+      ]
+    },
+    {
+      "scene": "car8",
+      "action": "bossDrop",
+      "entries": [
+        {
+          "itemId": "QFSE013",
+          "chance": 1
+        }
+      ]
+    }
+  ],
+  "scenes": {
+    "cars": [
+      "car1_driver",
+      "car2_seats",
+      "car3_luggage",
+      "car4_dining",
+      "car5_sleeper",
+      "car6_mail",
+      "car7_service",
+      "car8_cabin"
+    ],
+    "deadline": 10,
+    "chenhuiRescueTurn": 10,
+    "radioCooldown": 2,
+    "note": "列车布局：1驾驶室 ⇄ 2二等座 ⇄ 3行李厢 ⇄ 4餐车(初始) ⇄ 5卧铺 ⇄ 6货物厢 ⇄ 7乘务设备厢(陈慧) ⇄ 8尾厢(修格斯幼体+逃生)"
+  }
+}

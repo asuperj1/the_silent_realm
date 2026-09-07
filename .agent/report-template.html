@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>Agent 系统报告 — {{仓库名}} · {{YYYY-MM-DD}}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "neutral",
+        securityLevel: "loose",
+      });
+    </script>
+    <style>
+      .seam {
+        stroke-dasharray: 4 4;
+      }
+      .leak {
+        stroke: #dc2626;
+      }
+      .deep {
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+      }
+    </style>
+  </head>
+  <body class="bg-stone-50 text-slate-900 font-sans">
+    <main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+      <!-- ==================== Header ==================== -->
+      <header class="space-y-2">
+        <p class="text-xs uppercase tracking-wider text-slate-500">
+          Agent 工作流报告 · {{类型: review / plan / test / decision / state}}
+        </p>
+        <h1 class="text-3xl font-serif font-semibold">{{报告标题}}</h1>
+        <p class="text-sm text-slate-600">
+          {{仓库名}} · {{YYYY-MM-DD}} · 当前状态: {{current_state}}
+        </p>
+        <!-- 图例：实线框=模块，虚线=seam，红箭头=泄漏，深色厚框=deep -->
+        <div class="flex flex-wrap gap-4 pt-2 text-xs text-slate-600">
+          <span class="inline-flex items-center gap-1.5">
+            <span
+              class="w-4 h-4 border border-slate-400 bg-slate-100 rounded-sm inline-block"
+            ></span>
+            模块
+          </span>
+          <span class="inline-flex items-center gap-1.5">
+            <svg width="24" height="8" class="inline-block">
+              <line
+                x1="0"
+                y1="4"
+                x2="24"
+                y2="4"
+                stroke="#64748b"
+                stroke-width="2"
+                class="seam"
+              />
+            </svg>
+            seam（接缝）
+          </span>
+          <span class="inline-flex items-center gap-1.5">
+            <svg width="24" height="8" class="inline-block">
+              <line
+                x1="0"
+                y1="4"
+                x2="24"
+                y2="4"
+                stroke="#dc2626"
+                stroke-width="2"
+              />
+            </svg>
+            泄漏 / 阻塞
+          </span>
+          <span class="inline-flex items-center gap-1.5">
+            <span
+              class="w-4 h-4 rounded-sm inline-block"
+              style="background: linear-gradient(135deg, #0f172a, #1e293b)"
+            ></span>
+            deep（深化模块）
+          </span>
+        </div>
+      </header>
+
+      <!-- ==================== 结论 ==================== -->
+      <section
+        id="verdict"
+        class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm"
+      >
+        <h2 class="text-lg font-semibold mb-3">结论</h2>
+        <p>{{通过 / 有条件通过 / 不通过 —— 一句话结论}}</p>
+        <ul class="list-disc list-inside text-sm text-slate-700 mt-2 space-y-1">
+          <li>{{风险 1}}</li>
+          <li>{{风险 2}}</li>
+        </ul>
+      </section>
+
+      <!-- ==================== 候选 / 项目卡片 ==================== -->
+      <section id="candidates" class="space-y-10">
+        <article
+          class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm space-y-4"
+        >
+          <div class="flex items-center gap-3 flex-wrap">
+            <h3 class="text-xl font-serif font-semibold">
+              {{候选标题 / 项目名}}
+            </h3>
+            <!-- 推荐强度徽章: Strong=emerald / Worth exploring=amber / Speculative=slate -->
+            <span
+              class="text-xs font-medium px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800"
+              >Strong</span
+            >
+            <span
+              class="text-xs px-2 py-1 rounded bg-slate-100 text-slate-600 font-mono"
+              >{{in-process | local-substitutable | ports & adapters |
+              mock}}</span
+            >
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- Before -->
+            <div class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-500 mb-2">
+                Before
+              </p>
+              <div class="rounded-md border border-slate-200 bg-white p-3">
+                <pre class="mermaid">
+                  flowchart LR
+                    A[调用方] --> B[浅模块]
+                    B -.leak.-> C[被泄漏实现]
+                    classDef leak stroke:#dc2626,stroke-width:2px;
+                    class B,C leak
+                </pre>
+              </div>
+            </div>
+            <!-- After -->
+            <div class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-500 mb-2">
+                After
+              </p>
+              <div class="rounded-md bg-slate-900 p-3 text-white">
+                <pre class="mermaid">
+                  flowchart LR
+                    A[调用方] --> D[Deep 模块]
+                    classDef deep fill:#0f172a,stroke:#0f172a,color:#fff;
+                    class D deep
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          <dl class="grid sm:grid-cols-2 gap-4 text-sm">
+            <div>
+              <dt
+                class="font-semibold text-slate-500 text-xs uppercase tracking-wider"
+              >
+                Files
+              </dt>
+              <dd class="font-mono text-xs mt-1 space-y-0.5">
+                <div>{{文件路径 1}}</div>
+                <div>{{文件路径 2}}</div>
+              </dd>
+            </div>
+            <div>
+              <dt
+                class="font-semibold text-slate-500 text-xs uppercase tracking-wider"
+              >
+                Problem
+              </dt>
+              <dd class="mt-1">{{一句话：当前为什么造成摩擦}}</dd>
+            </div>
+            <div>
+              <dt
+                class="font-semibold text-slate-500 text-xs uppercase tracking-wider"
+              >
+                Solution
+              </dt>
+              <dd class="mt-1">{{一句话：要改变什么}}</dd>
+            </div>
+            <div>
+              <dt
+                class="font-semibold text-slate-500 text-xs uppercase tracking-wider"
+              >
+                Wins
+              </dt>
+              <dd>
+                <ul class="list-disc list-inside mt-1 space-y-0.5">
+                  <li>{{≤6 词的收益，用 locality / leverage 术语}}</li>
+                  <li>{{测试命中单一接口}}</li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+
+          <!-- ADR 冲突提示（如适用） -->
+          <div
+            class="rounded-md bg-amber-50 border border-amber-200 text-amber-800 text-sm px-4 py-2"
+          >
+            ⚠ 与 ADR-0007 冲突 —— 但因 {{真实摩擦}} 值得重新讨论。
+          </div>
+        </article>
+      </section>
+
+      <!-- ==================== Top recommendation ==================== -->
+      <section
+        id="top-recommendation"
+        class="rounded-xl bg-slate-900 text-slate-100 p-6 shadow-md"
+      >
+        <h2 class="text-lg font-semibold mb-2">Top recommendation</h2>
+        <p class="text-sm">{{候选名}} —— 为什么先做它（一句话）。</p>
+        <a href="#candidates" class="text-sm underline text-sky-300"
+          >跳转到候选卡片 →</a
+        >
+      </section>
+    </main>
+  </body>
+</html>

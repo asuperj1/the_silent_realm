@@ -1,0 +1,161 @@
+/* ==========================================
+   COC 跑团 — 独立登录页样式
+   ========================================== */
+
+/* ---- Reset & Base ---- */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body {
+  font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+  background: #0a0c0f;
+  color: #c8c0b0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ---- 背景粒子画布 ---- */
+#bgCanvas {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+}
+
+/* ---- 中央卡片 ---- */
+.auth-card {
+  position: relative; z-index: 1;
+  width: 400px; max-width: 92vw;
+  background: rgba(18, 20, 26, 0.92);
+  border: 1px solid #3a3428;
+  border-radius: 16px;
+  padding: 36px 32px 28px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.04);
+  animation: cardIn 0.7s ease-out;
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ---- 标题 ---- */
+.card-header { text-align: center; margin-bottom: 20px; }
+.game-title {
+  font-size: 28px; font-weight: 700; letter-spacing: 8px;
+  color: #c8a86e; text-shadow: 0 0 18px rgba(200,168,110,0.3);
+}
+.game-subtitle {
+  font-size: 12px; color: #5a5040; letter-spacing: 4px; margin-top: 4px;
+}
+
+/* ---- 标签栏 ---- */
+.tab-bar { display: flex; gap: 0; margin-bottom: 22px; border-radius: 8px; overflow: hidden; border: 1px solid #2e281a; }
+.tab-bar .tab {
+  flex: 1; padding: 10px 0; background: transparent; border: none;
+  color: #7a7060; font-size: 14px; cursor: pointer; transition: 0.25s;
+  font-family: inherit; letter-spacing: 2px;
+}
+.tab-bar .tab.active {
+  background: #1e1c16; color: #c8a86e; font-weight: 600;
+  box-shadow: inset 0 -2px 0 #c8a86e;
+}
+
+/* ---- 表单面板 ---- */
+.form-panel { display: none; flex-direction: column; gap: 14px; }
+.form-panel.active { display: flex; }
+
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field label {
+  font-size: 11px; color: #7a7060; letter-spacing: 3px; text-transform: uppercase;
+}
+.field input {
+  background: #111418; border: 1px solid #2e281a; border-radius: 8px;
+  padding: 12px 14px; color: #d4c8b0; font-size: 15px; font-family: inherit;
+  outline: none; transition: border-color 0.25s;
+}
+.field input:focus { border-color: #8a7040; }
+.field input::placeholder { color: #3a3428; }
+
+/* ---- 按钮 ---- */
+.btn-go {
+  margin-top: 8px; padding: 13px 0; border: none; border-radius: 10px;
+  background: linear-gradient(135deg, #2a2218 0%, #3a2e1a 100%);
+  color: #c8a86e; font-size: 16px; font-weight: 700; letter-spacing: 6px;
+  cursor: pointer; font-family: inherit;
+  border: 1px solid #4a3820;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.15s;
+}
+.btn-go:hover { background: linear-gradient(135deg, #3a2e1a 0%, #4a3820 100%); box-shadow: 0 0 24px rgba(200,168,110,0.25); }
+.btn-go:active { transform: scale(0.97); }
+.btn-go:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* 全局按钮暗金流光 */
+.auth-card button {
+  position: relative;
+  overflow: hidden;
+}
+.auth-card button::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(180, 140, 60, 0.04) 30%,
+    rgba(212, 168, 67, 0.14) 50%,
+    rgba(180, 140, 60, 0.04) 70%,
+    transparent 100%
+  );
+  animation: btnGoldSweepGlobal 3.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+.auth-card button.loading-btn::after { animation: none; display: none; }
+@keyframes btnGoldSweepGlobal {
+  0%   { left: -100%; }
+  100% { left: 100%; }
+}
+
+.hint {
+  font-size: 11px; color: #4a4030; text-align: center; margin-top: 2px;
+}
+
+/* ---- 消息提示 ---- */
+.msg-box {
+  margin-top: 16px; text-align: center; font-size: 13px; min-height: 20px; line-height: 20px;
+  transition: color 0.3s;
+}
+.msg-box.error { color: #cc5544; }
+.msg-box.success { color: #6a9a5a; }
+.msg-box.info { color: #8a7040; }
+
+/* ---- 退出登录按钮（登录页底部） ---- */
+.btn-logout-login {
+  display: block;
+  margin: 18px auto 0;
+  padding: 8px 20px;
+  background: transparent;
+  border: 1px solid rgba(200,100,80,0.25);
+  border-radius: 6px;
+  color: rgba(180,130,110,0.6);
+  font-size: 12px;
+  font-family: inherit;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.btn-logout-login:hover {
+  border-color: rgba(200,100,80,0.5);
+  color: #cc7766;
+  background: rgba(200,80,60,0.06);
+  box-shadow: 0 0 12px rgba(200,80,60,0.1);
+}
+
+/* 全局金色粒子 Canvas（登录页未加载 main.css，需补定位，避免挤占 flex 居中） */
+.global-gold-canvas {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}

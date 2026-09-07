@@ -1,0 +1,107 @@
+{
+  "_comment": "杀戮尖塔2式战斗系统 · 职业战斗配置（v2.1 §5）。role: 法系/战士/坦克/敏捷/爆发；resourceType: active=技能消耗 / passive=自动触发不可消耗 / mix=被动累积+主动消耗",
+  "fangshi": {
+    "name": "方士", "role": "法系", "mainAttr": "wil", "energyDice": "3D6",
+    "resource": "炁", "resourceType": "active",
+    "basic": { "ap": 2, "weapon": "法器", "template": "法术敲击", "barehandDmg": "physAtk", "hits": 1 },
+    "skillApRange": [5, 8],
+    "resourceRule": { "gainOnBasic": 2, "gainOnTurnStart": 1, "costPerSkill": 2, "max": 12 },
+    "specialSkill": { "name": "炁盾", "cost": 2, "ap": 0, "desc": "消耗2炁，获得8格挡", "effect": { "kind": "block", "value": 8 } }
+  },
+  "guanxingzhe": {
+    "name": "观星者", "role": "法系", "mainAttr": "wil", "energyDice": "3D6",
+    "resource": "星能", "resourceType": "active",
+    "basic": { "ap": 2, "weapon": "法器", "template": "星杖敲击", "barehandDmg": "physAtk", "hits": 1 },
+    "skillApRange": [6, 9],
+    "resourceRule": { "gainOnTurnStart": 3, "costPerSkill": 3, "max": 15 },
+    "specialSkill": { "name": "星辉护体", "cost": 3, "ap": 0, "desc": "消耗3星能，获得10格挡", "effect": { "kind": "block", "value": 10 } }
+  },
+  "huanfashi": {
+    "name": "环法师", "role": "法系", "mainAttr": "wil", "energyDice": "3D6",
+    "resource": "魔能", "resourceType": "active",
+    "basic": { "ap": 2, "weapon": "法器", "template": "魔环敲击", "barehandDmg": "physAtk", "hits": 1 },
+    "skillApRange": [6, 10],
+    "resourceRule": { "gainOnBasic": 1, "gainOnTurnStart": 2, "costPerSkill": 4, "max": 12 },
+    "specialSkill": { "name": "魔环屏障", "cost": 4, "ap": 0, "desc": "消耗4魔能，获得12格挡", "effect": { "kind": "block", "value": 12 } }
+  },
+  "lianjinshushi": {
+    "name": "炼金术师", "role": "法系", "mainAttr": "per", "energyDice": "4D6",
+    "resource": "剂量", "resourceType": "active",
+    "basic": { "ap": 2, "weapon": "法器", "template": "药剂砸击", "barehandDmg": "physAtk", "hits": 1 },
+    "skillApRange": [4, 7],
+    "resourceRule": { "gainOnBasic": 2, "gainOnTurnStart": 2, "costPerSkill": 2, "max": 16 },
+    "specialSkill": { "name": "调和药剂", "cost": 2, "ap": 0, "desc": "消耗2剂量，回复6HP", "effect": { "kind": "hp", "value": 6 } }
+  },
+  "jiaodoushi": {
+    "name": "角斗士", "role": "战士", "mainAttr": "str", "energyDice": "3D6",
+    "resource": "战意", "resourceType": "active",
+    "basic": { "ap": 3, "weapon": "近战", "template": "重击", "barehandDmg": "physAtk", "hits": 1 },
+    "skillApRange": [4, 8],
+    "resourceRule": { "gainOnHurt": 1, "gainOnBasic": 1, "costPerSkill": 3, "max": 12 },
+    "specialSkill": { "name": "战吼", "cost": 3, "ap": 0, "desc": "消耗3战意，力量+1（2回合）", "effect": { "kind": "buff", "id": "strength", "value": 1, "turns": 2 } }
+  },
+  "qishi": {
+    "name": "骑士", "role": "坦克", "mainAttr": "str", "energyDice": "3D6",
+    "resource": "怒气", "resourceType": "active",
+    "basic": { "ap": 3, "weapon": "近战", "template": "盾击", "barehandDmg": "physAtk", "hits": 1, "blockOnBasic": 4 },
+    "skillApRange": [5, 9],
+    "resourceRule": { "gainOnHurt": 2, "costPerSkill": 3, "max": 12 },
+    "specialSkill": { "name": "举盾坚守", "cost": 3, "ap": 0, "desc": "消耗3怒气，获得14格挡", "effect": { "kind": "block", "value": 14 } }
+  },
+  "baifuzhang": {
+    "name": "百夫长", "role": "战士", "mainAttr": "str", "energyDice": "3D6",
+    "resource": "战力", "resourceType": "passive",
+    "basic": { "ap": 2, "weapon": "近战", "template": "连击", "barehandDmg": "physAtk", "hits": 1 },
+    "skillApRange": [5, 8],
+    "passive": { "id": "five_stance", "label": "五段战姿", "trigger": { "onCombo": 1, "maxCombo": 5 }, "effect": "连击每段伤害 +8%，满 5 段下段伤害 +50%" },
+    "specialSkill": { "name": "军旗鼓舞", "cost": 2, "ap": 0, "desc": "消耗2战力，力量+1（2回合）", "effect": { "kind": "buff", "id": "strength", "value": 1, "turns": 2 } }
+  },
+  "haidao": {
+    "name": "海盗", "role": "战士", "mainAttr": "str", "energyDice": "3D6",
+    "resource": "酒意", "resourceType": "active",
+    "basic": { "ap": 3, "weapon": "近战", "template": "劈砍", "barehandDmg": "physAtk", "hits": 1 },
+    "skillApRange": [4, 7],
+    "resourceRule": { "gainOnBasic": 2, "costPerSkill": 2, "max": 12 },
+    "specialSkill": { "name": "痛饮", "cost": 2, "ap": 0, "desc": "消耗2酒意，回复5HP", "effect": { "kind": "hp", "value": 5 } }
+  },
+  "qiangshou": {
+    "name": "枪手", "role": "敏捷", "mainAttr": "dex", "energyDice": "3D6",
+    "resource": "子弹", "resourceType": "active",
+    "basic": { "ap": 4, "weapon": "枪械", "template": "射击", "barehandDmg": "physAtk", "hits": 2, "ammoPerShot": 1 },
+    "skillApRange": [5, 9],
+    "resourceRule": { "gainOnReload": 5, "gainOnTurnStart": 2, "costPerSkill": 1, "max": 12 },
+    "specialSkill": { "name": "快速装填", "cost": 1, "ap": 0, "desc": "消耗1子弹，敏捷+1（2回合）", "effect": { "kind": "buff", "id": "dexUp", "value": 1, "turns": 2 } }
+  },
+  "zhentan": {
+    "name": "侦探", "role": "敏捷", "mainAttr": "per", "energyDice": "3D6",
+    "resource": "探知值", "resourceType": "mix",
+    "basic": { "ap": 2, "weapon": "近战", "template": "连刺", "barehandDmg": "physAtk", "hits": 2 },
+    "skillApRange": [5, 8],
+    "resourceRule": { "gainOnBasic": 1, "gainOnTurnStart": 1, "costPerSkill": 2, "max": 10, "markWeak": "消耗2探知标记1目标弱点(易伤+1)" },
+    "specialSkill": { "name": "识破弱点", "cost": 2, "ap": 0, "desc": "消耗2探知，目标易伤+1（2回合）", "effect": { "kind": "debuff", "id": "vulnerable", "value": 1, "turns": 2 } }
+  },
+  "wushi": {
+    "name": "武士", "role": "战士", "mainAttr": "dex", "energyDice": "2D6",
+    "resource": "禅意", "resourceType": "passive",
+    "basic": { "ap": 2, "weapon": "近战", "template": "居合连斩", "barehandDmg": "physAtk", "hits": 2 },
+    "skillApRange": [4, 8],
+    "passive": { "id": "stance", "label": "架势条", "trigger": { "onHurt": 1, "onDodge": 2, "threshold": 5 }, "effect": "累积满触发『招架』抵消下一次攻击" },
+    "specialSkill": { "name": "招架", "cost": 2, "ap": 0, "desc": "消耗2禅意，获得16格挡（抵消一次攻击）", "effect": { "kind": "block", "value": 16 } }
+  },
+  "guishuxiaochou": {
+    "name": "诡术小丑", "role": "敏捷", "mainAttr": "dex", "energyDice": "2D6",
+    "resource": "狂欢能量", "resourceType": "active",
+    "basic": { "ap": 2, "weapon": "近战", "template": "戏法连击", "barehandDmg": "physAtk", "hits": 3 },
+    "skillApRange": [4, 7],
+    "resourceRule": { "gainOnCrit": 3, "gainOnBasic": 1, "costPerSkill": 3, "max": 12 },
+    "specialSkill": { "name": "戏法烟雾", "cost": 3, "ap": 0, "desc": "消耗3狂欢，目标易伤+1（2回合）", "effect": { "kind": "debuff", "id": "vulnerable", "value": 1, "turns": 2 } }
+  },
+  "jingguan": {
+    "name": "警官", "role": "爆发", "mainAttr": "str", "energyDice": "2D6",
+    "resource": "正义值", "resourceType": "mix",
+    "basic": { "ap": 3, "weapon": "枪械", "template": "射击", "barehandDmg": "physAtk", "hits": 1 },
+    "skillApRange": [5, 8],
+    "resourceRule": { "gainOnBasic": 1, "gainOnKill": 5, "max": 10, "autoExecute": "满值自动『正义处决』(真实伤害,无视防御)" },
+    "specialSkill": { "name": "正义裁决", "cost": 3, "ap": 0, "desc": "消耗3正义，目标易伤+2（2回合）", "effect": { "kind": "debuff", "id": "vulnerable", "value": 2, "turns": 2 } }
+  }
+}

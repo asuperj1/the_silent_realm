@@ -1,0 +1,138 @@
+{
+  "id": "game_room_1788421241099_tvsfkv",
+  "savedAt": 1788421435183,
+  "copyName": "废都纪元800｜青峰山虚空列车",
+  "currentDungeonId": "qingfeng_train_800",
+  "dungeonConfigId": "qingfeng_train_800",
+  "worldTag": "废都轮回消亡世界",
+  "era": 800,
+  "turn": 1,
+  "copyState": {
+    "name": "废都纪元800｜青峰山虚空列车",
+    "scores": {
+      "clue": 0,
+      "survival": 0,
+      "sanity": 0,
+      "contribution": 0
+    }
+  },
+  "history": [],
+  "lastScene": null,
+  "exclusiveMap": "assets/qingfeng_scenes/废都青峰山地图.png",
+  "chenhuiPortrait": "assets/qingfeng_scenes/废都青峰山7号车配电间.png",
+  "itemDungeonId": "qingfengshan",
+  "dungeonState": {
+    "dungeonId": "废都纪元800｜青峰山虚空列车",
+    "dungeonConfigId": "qingfeng_train_800",
+    "turn": 1,
+    "phase": "explore",
+    "currentCar": "car_4_dining",
+    "carStates": {
+      "car_1_cab": {
+        "visited": false,
+        "clearedSpawn": false
+      },
+      "car_2_economy": {
+        "visited": false,
+        "clearedSpawn": false,
+        "bodySearched": false,
+        "roofTriggered": false
+      },
+      "car_3_luggage": {
+        "visited": false,
+        "clearedSpawn": false
+      },
+      "car_4_dining": {
+        "visited": true,
+        "clearedSpawn": false
+      },
+      "car_5_sleeper": {
+        "visited": false,
+        "clearedSpawn": false,
+        "formlessTriggered": false
+      },
+      "car_6_mail": {
+        "visited": false,
+        "clearedSpawn": false
+      },
+      "car_7_service": {
+        "visited": false,
+        "clearedSpawn": false,
+        "chenHuiRescued": false
+      },
+      "car_8_cabin": {
+        "visited": false,
+        "clearedSpawn": false,
+        "gatewayOpened": false,
+        "shoggothTriggered": false
+      }
+    },
+    "cluesFound": [],
+    "truthTier": 0,
+    "activeCombat": null,
+    "sceneSwitchEnable": true,
+    "miGoDeceived": true,
+    "walkieStage": 0,
+    "chenHui": {
+      "alive": true,
+      "rescued": false,
+      "withParty": false,
+      "hp": 20,
+      "injured": false
+    },
+    "shoggothTriggered": false,
+    "shoggothDefeated": false,
+    "shoggothTurn": 0,
+    "lightSources": 0,
+    "escapeStarted": false,
+    "escapeComplete": false,
+    "playerHpOnEscape": 0,
+    "ending": null,
+    "scores": {
+      "clue": 0,
+      "survival": 0,
+      "sanity": 0,
+      "contribution": 0
+    }
+  },
+  "_exploreRound": null,
+  "_kpTurn": {},
+  "_pendingLoot": null,
+  "eventLog": [
+    {
+      "t": 1788421243038,
+      "type": "copy:start",
+      "actor": "game_room_1788421241099_tvsfkv",
+      "value": 1,
+      "data": {
+        "copyName": "废都纪元800｜青峰山虚空列车",
+        "dungeonId": "qingfeng_train_800"
+      }
+    }
+  ],
+  "battle": null,
+  "players": [
+    {
+      "uid": "c_1786539947587_hipjra",
+      "socketId": "6OuAT214G_JZlx8lAAAF",
+      "name": "超神秘无敌唐王大人",
+      "career": "海盗",
+      "level": 1,
+      "carId": "car_4_dining",
+      "attr": {
+        "hp": 106,
+        "maxHp": 106,
+        "san": 80,
+        "maxSan": 80,
+        "str": 75,
+        "dex": 46,
+        "con": 53,
+        "per": 46,
+        "wil": 40,
+        "int": 46,
+        "cha": 40,
+        "lck": 40
+      }
+    }
+  ]
+}

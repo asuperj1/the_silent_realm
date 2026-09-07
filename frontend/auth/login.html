@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>寂静之地 · 登录</title>
+  <link rel="stylesheet" href="/auth/login.css" />
+  <link rel="stylesheet" href="/auth/loginLoadingAnim.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><text y='48' font-size='48'>🎲</text></svg>" />
+</head>
+<body>
+  <!-- 背景粒子 -->
+  <canvas id="bgCanvas"></canvas>
+  <!-- 全局金色粒子 -->
+  <canvas id="globalGoldParticles" class="global-gold-canvas"></canvas>
+
+  <!-- 中央卡片 -->
+  <div class="auth-card">
+    <div class="card-header">
+      <h1 class="game-title">寂静之地</h1>
+      <p class="game-subtitle">The Silent Place</p>
+    </div>
+
+    <!-- 标签切换 -->
+    <div class="tab-bar">
+      <button class="tab active" data-tab="login">进入世界</button>
+      <button class="tab" data-tab="register">创建身份</button>
+    </div>
+
+    <!-- 登录面板 -->
+    <form id="loginPanel" class="form-panel active">
+      <div class="field">
+        <label for="loginUser">代号</label>
+        <input id="loginUser" type="text" placeholder="你的调查员代号" autocomplete="off" maxlength="20" />
+      </div>
+      <div class="field">
+        <label for="loginPass">密令</label>
+        <input id="loginPass" type="password" placeholder="••••••" autocomplete="off" maxlength="30" />
+      </div>
+      <button type="submit" class="btn-go" id="btnLogin">进入寂静之地</button>
+      <p class="hint">没有身份？点击上方「创建身份」</p>
+    </form>
+
+    <!-- 注册面板 -->
+    <form id="registerPanel" class="form-panel">
+      <div class="field">
+        <label for="regUser">代号</label>
+        <input id="regUser" type="text" placeholder="创建你的调查员代号" autocomplete="off" maxlength="20" />
+      </div>
+      <div class="field">
+        <label for="regPass">密令</label>
+        <input id="regPass" type="password" placeholder="••••••" autocomplete="off" maxlength="30" />
+      </div>
+      <button type="submit" class="btn-go" id="btnRegister">创建身份</button>
+      <p class="hint">已有身份？点击上方「进入世界」</p>
+    </form>
+
+    <div id="msgBox" class="msg-box"></div>
+
+    <!-- 退出登录按钮（清除缓存回到初始态） -->
+    <button id="btnLogoutOnLogin" class="btn-logout-login" title="清除缓存并返回扉页">退出登录</button>
+  </div>
+
+  <!-- 先加载 Socket.IO，再加载业务脚本 -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/goldParticles.js"></script>
+  <script src="/auth/login.js"></script>
+</body>
+</html>

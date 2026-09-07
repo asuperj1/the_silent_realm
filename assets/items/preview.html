@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>物品图标预览</title>
+<style>
+  body { background:#0d0f14; color:#e2e8f0; font-family: system-ui, sans-serif; padding:24px; }
+  h1 { font-size:18px; color:#94a3b8; margin-bottom:16px; }
+  h2 { font-size:14px; color:#64748b; margin:24px 0 10px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:16px; }
+  .card { background:#1a1f2b; border:1px solid #2a3242; border-radius:10px; padding:12px; text-align:center; }
+  .card img { width:128px; height:128px; object-fit:contain; border-radius:8px; background:#000; }
+  .name { margin-top:8px; font-size:13px; }
+  .id { color:#64748b; font-size:11px; }
+</style>
+</head>
+<body>
+<h1>物品图标预览（无字 · 深色厚涂 · 道具格）</h1>
+<script>
+  const ITEMS = {
+    '全局物品 G-*': [
+      ['G-001','诡秘点数'],['G-002','基础绷带'],['G-003','镇静茶'],['G-004','魂晶'],['G-005','通用维修包'],['G-006','旧日医箱']
+    ],
+    '剧情 QFSD*': [
+      ['QFSD001','泛黄G314进站车票'],['QFSD002','裂隙观测手记'],['QFSD003','列车制动铜钥匙'],['QFSD004','乘务员残损执勤表'],
+      ['QFSD005','陈慧求救便签'],['QFSD006','伪造安全广播稿'],['QFSD007','修格斯幼体目击记录'],['QFSD008','逃生通道示意图']
+    ],
+    '消耗 QFSC*': [
+      ['QFSC001','密封矿泉水'],['QFSC002','镇静草药包'],['QFSC004','锈蚀肾上腺素针剂'],['QFSC005','装甲润滑油脂'],
+      ['QFSC006','列车压缩饼干'],['QFSC007','罐装列车咖啡'],['QFSC008','消毒酒精棉'],['QFSC009','蒸馏提神药'],
+      ['QFSC010','9mm手枪弹匣'],['QFSC011','12号霰弹'],['QFSC012','精神稳定注射剂']
+    ],
+    '材料 QFSM*': [
+      ['QFSM001','锈蚀列车螺丝'],['QFSM002','绝缘电缆段'],['QFSM003','旧乘务员徽章'],['QFSM004','破碎列车玻璃'],
+      ['QFSM005','引擎传动零件'],['QFSM006','陈慧的旧怀表']
+    ],
+    '装备 QFSE*': [
+      ['QFSE001','列车撬棍'],['QFSE002','生锈拆解刀'],['QFSE003','简易手枪'],['QFSE004','双管霰弹枪'],
+      ['QFSE005','乘务员耐磨工装'],['QFSE006','绝缘胶皮手套'],['QFSE007','褪色乘务员围巾'],['QFSE008','列车员对讲机'],
+      ['QFSE009','乘务员硬帽'],['QFSE010','旧式工装靴'],['QFSE011','皮质巡逻腰带'],['QFSE012','警用防刺背心'],['QFSE013','修格斯核心残片（黑装）']
+    ]
+  };
+  let total = 0;
+  for (const [title, ids] of Object.entries(ITEMS)) {
+    const el = document.createElement('div'); el.className = 'group';
+    const h = document.createElement('h2'); h.textContent = `${title}（${ids.length}）`; el.appendChild(h);
+    const grid = document.createElement('div'); grid.className = 'grid';
+    for (const [id, name] of ids) {
+      total++;
+      const d = document.createElement('div'); d.className = 'card';
+      d.innerHTML = `<img src="/assets/items/${id}.png" onerror="this.outerHTML='<div style=color:#ef4444>缺失</div>'"><div class="name">${name}</div><div class="id">${id}</div>`;
+      grid.appendChild(d);
+    }
+    el.appendChild(grid);
+    document.body.appendChild(el);
+  }
+  const h1 = document.querySelector('h1');
+  h1.textContent = `物品图标预览 · 全部 ${total} 张`;
+</script>
+</body>
+</html>

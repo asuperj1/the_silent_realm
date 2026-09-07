@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>寂静之地</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/qingfengMap.css">
+  <link rel="stylesheet" href="/css/sceneSwitch.css">
+  <link rel="stylesheet" href="css/goldBeams.css">
+  <!-- noUiSlider 成熟滑块方案 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
+</head>
+<body>
+  <!-- 场景背景系统（sceneLoader 自动创建，如果没有则手动注入） -->
+  <div id="sceneBackground" class="no-scene"></div>
+  <div id="sceneOverlay" class="default-overlay"></div>
+  <div id="sceneLabel"></div>
+
+  <!-- 全局加载遮罩 -->
+  <div id="loadingOverlay" class="loading-overlay hidden">
+    <div class="loading-spinner"></div>
+    <div class="loading-text" id="loadingText">正在连接寂静之地...</div>
+    <div class="loading-retry" id="loadingRetry" style="display:none;">
+      <p class="loading-error-msg" id="loadingErrorMsg"></p>
+      <button class="btn-retry-loading" id="btnRetryLoading">🔄 重新连接</button>
+    </div>
+  </div>
+
+  <!-- ==================== 角色选择页面 ==================== -->
+  <div id="pageCharacters" class="page">
+    <div class="char-header">
+      <h2>调查员档案</h2>
+      <div>
+        <button id="btnToggleListStyle" class="btn-toggle-list">📄 沉浸档案</button>
+        <button id="btnItemCatalog" class="btn-item-catalog" style="display:none">📚 全物品图鉴</button>
+        <button id="btnMapEditor" class="btn-item-catalog" style="display:none" title="地图标点模式（管理员）">🗺 地图标点模式</button>
+        <button id="btnNewChar">+ 新调查员</button>
+        <button type="button" class="btn-settings-open" title="设置">⚙️ 设置</button>
+        <button id="btnLogout">退出登录</button>
+      </div>
+    </div>
+    <div id="charList" class="char-grid"></div>
+  </div>
+
+  <!-- ==================== 角色详情配置界面（P0 5 标签：概况/背包仓库/技能/工坊/档案记录） ==================== -->
+  <div id="pageCharDetail" class="page">
+    <div class="cd-header">
+      <button id="cdBack" class="cd-back">← 返回调查员档案</button>
+      <div class="cd-title" id="cdTitle">角色详情</div>
+      <button id="cdEnterCopy" class="cd-enter">⚔ 进入副本</button>
+    </div>
+    <div class="cd-tabs">
+      <button class="cd-tab active" data-tab="overview">概况</button>
+      <button class="cd-tab" data-tab="inventory">背包仓库</button>
+      <button class="cd-tab" data-tab="tasks">任务</button>
+      <button class="cd-tab" data-tab="skilltree">技能树</button>
+      <button class="cd-tab" data-tab="attralloc">属性分配</button>
+      <button class="cd-tab" data-tab="workshop">工坊</button>
+      <button class="cd-tab" data-tab="shop">商店</button>
+      <button class="cd-tab" data-tab="archive">档案记录</button>
+    </div>
+    <div class="cd-body">
+      <div class="cd-pane active" id="cdPaneOverview"></div>
+      <div class="cd-pane cd-pane-full" id="cdPaneInventory"><div class="cd-embed-box-full cd-wh-embed" id="cdInventoryEmbed"></div></div>
+      <div class="cd-pane" id="cdPaneTasks"></div>
+      <div class="cd-pane cd-pane-full" id="cdPaneSkillTree"><div class="cd-embed-box-full" id="cdSkillTreeEmbed"></div></div>
+      <div class="cd-pane cd-pane-full" id="cdPaneAttrAlloc"><div class="cd-embed-box-full" id="cdSkillAllocEmbed"></div></div>
+      <div class="cd-pane" id="cdPaneWorkshop"></div>
+      <div class="cd-pane" id="cdPaneShop"></div>
+      <div class="cd-pane" id="cdPaneArchive"></div>
+    </div>
+  </div>
+
+  <!-- ==================== 角色创建弹窗 ==================== -->
+  <div id="modalCreateChar" class="modal">
+    <div class="modal-content create-char-box">
+      <h2>创建调查员</h2>
+      <input type="text" id="newCharName" placeholder="姓名">
+      <div class="career-select-area">
+        <div class="career-select-left">
+          <div class="career-label">选择职业 <span id="selectedCareerBadge" class="career-badge">未选择</span></div>
+          <div id="careerCardGrid" class="career-grid"></div>
+        </div>
+        <div class="career-preview" id="careerPreview">
+          <img id="careerPreviewImg" alt="职业立绘" style="display:none">
+          <div class="career-preview-placeholder" id="careerPreviewPlaceholder">✨ 点击左侧职业<br>查看对应立绘</div>
+          <div class="career-preview-name" id="careerPreviewName"></div>
+          <div class="career-preview-desc" id="careerPreviewDesc"></div>
+        </div>
+      </div>
+      <input type="hidden" id="newCharCareer">
+      <div class="attr-allocate">
+        <label>属性分配（剩余 <span id="freePoints">260</span> 点）</label>
+        <div class="attr-row" data-key="str">
+          <span class="attr-icon">💪</span><span class="attr-label">力量</span>
+          <button class="attr-step minus" type="button">−</button>
+          <span class="val" id="valStr">40</span>
+          <button class="attr-step plus" type="button">＋</button>
+          <div class="attr-track"><div class="attr-fill" id="fillStr"></div></div>
+        </div>
+        <div class="attr-row" data-key="dex">
+          <span class="attr-icon">👟</span><span class="attr-label">敏捷</span>
+          <button class="attr-step minus" type="button">−</button>
+          <span class="val" id="valDex">40</span>
+          <button class="attr-step plus" type="button">＋</button>
+          <div class="attr-track"><div class="attr-fill" id="fillDex"></div></div>
+        </div>
+        <div class="attr-row" data-key="con">
+          <span class="attr-icon">🛡️</span><span class="attr-label">体力</span>
+          <button class="attr-step minus" type="button">−</button>
+          <span class="val" id="valCon">40</span>
+          <button class="attr-step plus" type="button">＋</button>
+          <div class="attr-track"><div class="attr-fill" id="fillCon"></div></div>
+        </div>
+        <div class="attr-row" data-key="int">
+          <span class="attr-icon">🧠</span><span class="attr-label">智力</span>
+          <button class="attr-step minus" type="button">−</button>
+          <span class="val" id="valInt">40</span>
+          <button class="attr-step plus" type="button">＋</button>
+          <div class="attr-track"><div class="attr-fill" id="fillInt"></div></div>
+        </div>
+        <div class="attr-row" data-key="cha">
+          <span class="attr-icon">🎭</span><span class="attr-label">魅力</span>
+          <button class="attr-step minus" type="button">−</button>
+          <span class="val" id="valCha">40</span>
+          <button class="attr-step plus" type="button">＋</button>
+          <div class="attr-track"><div class="attr-fill" id="fillCha"></div></div>
+        </div>
+        <div class="attr-row" data-key="lck">
+          <span class="attr-icon">🍀</span><span class="attr-label">幸运</span>
+          <button class="attr-step minus" type="button">−</button>
+          <span class="val" id="valLck">40</span>
+          <button class="attr-step plus" type="button">＋</button>
+          <div class="attr-track"><div class="attr-fill" id="fillLck"></div></div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button id="btnCreateChar">确认创建</button>
+        <button id="btnCancelCreate">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 投票弹窗（可拖动/最小化/关闭，王者投降风格） ==================== -->
+  <div id="modalVote" class="modal vote-modal">
+    <div class="modal-content vote-box" id="voteBox">
+      <div class="vote-titlebar" id="voteTitlebar">
+        <span class="vote-titlebar-text" id="voteTitlebarText">🗳 发起投票</span>
+        <div class="vote-titlebar-btns">
+          <button id="btnVoteMin" class="vote-tb-btn" title="最小化">—</button>
+          <button id="btnVoteClose" class="vote-tb-btn" title="关闭">✕</button>
+        </div>
+      </div>
+      <div id="voteBody">
+        <!-- 发起投票表单 -->
+        <div id="voteForm">
+          <div class="form-group">
+            <label>投票议题</label>
+            <input type="text" id="voteTitleInput" placeholder="输入议题">
+          </div>
+          <div class="form-group">
+            <label>投票选项（前两项默认 绿 / 红）</label>
+            <div id="voteOptionsContainer" class="vote-options-list"></div>
+            <button id="btnAddOption" class="btn-small">+ 添加选项</button>
+          </div>
+          <div class="form-group">
+            <label>倒计时（秒）</label>
+            <input type="number" id="voteTimerInput" value="30" min="10" max="300">
+          </div>
+          <div class="modal-actions">
+            <button id="btnConfirmVote">确认发起</button>
+            <button id="btnCloseVoteModal">取消</button>
+          </div>
+        </div>
+        <!-- 投票进行中（王者投降风格：彩色进度条 + 已投/总数） -->
+        <div id="voteInProgress" style="display:none">
+          <div class="vp-title" id="vpTitle">投票进行中</div>
+          <div class="vp-countdown" id="vpCountdown">30s</div>
+          <div class="vp-options" id="vpOptions"></div>
+          <div class="vp-foot">
+            <span class="vp-voters" id="vpVoters">已投 0 / 0</span>
+            <button id="btnVoteClose2" class="btn-small">关闭</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 投票最小化小条 -->
+  <div id="voteMini" class="vote-mini" style="display:none">
+    <span class="vote-mini-text" id="voteMiniText">🗳 投票进行中</span>
+    <button id="btnVoteMiniRestore" class="btn-mini">展开</button>
+  </div>
+
+  <!-- ==================== 集体行动弹窗 ==================== -->
+  <div id="modalGroupAction" class="modal">
+    <div class="modal-content group-action-box">
+      <h2>集体行动</h2>
+      <input type="text" id="groupActionTitle" placeholder="行动名称">
+      <textarea id="groupActionDesc" placeholder="行动描述"></textarea>
+      <div id="groupActionMembers" class="vote-members"></div>
+      <div class="modal-actions">
+        <button id="btnSubmitGroupAction">提交行动</button>
+        <button id="btnCancelGroupAction">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 副本日志弹窗 ==================== -->
+  <div id="modalCopyLog" class="modal">
+    <div class="modal-content copylog-box">
+      <h2>副本日志</h2>
+      <div id="copyLogContent" class="copylog-content"></div>
+      <div class="modal-actions">
+        <button id="btnCloseCopyLog">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 副本选择页面（等距瓦片动态背景 + 副本词条环绕） ==================== -->
+  <div id="pageCopySelect" class="page">
+    <canvas id="isometricBgCanvas"></canvas>
+    <div class="copy-select-overlay">
+      <div class="copy-select-header">
+        <h2 class="copy-select-title">📜 寂静之地 · 副本纪元</h2>
+        <div class="copy-select-actions">
+          <button type="button" class="btn-settings-open" title="设置">⚙️ 设置</button>
+          <button id="btnBackToCharFromCopySelect" class="btn-back-hall">← 返回角色选择</button>
+        </div>
+      </div>
+      <div class="copy-select-stage">
+        <!-- 方尖碑 GIF 动图（z-index:1） -->
+        <div id="obelisk">
+          <div class="obelisk-base"></div>
+          <!-- 菱形地面红光晕（底部强→顶部弱，贴合透视结构，6s 呼吸脉动） -->
+          <div class="obelisk-aura"></div>
+          <div class="obelisk-inner">
+            <!-- JS 动态注入 GIF <img> -->
+          </div>
+          <!-- 旧式红色流光叠加层：永久关闭 -->
+          <div class="obelisk-red-glow"></div>
+        </div>
+        <!-- ADR-005: 金尘粒子 Canvas（z-index:1.5） -->
+        <canvas id="goldParticleCanvas"></canvas>
+        <!-- ADR-005: 仪式光环（T-6） -->
+        <div id="obeliskRitualRings" class="obelisk-ritual-rings">
+          <div class="ritual-ring ring-inner"></div>
+          <div class="ritual-ring ring-outer"></div>
+        </div>
+        <div id="copyCardsRing" class="copy-cards-ring">
+          <!-- JS 动态渲染副本卡片 -->
+        </div>
+      </div>
+    </div>
+    <!-- ADR-005: 视口金框层（古籍扉页风格，z-index:3） -->
+    <div id="viewportGoldFrame">
+      <div class="vgf-corner vgf-tl"></div>
+      <div class="vgf-corner vgf-tr"></div>
+      <div class="vgf-corner vgf-bl"></div>
+      <div class="vgf-corner vgf-br"></div>
+      <div class="vgf-edge vgf-top"></div>
+      <div class="vgf-edge vgf-bottom"></div>
+    </div>
+  </div>
+
+  <!-- ==================== T-5: 飞页过渡合页金流（body级overlay） ==================== -->
+  <div id="parchmentTransitionOverlay" class="parchment-transition-overlay">
+    <div class="parchment-transition-beams">
+      <div class="gold-beam tl"></div>
+      <div class="gold-beam tr"></div>
+      <div class="gold-beam bl"></div>
+      <div class="gold-beam br"></div>
+      <div class="gold-beam-diag d1"></div>
+      <div class="gold-beam-diag d2"></div>
+      <div class="gold-beam-diag d3"></div>
+      <div class="gold-beam-diag d4"></div>
+    </div>
+    <div class="parchment-transition-stage">
+      <div class="parchment-transition-left"></div>
+      <div class="parchment-transition-right"></div>
+      <div class="parchment-transition-spine"></div>
+    </div>
+  </div>
+  <div id="parchmentGoldRing" class="parchment-gold-ring"></div>
+  <div id="parchmentGoldParticles" class="parchment-gold-particles"></div>
+
+  <!-- ==================== 房间大厅页面（独立页面，副本选择后进入） ==================== -->
+  <div id="pageRoomLobby" class="page">
+    <div class="room-lobby-layout">
+      <div class="lobby-header">
+        <button id="btnBackToCopySelect" class="btn-back-hall">← 返回副本选择</button>
+        <div class="lobby-header-info">
+          <div class="panel-title" id="lobbyCopyTitle">🏠 房间大厅</div>
+          <div id="lobbyCopyInfo" class="lobby-copy-info"></div>
+        </div>
+        <button type="button" class="btn-settings-open" title="设置">⚙️ 设置</button>
+      </div>
+      <!-- 未加入房间：房间列表 -->
+      <div id="lobbyRoomList" class="lobby-room-list"></div>
+      <!-- 已加入房间：成员详情 -->
+      <div id="lobbyCurrentRoom" class="lobby-current-room hidden">
+        <div class="panel-title">👥 当前房间成员</div>
+        <div id="lobbyRoomCodeDisplay" class="lobby-room-code">房间码：<span id="lobbyRoomCode">---</span></div>
+        <div id="lobbyRoomPlayers" class="lobby-room-players"></div>
+        <div class="lobby-room-actions">
+          <button id="btnLeaveRoomLobby" class="btn-leave-hall hidden">离开房间</button>
+          <button id="btnStartCopyLobby" class="btn-start-copy-hall hidden">▶ 启动副本</button>
+        </div>
+      </div>
+      <!-- 底部操作栏（仅未加入房间时显示） -->
+      <div id="lobbyActions" class="lobby-actions">
+        <div class="lobby-actions-row">
+          <span class="lobby-actions-hint">当前副本：<strong id="lobbySelectedCopy">未选择</strong></span>
+        </div>
+        <div class="lobby-actions-row">
+          <button id="btnCreateRoomLobby">+ 创建房间</button>
+          <button id="btnJoinByCodeLobby">🔑 输入房间码</button>
+          <button id="btnSkillSetupLobby" title="进副本前选择出战技能">⚔ 技能搭配</button>
+          <button id="btnQuestBoardLobby" title="进副本前查看/接受任务">📋 任务板</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 创建房间弹窗 ==================== -->
+  <div id="modalCreateRoom" class="modal">
+    <div class="modal-content create-room-box">
+      <h2>创建房间</h2>
+      <p style="color:var(--dim);margin-bottom:12px;" id="createRoomCopyLabel">副本：未选择</p>
+      <label>
+        <input type="checkbox" id="roomPrivate"> 私密房间（需邀请码加入）
+      </label>
+      <div class="modal-actions">
+        <button id="btnConfirmCreateRoom">确认创建</button>
+        <button id="btnCancelCreateRoom">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 任务板弹窗（进副本前接受/提交任务） ==================== -->
+  <div id="modalQuestBoard" class="modal">
+    <div class="modal-content quest-board-box">
+      <div class="quest-board-head">
+        <h2>📋 任务板</h2>
+        <span class="stq-hint">接受任务 → 副本内自动推进 → 完成后提交领取奖励</span>
+      </div>
+      <div id="questBoardBody" class="quest-board-body"></div>
+      <div class="modal-actions">
+        <button id="btnQuestBoardClose">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 输入房间码弹窗 ==================== -->
+  <div id="modalJoinCode" class="modal">
+    <div class="modal-content join-code-box">
+      <h2>输入房间码</h2>
+      <input type="text" id="joinCodeInput" placeholder="粘贴房间码">
+      <div class="modal-actions">
+        <button id="btnConfirmJoinCode">加入</button>
+        <button id="btnCancelJoinCode">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 全局金色粒子 Canvas（角色选择/大厅页） ==================== -->
+  <canvas id="globalGoldParticles" class="global-gold-canvas"></canvas>
+
+  <!-- 全局暗金四角光束（角色选择/大厅页） -->
+  <div id="globalGoldBeams" class="gold-beams">
+    <div class="gold-beam tl"></div>
+    <div class="gold-beam tr"></div>
+    <div class="gold-beam bl"></div>
+    <div class="gold-beam br"></div>
+  </div>
+
+  <!-- ==================== 主游戏界面（三栏布局） ==================== -->
+  <div id="pageGame" class="page">
+    <div class="game-layout">
+      <!-- 左侧对话区：小队频道 / KP 单人回应 共用聊天框 -->
+      <div class="left-col">
+        <div class="panel-box shared-chat">
+          <div class="panel-title" id="privatePanelTitle">
+            <img class="speaker-avatar" id="privateSpeakerAvatar" alt="" style="display:none;">
+            <span id="privateSpeakerName" style="display:none;"></span>
+            <img class="speaker-avatar" id="publicSpeakerAvatar" alt="" style="display:none;">
+            <span id="publicSpeakerName" style="display:none;">📢 KP 全局播报</span>
+            <div class="chat-quick-btns">
+              <button type="button" class="chat-quick-btn func-btn" data-target="shop" title="寂静商店">🏪</button>
+              <button type="button" class="chat-quick-btn func-btn" data-target="inventory" title="背包仓库">🎒</button>
+            </div>
+            <div class="chat-switch-dropdown">
+              <button type="button" id="chatSwitchToggle" class="chat-switch-btn">📢 公共频道</button>
+              <div id="chatSwitchMenu" class="chat-switch-menu">
+                <button type="button" class="chat-switch-option" data-view="public">📢 公共频道</button>
+                <button type="button" class="chat-switch-option" data-view="team">💬 小队频道</button>
+                <button type="button" class="chat-switch-option" data-view="private">🔮 单人回应</button>
+              </div>
+            </div>
+          </div>
+          <div class="chat-log" id="publicLog">
+            <p class="team-chat-hint">— KP 全局播报 —</p>
+          </div>
+          <div class="chat-log" id="privateLog" style="display:none;"></div>
+          <div class="chat-log" id="teamChatLog" style="display:none;">
+            <p class="team-chat-hint">— 和队友商量战术、交换线索 —</p>
+          </div>
+        </div>
+        <!-- ★ 左下角：骰子 + 罗盘（战斗行为系统，常驻显示） -->
+        <div class="left-col-hud" id="leftColHud">
+          <div class="dice-panel" id="dicePanel">
+            <div class="dice-display" id="diceDisplay">
+              <div class="dice-cups" id="diceCups"></div>
+            </div>
+          </div>
+          <div class="compass-panel" id="compassPanel">
+            <div class="compass" id="compass">
+              <img class="compass-bg" src="assets/黑金罗盘底盘.png" alt="罗盘">
+              <div class="compass-ticks" id="compassTicks"></div>
+              <div class="compass-needle" id="compassNeedle"><div class="needle-hand"></div><div class="needle-hub"></div></div>
+            </div>
+            <div class="compass-readout">
+              <span class="compass-caption">回合值</span>
+              <span class="compass-center" id="compassCenterVal">0</span>
+              <button id="btnExploreEnd" class="btn-mini">⏹ 结束回合</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 中间主画布 -->
+      <div class="center-col">
+        <div class="scene-canvas" id="sceneCanvas">
+          <!-- ★ 模糊铺底层（cover 放大+模糊，填满无黑边）＋主体层（contain 完整显示） -->
+          <!-- ★ 动态 src 的 img 不设 src 属性（空 src 会被浏览器解析为页面 URL，干扰懒加载判断） -->
+          <img id="sceneBgBlur" class="bg-blur-fill" alt="">
+          <!-- 上半：场景图（KP 按场景切换，青峰山时联动小地图/大地图） -->
+          <img id="sceneBg" alt="场景图" style="width:100%;height:100%;object-fit:contain;">
+          <div id="unitLayer"></div>
+        </div>
+        <!-- ★ 战斗场景模块（场景图下方、战斗信息栏上方）：杀戮尖塔2 式，玩家站左平台、怪物站右平台，融入背景 -->
+        <div class="scene-below" id="sceneBelow">
+          <div class="battle-scene" id="battleScene">
+            <img id="battleBgBlur" class="bg-blur-fill" alt="">
+            <img class="battle-bg" id="battleBg" alt="战斗背景">
+            <div class="battle-sides">
+              <div class="battle-side battle-left" id="battlePlayers"></div>
+              <div class="battle-side battle-right" id="battleMonsters"></div>
+            </div>
+          </div>
+        </div>
+        <!-- ★ 行动 HUD（战斗行为系统1.0）：探索状态条 + 战斗操作条 + 骰子面板 -->
+        <div class="action-hud" id="actionHud" style="display:none">
+          <!-- 探索状态条：仅保留行动状态提示（回合数与回合值已整合到 LOL HUD / 罗盘） -->
+          <div class="explore-bar" id="exploreBar" style="display:none">
+            <span class="explore-wait" id="exploreWait"></span>
+          </div>
+          <!-- 战斗操作条：当前行动者 + AP能量 + 特殊能量条+配套技能 + 快捷操作（技能/普攻请用下方战斗信息栏 LOL HUD） -->
+          <div class="battle-bar" id="battleBar" style="display:none">
+            <span class="battle-turn" id="battleTurnInfo">⚔ 战斗中</span>
+            <span class="battle-energy" id="battleEnergyText">⚡ 0/0</span>
+            <div class="battle-res" id="battleResBar"></div>
+            <div class="battle-res-skills" id="battleResSkills"></div>
+            <div class="battle-actions">
+              <button data-bact="item" class="btn-battle">💊 吃药</button>
+              <button data-bact="equip" class="btn-battle">⚙ 换装</button>
+              <button data-bact="flee" class="btn-battle">🏃 撤退</button>
+              <button data-bact="end" class="btn-battle">⏹ 结束行动</button>
+              <!-- ★ 催促队友行动（非本人回合时显示，点击发 battleUrge 给当前行动者） -->
+              <button id="btnBattleUrge" class="btn-battle" style="display:none" title="催促当前行动中的队友尽快结束行动">📣 催促队友</button>
+            </div>
+          </div>
+        </div>
+        <div class="action-bar">
+          <div class="channel-dropdown">
+            <button id="btnChannelToggle" class="channel-btn">📡 频道</button>
+            <div id="channelMenu" class="channel-menu">
+              <!-- ★ 单人频道已从输入栏移除（仅作为 KP 选项选择时内部使用） -->
+              <button class="channel-option" data-channel="public">📢 全队公共行动</button>
+              <button class="channel-option" data-channel="team">💬 小队频道</button>
+            </div>
+          </div>
+          <!-- ★ 行动指令模块：输入 /指令 参数 快速调用对应行动；全局频道聚焦时向上弹出指令面板（快捷按钮已整合进指令面板） -->
+          <div class="cmd-input-wrap">
+            <div id="actionCmdPanel" class="action-cmd-panel"></div>
+            <input type="text" id="actionInput" placeholder="描述你的行动，或输入 / 查看指令...">
+          </div>
+          <button id="sendAction">行动</button>
+          <!-- ★ KP 响应 loading 指示（P2）：发送行动后显示"KP 正在书写…" -->
+          <div id="kpLoading" class="kp-loading" style="display:none">✍️ KP 正在书写…</div>
+        </div>
+        <!-- ★ LOL 风格战斗 HUD（技能格 + 血条 + 能量条 + 装备槽） -->
+        <div class="lol-hud" id="lolHud">
+          <div class="lol-champion">
+            <div class="lol-champion-avatar" id="lolChampionAvatar">🎭</div>
+            <span class="lol-champion-level" id="lolChampionLevel">1</span>
+          </div>
+          <span class="lol-turn" id="lolTurn">回合 1</span>
+          <!-- ★ 圆形能量池（移至技能/血条左边；非战斗纯黑 0/0，战斗随掷骰变化，液体颜色随职业） -->
+          <div class="lol-energy" id="lolEnergy">
+            <div class="lol-energy-fill" id="lolEnergyFill"></div>
+            <div class="lol-energy-shine"></div>
+            <span class="lol-energy-text" id="lolEnergyText">0/0</span>
+          </div>
+          <div class="lol-skillbars">
+            <div class="lol-skills">
+              <div class="lol-skill" id="lolSkillPassive" data-skill="passive">
+                <span class="lol-skill-icon" id="lolSkillIconPassive"></span>
+                <span class="lol-skill-key">P</span>
+              </div>
+              <div class="lol-skill" id="lolSkill1" data-skill="active1">
+                <span class="lol-skill-icon" id="lolSkillIcon1"></span>
+                <span class="lol-skill-key">Q</span>
+                <span class="lol-skill-cd" id="lolSkillCd1"></span>
+              </div>
+              <div class="lol-skill" id="lolSkill2" data-skill="active2">
+                <span class="lol-skill-icon" id="lolSkillIcon2"></span>
+                <span class="lol-skill-key">W</span>
+                <span class="lol-skill-cd" id="lolSkillCd2"></span>
+              </div>
+              <div class="lol-skill" id="lolSkill3" data-skill="active3">
+                <span class="lol-skill-icon" id="lolSkillIcon3"></span>
+                <span class="lol-skill-key">E</span>
+                <span class="lol-skill-cd" id="lolSkillCd3"></span>
+              </div>
+              <div class="lol-skill" id="lolSkill4" data-skill="active4">
+                <span class="lol-skill-icon" id="lolSkillIcon4"></span>
+                <span class="lol-skill-key">R</span>
+                <span class="lol-skill-cd" id="lolSkillCd4"></span>
+              </div>
+            </div>
+            <div class="lol-bars">
+              <div class="lol-bar hp">
+                <div class="lol-bar-fill" id="lolHpFill"></div>
+                <span class="lol-bar-text" id="lolHpText"></span>
+              </div>
+              <div class="lol-bar san">
+                <div class="lol-bar-fill" id="lolSanFill"></div>
+                <span class="lol-bar-text" id="lolSanText"></span>
+                <span class="lol-san-tag" id="lolSanTag"></span>
+              </div>
+            </div>
+          </div>
+          <div class="lol-equip" id="lolEquip"></div>
+          <!-- ★ 普通攻击键（位于装备格右侧） -->
+          <div class="lol-attack" id="lolAttack">
+            <div class="lol-attack-icon" id="lolAttackIcon">⚔</div>
+            <span class="lol-attack-key">普攻</span>
+          </div>
+          <!-- ★ 战斗信息（左侧数值 + 右侧职业机制垂直堆叠：连击/招架/暴击） -->
+          <div class="lol-combat" id="lolCombat">
+            <div class="lol-combat-title">⚔ 战斗信息</div>
+            <div class="lol-combat-body">
+              <div class="lol-combat-grid">
+                <span class="cc-item"><em>物攻</em><b id="ccPhysAtk">-</b></span>
+                <span class="cc-item"><em>法攻</em><b id="ccMagAtk">-</b></span>
+                <span class="cc-item"><em>物防</em><b id="ccPhysDef">-</b></span>
+                <span class="cc-item"><em>法防</em><b id="ccMagDef">-</b></span>
+                <span class="cc-item"><em>穿透</em><b id="ccPierce">-</b></span>
+                <span class="cc-item"><em>格挡</em><b id="ccBlock">-</b></span>
+                <span class="cc-item"><em>护盾</em><b id="ccShield">-</b></span>
+                <span class="cc-item"><em>吸血</em><b id="ccLifesteal">-</b></span>
+              </div>
+              <div class="lol-combat-mech">
+                <span class="cc-item"><em>连击</em><b id="ccCombo">-</b></span>
+                <span class="cc-item"><em>招架</em><b id="ccParry">-</b></span>
+                <span class="cc-item"><em>暴击</em><b id="ccCrit">-</b></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右侧侧边栏（全部模块化可折叠） -->
+      <div class="right-col">
+        <!-- ★ 调查员档案坞（右上角，小队成员上方） -->
+        <div class="player-dock" id="playerDock">
+          <div class="player-dock-head">
+            <span class="player-dock-title">👤 调查员档案</span>
+            <div class="player-dock-actions">
+              <button type="button" class="btn-settings-open player-dock-settings" title="设置">⚙️</button>
+              <button type="button" class="player-dock-trigger" id="playerDockTrigger" title="档案操作">⋯</button>
+              <!-- ★ 浮窗放在 head 内，相对 head 定位 → 从按钮正下方弹出 -->
+              <div class="player-dock-popup" id="playerDockPopup">
+                <div class="info-buttons">
+                  <button id="btnSwitchChar">切换角色</button>
+                  <button id="btnLogoutGame">退出登录</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="info-panel">
+            <div id="playerInfoCard"></div>
+          </div>
+        </div>
+        <!-- 1. 小队成员 -->
+        <div class="collapsible-section" data-section="team">
+          <div class="panel-title collapsible-header">
+            <span>⚔️ 小队成员</span>
+            <button class="collapse-toggle-btn" data-section="team" title="折叠/展开">▲</button>
+          </div>
+          <div class="collapsible-body">
+            <div class="team-panel">
+              <!-- ★ 队友状态（常驻显示，不再折叠） -->
+              <div class="team-info-box team-info-standalone">
+                <div class="team-info-body" id="teamInfoBody">
+                  <div id="teamInfoList" class="team-info-list"></div>
+                </div>
+              </div>
+              <div class="team-actions">
+                <button id="btnVote">发起投票</button>
+                <button id="btnGroupAction">集体行动</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 4. 线索记录：文字线索 + 线索物品 -->
+        <div class="collapsible-section" data-section="clues">
+          <div class="panel-title collapsible-header">
+            <span>🔍 线索记录</span>
+            <button class="collapse-toggle-btn" data-section="clues" title="折叠/展开">▲</button>
+          </div>
+          <div class="collapsible-body">
+            <div class="clue-panel">
+              <div id="clueItemList" class="clue-item-list"></div>
+            </div>
+          </div>
+        </div>
+        <!-- 5. 快捷栏：8 格（MC 快捷栏物品，点击使用/装备） -->
+        <div class="collapsible-section" data-section="consumables">
+          <div class="panel-title collapsible-header">
+            <span>⚡ 快捷栏</span>
+            <button class="collapse-toggle-btn" data-section="consumables" title="折叠/展开">▲</button>
+          </div>
+          <div class="collapsible-body">
+            <div class="consume-panel">
+              <div id="consumeGrid" class="consume-grid"></div>
+            </div>
+          </div>
+        </div>
+        <!-- 3. 场景背景与道具与记录已移除（自动切换 / 商店背包移入左侧快捷按钮） -->
+        <!-- 6. 列车小地图 + 副本结算：固定右下角（dock-bottom） -->
+        <div class="dock-bottom">
+          <div class="collapsible-section" data-section="minimap">
+            <div class="panel-title collapsible-header">
+              <span>🗺 列车地图</span>
+              <button class="collapse-toggle-btn" data-section="minimap" title="折叠/展开">▲</button>
+            </div>
+            <div class="collapsible-body">
+              <div class="minimap-box">
+                <div class="minimap-wrap" id="miniMapWrap" title="点击查看完整大地图">
+                  <img id="miniMapBg" alt="小地图">
+                  <div class="minimap-marker" id="miniMapMarker" style="display:none"></div>
+                </div>
+                <div class="minimap-loc" id="miniMapLoc">📍 当前位置：未知</div>
+              </div>
+            </div>
+          </div>
+          <div class="collapsible-section collapsed complete-dock" data-section="complete">
+            <div class="panel-title collapsible-header">
+              <span>🏁 副本结算</span>
+              <button class="collapse-toggle-btn" data-section="complete" title="折叠/展开">▲</button>
+            </div>
+            <div class="collapsible-body">
+              <div class="func-panel">
+                <button class="func-btn" data-target="copylog">📜 副本日志</button>
+                <button id="btnCompleteCopy" class="func-btn complete-copy-btn">🏁 完成副本</button>
+                <button id="btnAbandonCopy" class="func-btn abandon-copy-btn" title="中途放弃：评价降档，寂静点数仅发放 10%">🚪 放弃副本</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 商店页面（LOL 风格） ==================== -->
+  <div id="pageShop" class="page">
+    <div class="shop-page">
+      <div class="shop-page-header">
+        <button id="btnShopBack" class="btn-back-hall">← 返回副本</button>
+        <h2 class="shop-page-title">🏪 寂静商店</h2>
+        <div class="shop-page-points" id="shopPointsDisplayTop">🪙 诡秘点数: 0</div>
+        <div class="shop-page-tier" id="shopTierDisplay">阶位：见习</div>
+      </div>
+      <div class="shop-page-body">
+        <div class="shop-cats" id="shopCats">
+          <button class="shop-cat active" data-cat="all">全部</button>
+          <button class="shop-cat" data-cat="consumable">消耗品</button>
+          <button class="shop-cat" data-cat="equipment">装备</button>
+          <button class="shop-cat" data-cat="tool">工具</button>
+          <button class="shop-cat" data-cat="material">材料</button>
+        </div>
+        <div class="shop-page-main">
+          <div class="shop-grid" id="shopItemGrid"></div>
+          <div class="shop-detail" id="shopDetail">
+            <div class="shop-detail-empty">👆 点击左侧物品查看详情</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 背包页面（仓库式格子：分区背包 + 快捷栏 + 六槽装备） ==================== -->
+  <div id="pageInventory" class="page">
+    <div class="inventory-page mc-inventory">
+      <div class="inventory-page-header">
+        <button id="btnInvBack" class="btn-back-hall">← 返回副本</button>
+        <h2 class="inventory-page-title">🎒 背包 · 快捷栏</h2>
+        <div class="mc-pts" id="mcPointsDisp">🪙 0</div>
+      </div>
+      <div class="inventory-page-body inv-body">
+        <div class="inv-body-scroll">
+          <!-- ★ 上半部分：与仓库一致的整个背包（分区格子装载，紧凑并排） -->
+          <div class="inv-parts-panel">
+            <div class="inv-parts-title">🎒 全部物品 <span class="wh-dim">点击物品操作 · 拖拽到下方快捷栏 / 装备栏</span></div>
+            <div class="inv-partitions">
+              <div class="inv-part">
+                <div class="inv-part-title">🍶 消耗品 <span class="wh-dim" id="capConsumable"></span></div>
+                <div class="grid-board" id="inv-consumable" data-type="consumable"></div>
+              </div>
+              <div class="inv-part">
+                <div class="inv-part-title">🔩 材料 <span class="wh-dim" id="capMaterial"></span></div>
+                <div class="grid-board" id="inv-material" data-type="material"></div>
+              </div>
+              <div class="inv-part">
+                <div class="inv-part-title">🪢 工具 <span class="wh-dim" id="capTool"></span></div>
+                <div class="grid-board" id="inv-tool" data-type="tool"></div>
+              </div>
+              <div class="inv-part inv-part-wide">
+                <div class="inv-part-title">⚔️ 装备 <span class="wh-dim" id="capEquipment"></span></div>
+                <div class="grid-board" id="inv-equipment" data-type="equipment"></div>
+              </div>
+              <div class="inv-part inv-part-wide">
+                <div class="inv-part-title">📜 剧情道具 <span class="wh-dim" id="capPlot"></span></div>
+                <div class="grid-board" id="inv-plot" data-type="plot"></div>
+              </div>
+            </div>
+          </div>
+          <!-- ★ 下半部分（同一行紧贴）：快捷栏配置 | 装备格配置 -->
+          <div class="inv-bottom">
+            <div class="inv-bottom-col">
+              <div class="inv-hotbar-title">⚡ 快捷栏配置 <span class="wh-dim">点击使用/装备 · 数字键 1-8</span></div>
+              <div class="mc-hotbar" id="mcHotbar"></div>
+            </div>
+            <div class="equip-bar">
+              <div class="equip-bar-title">⚔️ 装备格配置 <span class="wh-dim">拖入装备 · 点击卸下</span></div>
+              <div class="equip-slots" id="equipSlots"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 仓库页面（副本外独立界面：仓库栏/背包栏 双空间 + 商店式分类） ==================== -->
+  <div id="pageWarehouse" class="page">
+    <div class="inventory-page">
+      <div class="inventory-page-header">
+        <button id="btnWhBack" class="btn-back-hall">← 返回角色选择</button>
+        <h2 class="inventory-page-title">🏠 仓库 · 格子装载</h2>
+      </div>
+      <div class="inventory-page-body">
+        <!-- ★ 左右分栏：左=仓库 800 格大空间 / 右=背包 分区（消耗25/剧情80/材料40/装备12含槽） -->
+        <div class="wh-split">
+          <div class="wh-panel">
+            <div class="wh-panel-title">🏠 仓库 <span class="wh-dim" id="whCapLbl"></span></div>
+            <div class="grid-board wh-board" id="whWhGrid" data-space="warehouse"></div>
+            <!-- ★ 装备槽 + 装备格：左仓库下方（6 部位拖入装载 / 拖出卸下；12 格横排存放，共 18 含槽） -->
+            <div class="wh-equip-dock">
+              <div class="wh-equip-title">装备槽 · 拖入装载 / 拖出卸下</div>
+              <div class="wh-equip-slots">
+                <div class="ic-slot eq-slot" data-slot="weapon"><span class="ic-slot-label">🗡 武器</span><div class="ic-slot-value" id="whWeapon">空</div></div>
+                <div class="ic-slot eq-slot" data-slot="head"><span class="ic-slot-label">⛑ 头部</span><div class="ic-slot-value" id="whHead">空</div></div>
+                <div class="ic-slot eq-slot" data-slot="body"><span class="ic-slot-label">🦺 身体</span><div class="ic-slot-value" id="whBody">空</div></div>
+                <div class="ic-slot eq-slot" data-slot="hand"><span class="ic-slot-label">🧤 手部</span><div class="ic-slot-value" id="whHand">空</div></div>
+                <div class="ic-slot eq-slot" data-slot="foot"><span class="ic-slot-label">🥾 足部</span><div class="ic-slot-value" id="whFoot">空</div></div>
+                <div class="ic-slot eq-slot" data-slot="accessory"><span class="ic-slot-label">📿 配饰</span><div class="ic-slot-value" id="whAccessory">空</div></div>
+              </div>
+              <div class="wh-equip-title" style="margin-top:8px">⚔️ 装备格 <span class="wh-dim" id="capEquipment"></span> · 拖入存放</div>
+              <div class="grid-board" id="whInv-equipment" data-space="inventory" data-type="equipment"></div>
+            </div>
+            <div class="wh-hint">拖拽物品到此处存入仓库</div>
+          </div>
+          <div class="wh-panel wh-panel-inv">
+            <div class="wh-panel-title">🎒 背包</div>
+            <div class="inv-partitions">
+              <div class="inv-part">
+                <div class="inv-part-title">🍶 消耗品 <span class="wh-dim" id="capConsumable"></span></div>
+                <div class="grid-board" id="whInv-consumable" data-space="inventory" data-type="consumable"></div>
+              </div>
+              <div class="inv-part">
+                <div class="inv-part-title">🪢 工具 <span class="wh-dim" id="capTool"></span></div>
+                <div class="grid-board" id="whInv-tool" data-space="inventory" data-type="tool"></div>
+              </div>
+              <div class="inv-part inv-part-wide">
+                <div class="inv-part-title">🔩 材料 <span class="wh-dim" id="capMaterial"></span></div>
+                <div class="grid-board" id="whInv-material" data-space="inventory" data-type="material"></div>
+              </div>
+              <div class="inv-part inv-part-wide">
+                <div class="inv-part-title">📜 剧情道具 <span class="wh-dim" id="capPlot"></span></div>
+                <div class="grid-board" id="whInv-plot" data-space="inventory" data-type="plot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 全物品图鉴（后台账号） ==================== -->
+  <div id="pageItemCatalog" class="page">
+    <div class="inventory-page">
+      <div class="inventory-page-header">
+        <button id="btnCatBack" class="btn-back-hall">← 返回角色选择</button>
+        <h2 class="inventory-page-title">📚 全物品图鉴</h2>
+      </div>
+      <div class="inventory-page-body">
+        <div class="wh-body">
+          <div class="shop-cats cat-cats" id="catCats">
+            <button class="shop-cat active" data-cat="all">全部</button>
+            <button class="shop-cat" data-cat="plot">剧情</button>
+            <button class="shop-cat" data-cat="consumable">消耗品</button>
+            <button class="shop-cat" data-cat="material">材料</button>
+            <button class="shop-cat" data-cat="equipment">装备</button>
+            <button class="shop-cat" data-cat="perm">强化</button>
+          </div>
+          <div class="cat-grid-wrap">
+            <div id="catLoading" class="empty-inventory">加载中…</div>
+            <div id="catSections" class="cat-sections"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ★ 全局设置：副本界面右上角档案坞 + 副本外右上角 设置按钮，独立设置面板 -->
+  <div id="settingsModal" class="modal settings-modal">
+    <div class="modal-content settings-box">
+      <div class="settings-head">
+        <h2>⚙️ 设置</h2>
+        <button id="btnCloseSettings" type="button" class="settings-close" title="关闭">✕</button>
+      </div>
+      <div class="settings-body">
+        <div class="settings-group">
+          <div class="settings-group-title">🔊 音频</div>
+          <div class="settings-row">
+            <span class="set-label">音效</span>
+            <button id="setSfxToggle" type="button" class="set-toggle on">已开启</button>
+          </div>
+          <div class="settings-row">
+            <span class="set-label">主音量</span>
+            <input type="range" id="setVolume" class="set-range" min="0" max="100" step="1" value="80">
+            <span class="set-val" id="setVolumeVal">80%</span>
+          </div>
+        </div>
+        <div class="settings-row settings-actions">
+          <button id="setReset" type="button" class="set-reset">↺ 恢复默认</button>
+        </div>
+        <div class="settings-foot">寂静之地 · 克苏鲁多人跑团 &nbsp;·&nbsp; 音效与音量设置会实时生效并自动保存</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ★ 脚本分级加载：核心网络/认证优先，副本素材/地图延后 -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/settingsPanel.js"></script>
+  <!-- ==================== 大地图浮窗（点击小地图弹出，黑金风格无黑框） ==================== -->
+  <div id="fullMapOverlay" class="fullmap-overlay" style="display:none">
+    <div class="fullmap-box">
+      <div class="fullmap-head">
+        <button id="fullMapClose" class="fullmap-close">✕</button>
+      </div>
+      <div class="fullmap-body">
+        <img id="fullMapBgBlur" class="fullmap-blur" alt="">
+        <img id="fullMapBg" alt="大地图">
+        <canvas id="fullMapCanvas" class="fullmap-canvas" width="0" height="0"></canvas>
+        <div class="fullmap-markers" id="fullMapMarkers"></div>
+      </div>
+      <div class="fullmap-foot">
+        <button id="fmToolDraw" class="fm-tool" title="涂鸦：在地图上自由绘制">🖊 涂鸦</button>
+        <button id="fmToolPin" class="fm-tool" title="标点：点击地图放置标记">📍 标点</button>
+        <button id="fmToolClear" class="fm-tool" title="清除所有涂鸦与标点">🧹 清除</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tier 1: 核心模块（网络 → 认证 → 大厅）立即加载 -->
+  <script src="js/loginLogout.js"></script>
+  <script src="js/qingfengMap.js"></script>
+  <script src="js/battleScene.js"></script>
+  <script src="js/client.js"></script>
+  <!-- ★ 拆分（2026-08-23）：投票 / 商店·背包·物品 从 client.js 移出，须在 client.js 之后加载 -->
+  <script src="js/client-vote.js"></script>
+  <script src="js/client-shop.js"></script>
+  <script src="js/client-hud.js"></script>
+  <script src="js/roomHallSocket.js"></script>
+  <script src="js/roomHall.js"></script>
+  <script src="js/isometricBg.js"></script>
+  <script src="js/obeliskAnim.js"></script>
+  <script src="js/goldParticles.js"></script>
+  <script src="js/copySelectTransition.js"></script>
+  <script src="js/attrSlider.js"></script>
+  <!-- Tier 2: 副本素材延后加载（map/scene/settlement/bg） -->
+  <script src="js/settlement.js"></script>
+  <script src="js/skillTree.js"></script>
+  <script src="js/skillSetup.js"></script>
+  <script src="js/attrAllocate.js"></script>
+  <script src="js/questBoard.js"></script>
+  <!-- ★ 可复用物品格子组件（内核 + 仓库/背包/装备材料 三组件） -->
+  <script src="js/components/ItemGrid.js"></script>
+  <script src="js/components/WarehouseGrid.js"></script>
+  <script src="js/components/InventoryGrid.js"></script>
+  <script src="js/components/EquipMaterialGrid.js"></script>
+  <script src="js/warehouse.js"></script>
+  <script src="js/itemCatalog.js"></script>
+  <script src="js/charDetail.js"></script>
+  <script src="js/mapMarkers.js"></script>
+  <script src="js/mapCoordinateSystem.js"></script>
+  <script src="js/mapCoordPanel.js"></script>
+  <script src="/js/sceneLoader.js"></script>
+  <script src="js/bgSwitcher.js"></script>
+  <script src="js/cluePanel.js"></script>
+</body>
+</html>

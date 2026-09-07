@@ -1,0 +1,26 @@
+{
+  "name": "coc-rpg-game",
+  "version": "1.0.0",
+  "description": "多人联机克苏鲁寂静之地跑团RPG",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build:native": "node-gyp rebuild --directory=native",
+    "test:native": "node native/test/test_engine.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.22.2",
+    "node-fetch": "^3.3.2",
+    "sharp": "^0.35.3",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3"
+  },
+  "devDependencies": {
+    "node-addon-api": "^7.1.1",
+    "node-gyp": "^13.0.1",
+    "nodemon": "^3.0.1"
+  }
+}

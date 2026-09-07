@@ -1,0 +1,44 @@
+# Agent 编排器配置文件
+# 该文件由初始化脚本生成，可手动调整
+
+agent:
+  name: "Orchestrator"
+  version: "1.0.0"
+
+# 重试策略
+retry:
+  max_retries_per_task: 3 # 每个任务最多重试次数（从 REVIEWING 重新开始）
+  tool_timeout_retries: 2 # 工具超时/临时故障的快速重试
+
+# 子Agent 技能：使用 VS Code 内置 skill（grill-me、to-prd、to-issues 等），无需本地目录
+# skills_dir: ".agent/skills"  # 已移除：目录不存在，技能来自 VS Code skill 系统
+
+# 记忆与上下文
+memory:
+  adr_dir: ".agent/memory/adr"
+  issues_dir: ".agent/memory/issues"
+  context_file: ".agent/memory/context.md"
+  index_file: ".agent/memory/adr/INDEX.md"
+
+# 任务管理
+tasks:
+  issue_tracker: "github" # 使用 GitHub Issues
+  plan_sort_order: ["dependency", "urgency"] # 计划排序依据
+
+# 测试命令（可按项目覆盖）
+testing:
+  build_command: "npm run build"
+  test_command: "npm test"
+  visual_test_enabled: true # 如果涉及GUI
+
+# 打断设置
+interrupt:
+  enabled: true
+  clarify_skill: "grill-me" # 打断时优先用此技能理解意图
+
+# 审查组合流程
+review:
+  pipeline:
+    - skill: "improve-codebase-architecture" # 架构审查
+    - tool: "agent/runSubagent" # 代码审查：内联或委托 Reviewer（未提交代码用内联审查）
+    - skill: "grill-with-docs" # ADR一致性

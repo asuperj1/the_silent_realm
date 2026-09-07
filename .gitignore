@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.pyc
+
+# Agent 运行时数据（每次任务都会变化，不入库）
+.agent/memory/state.json
+.agent/memory/state.json.tmp
+
+# Agent 报告产物（每次审查/评估生成）
+.agent/reports/
+
+# 环境变量（含 API Key 等敏感信息，严禁提交）
+.env
+
+# 旧存档目录（已被 data/characters/ 取代）
+saves/
+
+# 原生模块构建产物（C++ N-API）
+native/build/
+*.node
+
+# 测试缓存与日志
+tests/__pycache__/
+*.log
+
+# Node 依赖
+node_modules/
+
+# 运行时日志
+logs/
+
+# IDE / 本地工具（mcp.json 含 API Key，严禁提交）
+.vscode/
+
+# 本地 Agent 技能（非项目游戏内容）
+.claude/
+
+# 运行时用户数据（账号 / 角色存档）
+data/users.json
+data/characters/

@@ -1,0 +1,44 @@
+# 最小 CI 流水线（T-6）
+# 范围：依赖安装 + node --check 语法门禁 + JS 单元回归 + Python 静态编译检查。
+# 明确排除：concurrency_test.js（需起 server + DeepSeek API）；不依赖 conda coc_rpg_env 运行时。
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node (LTS)
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # 语法门禁：关键 JS 文件
+      - name: Syntax check (node --check)
+        run: |
+          node --check server.js
+          for f in server/*.js; do node --check "$f"; done
+          for f in public/js/*.js; do node --check "$f"; done
+          for f in tests/*.js; do node --check "$f"; done
+
+      # JS 单元回归
+      - name: JS unit tests
+        run: node tests/test_round1.js
+
+      # Python 静态编译检查（不运行全量，避免 conda 环境依赖误伤）
+      - name: Python static check (py_compile)
+        run: |
+          python -m py_compile tests/test_t2_verify.py

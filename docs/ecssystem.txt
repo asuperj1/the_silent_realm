@@ -1,0 +1,316 @@
+一、ECS物品系统策划文档
+将此文档作为 system prompt 发给 DeepSeek，要求输出 C++17 代码。
+
+1.1 架构总览
+Text
+┌─────────────────────────────────────────────────────────┐
+│                  ItemSystemManager (单例)                 │
+│  初始化顺序: Factory → Inventory → Query → Equip → Loot  │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  ┌──────────┐  ┌───────────┐  ┌───────────┐            │
+│  │ Entity   │  │ Component │  │  System   │            │
+│  │ (ID唯一) │  │ (纯数据)  │  │ (纯逻辑)  │            │
+│  └────┬─────┘  └─────┬─────┘  └─────┬─────┘            │
+│       │              │              │                   │
+│  EntityManager  ComponentPool    SystemScheduler        │
+│  (增删查)       (按类型连续存储)  (依赖图+执行序)        │
+│                                                         │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │              EventBus (松耦合通信)                 │   │
+│  │  ItemAcquired | ItemConsumed | ItemEquipped       │   │
+│  │  ItemBroken  | ClueDiscovered | InventoryFull    │   │
+│  └──────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────┘
+1.2 Entity 定义
+字段	类型	说明
+id	uint64_t	全局唯一ID，高32位=类型Hash，低32位=自增序列
+generation	uint32_t	代数计数器，防止悬垂引用（ID复用后 generation++）
+isAlive	bool	存活标记，false时System跳过处理
+1.3 Component 定义（POD结构体，纯数据）
+1.3.1 ClueComponent（线索物品）
+字段	类型	说明
+clueId	uint32_t	线索唯一编号
+clueType	enum	KeyClue(关键线索) / SideClue(支线线索) / FakeClue(虚假线索，米·戈伪造)
+fragmentIndex	uint8_t	碎片序号（0-based）
+totalFragments	uint8_t	完整线索所需碎片总数
+truthScore	int8_t	真实度（-100~100），负值=假情报，正值=真情报
+revealsLocation	uint32_t	揭示的车厢ID（0=不揭示）
+revealsNPC	uint32_t	揭示的NPC ID（0=不揭示）
+relatedEventId	uint32_t	关联剧情事件ID
+isAutoIdentified	bool	获取后是否自动识别真伪（PER≥阈值时自动true）
+1.3.2 ConsumableComponent（消耗物品）
+字段	类型	说明
+effectType	enum	HP_RESTORE / SAN_RESTORE / BUFF_TEMP / CURE_WOUND / PURGE_VOID / LIGHT_SOURCE / REPAIR
+effectValue	int32_t	效果数值（HP恢复量/SAN恢复量/Buff增幅百分比）
+durationRounds	uint16_t	持续回合数（0=瞬间生效）
+cooldownSeconds	uint16_t	使用冷却（0=无冷却）
+maxCarryPerSlot	uint8_t	每格最大堆叠数（1=不可堆叠，0=无限制）
+useInCombat	bool	战斗中是否可使用
+useOutOfCombat	bool	非战斗是否可使用
+targetScope	enum	SELF_ONLY / SINGLE_ALLY / ALL_PARTY / SINGLE_ENEMY
+consumptionSound	string_id	使用音效ID
+consumptionVFX	string_id	使用特效ID
+1.3.3 EquipmentComponent（装备物品）
+字段	类型	说明
+equipSlot	enum	WEAPON / ACCESSORY / ARMOR / LIGHT_SOURCE
+attrBonuses	std::array<int32_t, 7>	7属性加成 [HP, SAN, STR, DEX, CON, PER, WIL]
+skillGranted	string_id	授予的额外技能ID（空=无）
+durability	uint16_t	当前耐久
+maxDurability	uint16_t	最大耐久
+durabilityLossPerUse	uint8_t	每次使用/受击的耐久损耗
+repairable	bool	是否可修理
+repairCost	uint16_t	修理消耗诡秘点数
+twoHanded	bool	是否双手占用
+specialEffect	string_id	特殊效果ID（如"灵火附魔""对亡灵+30%伤害"）
+1.3.4 TagComponent（标签）
+字段	类型	说明
+tags	std::vector<string_id>	标签列表，用于：1.场景匹配引擎 2.LootSystem筛选 3.KP叙述生成时的AI prompt注入
+sceneOrigin	string_id	来源场景tag（空=无特定来源）
+loreCategory	enum	VOID(虚空系) / MORTAL(凡人系) / MYTHOS(神话系) / RUINS(遗迹系) / TRAIN(列车系)
+1.3.5 WeightComponent（负重）
+字段	类型	说明
+weight	float	单件重量（kg）
+encumbrancePenalty	int8_t	负重超限后的DEX惩罚（每超1kg=-1DEX）
+1.4 System 定义（纯逻辑，无状态）
+1.4.1 ItemFactory（工厂）
+Text
+职责：根据物品模板ID创建物品Entity，注册所需Component
+输入：itemTemplateId（如 "clue_passport_001"）
+流程：
+  1. 查ItemTemplateRegistry获取模板
+  2. EntityManager::CreateEntity()
+  3. 根据模板 componentMask 逐项 AddComponent()
+  4. 如果模板有 generatorFunc → 调用生成随机属性（如耐久度浮动±10%）
+  5. 发送 Event::ItemCreated
+输出：Entity&
+模板注册表（策划配置数据）:
+  ItemTemplateRegistry = {
+    "clue_passport_001" → {
+      name: "散落的乘客护照",
+      componentMask: [Clue, Tag],
+      Clue: { clueType: SideClue, truthScore: 80, fragmentIndex: 0, totalFragments: 3, ... },
+      Tag: { tags: ["护照", "乘客", "废都799年", "3号车厢"], loreCategory: MORTAL }
+    },
+    "consumable_bandage_001" → {
+      name: "列车急救包",
+      componentMask: [Consumable, Tag, Weight],
+      Consumable: { effectType: HP_RESTORE, effectValue: 20, maxCarryPerSlot: 3, ... },
+      ...
+    }
+  }
+1.4.2 InventorySystem（背包）
+Text
+职责：增删改查、堆叠合并、负重计算
+核心方法：
+  AddItem(Entity& item, uint8_t slotIndex) → bool
+    1. 查是否有可堆叠的同类型物品（ConsumableComponent.maxCarryPerSlot>1）
+    2. 有→合并堆叠 无→占用新格子
+    3. 负重超限→发送 Event::InventoryFull，返回false
+    4. 发送 Event::ItemAcquired
+  RemoveItem(uint64_t entityId) → bool
+  GetItemsByTag(const std::string& tag) → std::vector<Entity*>
+  GetItemsByType(ComponentType type) → std::vector<Entity*>
+  GetTotalWeight() → float
+  MergeStack(uint64_t fromId, uint64_t toId) → bool
+1.4.3 ItemQuerySystem（查询）
+Text
+职责：多条件组合筛选 + 索引加速
+支持筛选条件：
+  - byType: Clue / Consumable / Equipment
+  - byTag: 任意tag字符串
+  - byRarity: Common / Uncommon / Rare / Epic
+  - byEffectType: HP_RESTORE / SAN_RESTORE / ...
+  - bySceneOrigin: 按来源场景筛选
+  - byTruthRange: [minTruth, maxTruth]（用于识别虚假线索）
+实现要点：
+  - 对 TagComponent.tags 建倒排索引（tag → EntityIdSet）
+  - 对 ComponentType 建位图索引
+  - 多条件用SetIntersection合并
+1.4.4 ItemEquipSystem（装备）
+Text
+职责：装备/卸下/耐久消耗/属性加成计算
+核心方法：
+  Equip(uint64_t itemEntityId, uint64_t characterEntityId) → bool
+    1. 检查 equipSlot 是否已被占用 → 占用则自动卸下旧装备
+    2. 检查属性要求（如 STR≥60 的长剑）
+    3. 应用 attrBonuses 到角色属性Component
+    4. 应用 skillGranted（临时技能写入角色SkillComponent）
+    5. 发送 Event::ItemEquipped
+  Unequip(uint64_t characterEntityId, EquipSlot slot) → bool
+  ApplyDurabilityLoss(uint64_t itemEntityId) → void
+    耐久归零→发送 Event::ItemBroken→不可修复则RemoveItem
+  GetEffectiveAttrBonuses(uint64_t characterEntityId) → AttrBonusSum
+1.4.5 ItemLootSystem（掉落）
+Text
+职责：根据场景条件决定掉落物品和概率
+核心方法：
+  GenerateLoot(const LootContext& ctx) → std::vector<Entity*>
+LootContext 结构：
+  {
+    sceneId: "car_3_luggage",          // 当前场景ID
+    stageIndex: 2,                       // 探索阶段
+    roundIndex: 1,                       // 当前轮次
+    playerPER: 55,                       // 玩家当前感知值
+    playerSTR: 62,                       // 玩家当前力量值
+    playerWIL: 48,                       // 玩家当前意志值
+    collectedClueIds: [1,3,5],          // 已收集线索ID列表
+    chenHuiAlive: true,                 // 陈慧是否存活
+    miGoDeceived: false,                // 是否已被米·戈欺骗
+    shoggothTriggered: false,           // 是否已触发修格斯遭遇战
+    shoggothRepelled: false,            // 是否成功驱退修格斯
+  }
+算法：
+  1. 从LootTableRegistry查 sceneId+stageIndex 的所有条目
+  2. 逐条检查 condition 是否满足（属性阈值/前置线索/事件状态）
+  3. 满足条件时：guaranteed=true → 必定掉落；guaranteed=false → 按dropWeight加权随机
+  4. 每轮最多掉落3件物品
+  5. 调用ItemFactory创建Entity
+  6. 发送 Event::LootGenerated
+1.5 ItemSystemManager（单例）
+Cpp
+class ItemSystemManager {
+public:
+    static ItemSystemManager& Instance();
+    void Init();          // 按依赖序初始化
+    void Shutdown();      
+    // 内部持有
+    EntityManager       entityMgr;       // 实体容器
+    ComponentPool       componentPools[ComponentType::COUNT];  // 6个Pool
+    ItemFactory         factory;         // 依赖 entityMgr + componentPools
+    InventorySystem     inventory;       // 依赖 entityMgr + componentPools
+    ItemQuerySystem     query;           // 依赖 componentPools（建索引）
+    ItemEquipSystem     equip;           // 依赖 entityMgr + componentPools
+    ItemLootSystem      loot;            // 依赖 factory
+    EventBus            eventBus;        // System间通信
+    ItemTemplateRegistry templates;      // 策划配置数据
+    LootTableRegistry   lootTables;      // 掉落表配置
+};
+二、青峰山虚空列车副本物品掉落策划表
+此表为策划定稿数据，可直接转为 JSON 配置供 LootSystem 加载。
+
+2.1 线索物品总表（15件）
+ID	物品名	位置	阶段	获取条件	线索类型	真实度	揭示内容	品质
+CL001	散落乘客护照	3号行李厢	第1轮翻找	自动获取（主动翻找行李）	支线	+80	L2·3号车厢乘客名单	Common
+CL002	手写便签「6号门外有东西在动」	2号二等座	第1轮观察	PER≥50	支线	+90	L2·警告6号车厢	Uncommon
+CL003	列车长尸体（米·戈拟态）	1号驾驶室	第1轮检查	自动获取	虚假	-70	假·引导去2号夹层	Junk
+CL004	系统日志「广播23:47被劫持」	4号餐车	第2轮（找到陈慧后）	PER≥55	关键	+100	L6·广播不可信	Rare
+CL005	幸存者日记·上册	5号卧铺	第1轮探索	自动获取（阅读日记）	支线	+85	L4·米·戈伪装规律	Uncommon
+CL006	幸存者日记·下册	5号卧铺	第2轮（已获L005）	阅读同一日记后页	关键	+100	L5·陈慧在4号餐车	Rare
+CL007	隧道工程蓝图	3号行李厢	第2轮（使用撬棍或STR≥60）	撬开上锁工具箱	关键	+100	L8·逃生通道在6号车尾	Epic
+CL008	广播伪造录音带	1号驾驶室	第2轮（已获L003后再检查）	PER≥65→识破	虚假→真实	识破后变+95	先假后真·米·戈手法证据	Rare
+CL009	陈慧口述「它们害怕强光」	4号餐车储物间	与陈慧对话	找到陈慧（自动）	关键	+100	修格斯驱退条件	Rare
+CL010	陈慧口述「逃生通道有毒雾」	4号餐车储物间	与陈慧深入对话	收集≥3条线索后对话	关键	+100	6号车厢安全通过方式	Rare
+CL011	虚空裂隙观测笔记	6号尾车厢	第1轮	PER≥60 + 陈慧同行	关键	+95	揭示虚空裂隙起源	Epic
+CL012	乘客遗物·婚戒	2号二等座	第2轮精细搜索	PER≥55	支线	+70	乘客背景故事	Common
+CL013	米·戈甲壳碎片	2号夹层	修格斯战·驱退后	驱退修格斯	关键	+100	证实外神势力介入	Epic
+CL014	伪造安全广播稿	各车厢广播	阶段2（中后期自动触发）	PER≥60→识破	虚假	-85	假·引导去2号夹层	Junk
+CL015	虚空漂流瓶·陈慧遗言	6号逃生通道	最终阶段（结局B触发）	陈慧遇害	关键	+100	跨世界彩蛋·陈慧最后信息	Epic
+线索品质与真实度层级
+Text
+真实度轴：
+-100 ←———————————— 0 ————————————→ +100
+ 假情报           中性线索           绝对真相
+Junk（垃圾）   Common（普通）  Uncommon（稀有）  Rare（精良）  Epic（史诗）
+CL003/CL014     CL001/CL012     CL002/CL005       CL004/CL006   CL007/CL011
+                                                     CL008/CL009   CL013/CL015
+2.2 消耗物品总表（12件）
+ID	物品名	位置	获取条件	效果类型	效果值	堆叠	品质
+CS001	列车急救包	3号行李厢·储物柜	自动获取（翻找）	HP_RESTORE	+20 HP	3/格	Common
+CS002	未开封矿泉水	4号餐车·吧台	自动获取	SAN_RESTORE	+10 SAN	5/格	Common
+CS003	镇静注射剂	5号卧铺·床头柜	PER≥50	SAN_RESTORE	+30 SAN	2/格	Uncommon
+CS004	强光手电筒	3号行李厢·工具箱	STR≥60或使用撬棍	LIGHT_SOURCE + BUFF_TEMP	驱退无形之子3回合+PER临时+5	1/格	Uncommon
+CS005	应急信号弹×3	1号驾驶室·应急箱	自动获取	LIGHT_SOURCE	驱退修格斯1回合	3/格	Uncommon
+CS006	虚空抗性药剂	6号尾车厢·医疗箱	PER≥55	PURGE_VOID	免疫毒雾伤害3回合	2/格	Rare
+CS007	陈慧的私藏咖啡	4号餐车储物间	陈慧存活+对话赠予	SAN_RESTORE + BUFF_TEMP	+15 SAN + WIL临时+10(5回合)	1/格	Rare
+CS008	列车长万能钥匙	1号驾驶室·尸体旁	PER≥65识破拟态后	特殊	打开任意上锁车门/储物柜	1/格	Epic
+CS009	修格斯粘液样本	2号夹层	驱退修格斯后	BUFF_TEMP	对虚空畸变伤害+25%（10回合）	1/格	Epic
+CS010	精神稳定药片	5号卧铺·卫生间	PER≥55	CURE_WOUND	解除「恐惧」和「混乱」状态	2/格	Uncommon
+CS011	便携急救缝线	4号餐车·厨房	STR≥50（拉开冻柜）	HP_RESTORE	+35 HP	2/格	Rare
+CS012	灵能电池	2号二等座·电子设备舱	自动获取	REPAIR	修复任意装备50%耐久	1/格	Uncommon
+陈慧存活影响：
+
+CS007（陈慧的私藏咖啡）仅在她存活时获取
+若陈慧死亡，CS007替换为「陈慧的工牌」（品质降为 Common，仅SAN+5，无Buff）
+2.3 装备物品总表（6件）
+ID	物品名	位置	获取条件	槽位	属性加成	特殊效果	耐久	品质
+EQ001	列车撬棍	3号行李厢·工具架	自动获取	WEAPON	STR+8 DEX-2	可撬开上锁容器（非战斗）	100	Common
+EQ002	乘务员对讲机	4号餐车·储物间	陈慧存活+对话获取	ACCESSORY	PER+5	范围内自动识别米·戈广播（判定PER阈值+10）	80	Rare
+EQ003	旧印护符	5号卧铺·神龛	PER≥60	ACCESSORY	WIL+8 SAN上限+10	对神话生物SAN损耗-30%	—	Epic
+EQ004	防爆手电	3号行李厢·工具箱	STR≥60撬锁或使用列车长钥匙	LIGHT_SOURCE	PER+3	光照范围+50%，对无形之子伤害×2	150	Uncommon
+EQ005	列车长制服（防撕裂内衬）	1号驾驶室·更衣柜	PER≥65识破拟态后	ARMOR	CON+5 HP上限+15	物理伤害-15%	200	Rare
+EQ006	虚空行者布靴	6号逃生通道·入口	最终阶段·成功抵达逃生通道	ARMOR	DEX+5	毒雾地形伤害-50%+移动速度+20%	120	Epic
+获取条件强度分级：
+
+条件难度	装备	说明
+自动获取	EQ001 列车撬棍	基础工具
+NPC存活	EQ002 乘务员对讲机	陈慧存活是前提
+PER阈值	EQ003 旧印护符	PER≥60 仔细搜索才能发现
+STR阈值	EQ004 防爆手电	STR≥60或替代品
+战斗驱退	EQ006+（无直接绑定但战斗中STR有用）	—
+复合条件	EQ005 列车长制服	需要PER≥65先识破 + 再搜索
+2.4 按车厢×阶段的完整掉落矩阵
+3号行李厢（起始车厢）
+阶段	轮次	条件	线索	消耗品	装备
+S1·初步探索	R1·翻找散落行李	自动	CL001 护照	—	EQ001 撬棍
+R2·检查通风口	PER≥50	无形之子痕迹描述	—	—
+S2·深入搜索	R1·撬开工具箱	STR≥60 或 持有撬棍	CL007 隧道蓝图	CS004 强光手电	EQ004 防爆手电
+R2·翻找储物柜	自动	—	CS001 急救包	—
+S3·通风口异常	R1·无形之子渗透	自动触发事件	—	—	—
+2号二等座（修格斯潜伏区·高风险）
+阶段	轮次	条件	线索	消耗品	装备
+S1·初步观察	R1·环视车厢	自动	乘客遗留物品描述	CS012 灵能电池	—
+R2·注意便签	PER≥50	CL002 便签	—	—
+S2·细致搜索	R1·搜索座位下方	PER≥55	CL012 婚戒	—	—
+R2·检查天花板	PER≥60	天花板夹层入口发现	—	—
+S3·夹层遭遇	R1·进入夹层	触发修格斯战	—	—	—
+R2·驱退修格斯后	驱退成功	CL013 甲壳碎片	CS009 粘液样本	—
+R3·夹层搜索	驱退修格斯+PER≥65	—	—	EQ006（仅S级结局额外掉落）
+1号驾驶室（米·戈主场·真假博弈）
+阶段	轮次	条件	线索	消耗品	装备
+S1·进入驾驶室	R1·初见	自动（SAN-3）	CL003 假尸体（Junk）	CS005 信号弹	—
+R2·仔细检查尸体	PER≥60	察觉拟态破绽	—	—
+S2·识破拟态	R1·二次检查	已察觉破绽+PER≥65	CL008 广播录音带（真相）	CS008 列车长钥匙	EQ005 列车长制服
+R2·分析电台	持有CL008+PER≥60	截获米·戈通讯频段	—	—
+S3·广播陷阱	R1·听到假广播	PER≥65识破	CL014 假广播（Junk→识破）	—	—
+R2·不听广播直接离开	—	跳过本轮，无惩罚	—	—
+4号餐车（陈慧·关键转折点）
+阶段	轮次	条件	线索	消耗品	装备
+S1·进入餐车	R1·环视	自动	餐车混乱痕迹	CS002 矿泉水	—
+R2·检查广播面板	PER≥55	CL004 系统日志	—	—
+S2·找到陈慧	R1·储物间外对话	敲门+表明来意	CL009 强光弱点	—	—
+R2·深入交流	已收集≥3条线索	CL010 毒雾警告	CS007 咖啡（赠予）	EQ002 对讲机（赠予）
+S3·离开餐车	R1·冻柜探索	STR≥50	—	CS011 急救缝线	—
+R2·护送陈慧同行	陈慧加入队伍	—	—	—
+5号卧铺（线索密集区）
+阶段	轮次	条件	线索	消耗品	装备
+S1·床铺搜索	R1·翻找1号床位	自动	CL005 日记上册	CS003 镇静剂（PER≥50）	—
+R2·翻找2号床位	自动	CL006 日记下册（需先获取CL005）	—	—
+S2·精细搜索	R1·卫生间	PER≥55	—	CS010 精神药片	—
+R2·角落神龛	PER≥60	旧印符号描述	—	EQ003 旧印护符
+S3·床底痕迹	R1·寻找无形之子爬行痕迹	PER≥50	5号→6号渗透路径图	—	—
+6号尾车厢（最终逃生阶段）
+阶段	轮次	条件	线索	消耗品	装备
+S1·进入尾车厢	R1·毒雾弥漫	每回合HP-3（贴地-1）	—	CS006 虚空抗性药剂（PER≥55找到医疗箱）	—
+R2·观察裂隙	PER≥60+陈慧同行	CL011 虚空裂隙笔记	—	—
+S2·突破无形之子	R1·潜行穿过	PER≥55+无光源 → 不触发战斗	—	—	—
+R2·强行突破	触发3只无形之子战斗	—	—	—
+S3·开启逃生通道	R1·扳动阀门	STR≥60→1回合；STR<60→3回合（每回合HP-3）	—	—	—
+R2·进入通道前	自动	—	—	EQ006 虚空行者布靴（通道入口处）
+R3·贴地撤离	HP-5（固定）+陈慧HP-3（若同行）	—	—	—
+2.5 米·戈虚假信息诱导路线（陷阱路线）
+若玩家被米·戈广播/假尸体误导，走向2号车厢夹层：
+
+阶段	后果
+进入夹层前	获得 CL003 假线索（品质Junk，真实度-70，引导去夹层）
+进入夹层	直接触发修格斯遭遇战
+战斗期间	4号餐车储物间门被震开 → 陈慧暴露 → 若3回合未驱退修格斯 → 陈慧死亡
+虚假线索物品	CL003 + CL014 共2件Junk品质线索（PER≥65可识别为假，转化为真实证据）
+未识破	2件Junk线索降低总真相分，结局评级最多到C
+2.6 按玩家路线汇总
+路线	可获得线索(件)	消耗品(件)	装备(件)	结局上限
+全探索路线（6车厢全清+陈慧存活+驱退修格斯）	13~15	10~12	6	S
+车头优先（3→2→1→4→5→6）	8~10	6~8	3~4	A
+车尾优先（3→4→5→6→回头→1→2）	11~13	9~11	5	S
+被米·戈欺骗（3→1→被诱导→2夹层）	5~7（含2件Junk）	4~5	2~3	C
+速通（3→4找到陈慧→直奔6号）	4~5	4~5	2	B

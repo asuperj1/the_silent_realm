@@ -1,0 +1,276 @@
+/* ==========================================
+   loginLoadingAnim.css — 羊皮纸飞页翻折 + 暗金流光环绕缓冲动画
+   独立样式文件，仅与登录业务耦合（通过 CSS class 触发）
+   约束：低饱和暗金 + 克苏鲁暗黑复古氛围
+   ========================================== */
+
+/* ====== 加载期间禁用点击 ====== */
+body.login-loading { pointer-events: none !important; }
+
+/* ====== 按钮流光暗金 ====== */
+.btn-go.loading-btn {
+  position: relative;
+  overflow: hidden;
+  color: transparent !important;
+  pointer-events: none;
+}
+.btn-go.loading-btn::before {
+  content: '';
+  position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(168, 130, 60, 0.15) 20%,
+    rgba(212, 168, 67, 0.5) 40%,
+    rgba(212, 168, 67, 0.6) 50%,
+    rgba(168, 130, 60, 0.5) 60%,
+    rgba(212, 168, 67, 0.15) 80%,
+    transparent 100%
+  );
+  animation: btnGoldSweep 1.2s ease-in-out infinite;
+  z-index: 1;
+}
+.btn-go.loading-btn::after {
+  content: '验证中…';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  color: #c8a86e; font-weight: 700; font-size: 15px;
+  letter-spacing: 4px; z-index: 2;
+}
+
+@keyframes btnGoldSweep {
+  0%   { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ====== 全屏加载遮罩 ====== */
+#loginLoadingOverlay {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(6, 5, 4, 0.92);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: wait;
+}
+#loginLoadingOverlay.active { display: flex; }
+
+/* ====== 羊皮纸飞页翻折容器 ====== */
+.parchment-stage {
+  position: relative;
+  width: 320px; height: 200px;
+  perspective: 1200px;
+}
+
+/* 羊皮纸左页 */
+.parchment-left {
+  position: absolute; top: 0; left: 0;
+  width: 50%; height: 100%;
+  background: linear-gradient(180deg,
+    #3a3426 0%, #4a4030 15%, #5a4e38 50%, #4a4030 85%, #3a3426 100%
+  );
+  border: 1px solid #6a5c40;
+  border-radius: 4px 0 0 4px;
+  transform-origin: right center;
+  box-shadow: inset 0 0 30px rgba(30, 24, 12, 0.6), 2px 0 12px rgba(0,0,0,0.5);
+  animation: parchmentLeftClose 0.7s ease-in-out forwards;
+  z-index: 2;
+}
+/* 羊皮纸右页 */
+.parchment-right {
+  position: absolute; top: 0; right: 0;
+  width: 50%; height: 100%;
+  background: linear-gradient(180deg,
+    #3a3426 0%, #4a4030 15%, #5a4e38 50%, #4a4030 85%, #3a3426 100%
+  );
+  border: 1px solid #6a5c40;
+  border-radius: 0 4px 4px 0;
+  transform-origin: left center;
+  box-shadow: inset 0 0 30px rgba(30, 24, 12, 0.6), -2px 0 12px rgba(0,0,0,0.5);
+  animation: parchmentRightClose 0.7s ease-in-out forwards;
+  z-index: 2;
+}
+
+/* 羊皮纸纹理 */
+.parchment-left::after, .parchment-right::after {
+  content: '';
+  position: absolute; inset: 6px;
+  border: 1px dashed rgba(180, 140, 80, 0.15);
+  border-radius: 1px;
+  opacity: 0.5;
+}
+
+/* 书脊暗金线 */
+.parchment-spine {
+  position: absolute; top: 10%; left: 50%;
+  transform: translateX(-50%);
+  width: 2px; height: 80%;
+  background: linear-gradient(180deg,
+    transparent 0%, #a08040 15%, #c8a860 50%, #a08040 85%, transparent 100%
+  );
+  border-radius: 1px;
+  z-index: 3;
+  animation: spinePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes parchmentLeftClose {
+  0%   { transform: rotateY(0deg); }
+  100% { transform: rotateY(-55deg); }
+}
+@keyframes parchmentRightClose {
+  0%   { transform: rotateY(0deg); }
+  100% { transform: rotateY(55deg); }
+}
+@keyframes spinePulse {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1; }
+}
+
+/* ====== 暗金流光从四角汇聚 ====== */
+.gold-beams {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1001;
+  pointer-events: none;
+  display: none;
+}
+.gold-beams.active { display: block; }
+
+/* 四角光束 */
+.gold-beam {
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(180, 140, 60, 0.6) 30%,
+    rgba(212, 168, 67, 0.9) 50%,
+    rgba(180, 140, 60, 0.6) 70%,
+    transparent
+  );
+  animation: beamSlide 2s ease-in-out infinite;
+  opacity: 0;
+}
+
+.gold-beam.tl { top: 0;   left: 0;   width: 40vw; height: 1px; transform-origin: left top; animation-delay: 0s; animation-name: beamSlideTL; }
+.gold-beam.tr { top: 0;   right: 0;  width: 40vw; height: 1px; transform-origin: right top; animation-delay: 0.3s; animation-name: beamSlideTR; }
+.gold-beam.bl { bottom: 0; left: 0;  width: 40vw; height: 1px; transform-origin: left bottom; animation-delay: 0.6s; animation-name: beamSlideBL; }
+.gold-beam.br { bottom: 0; right: 0; width: 40vw; height: 1px; transform-origin: right bottom; animation-delay: 0.9s; animation-name: beamSlideBR; }
+
+/* 对角斜光束 */
+.gold-beam-diag {
+  position: absolute;
+  width: 1px;
+  background: linear-gradient(180deg,
+    transparent,
+    rgba(168, 130, 60, 0.5) 30%,
+    rgba(200, 168, 110, 0.8) 50%,
+    rgba(168, 130, 60, 0.5) 70%,
+    transparent
+  );
+  animation: beamSlideDiag 2.5s ease-in-out infinite;
+  opacity: 0;
+}
+.gold-beam-diag.d1 { top: -20%; left: 20%;  height: 140%; transform: rotate(30deg);  animation-delay: 0.15s; }
+.gold-beam-diag.d2 { top: -20%; right: 20%; height: 140%; transform: rotate(-30deg); animation-delay: 0.45s; }
+.gold-beam-diag.d3 { top: -20%; left: 35%;  height: 140%; transform: rotate(15deg);  animation-delay: 0.75s; }
+.gold-beam-diag.d4 { top: -20%; right: 35%; height: 140%; transform: rotate(-15deg); animation-delay: 1.05s; }
+
+/* 中心旋转光环 */
+.gold-ring {
+  position: fixed;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1002;
+  display: none;
+}
+.gold-ring.active {
+  display: block;
+  animation: ringExpand 1.8s ease-out infinite;
+}
+
+@keyframes beamSlideTL {
+  0%   { opacity: 0; transform: scaleX(0); }
+  30%  { opacity: 1; transform: scaleX(1); }
+  70%  { opacity: 0.6; transform: scaleX(0.8); }
+  100% { opacity: 0; transform: scaleX(0); }
+}
+@keyframes beamSlideTR {
+  0%   { opacity: 0; transform: scaleX(0); }
+  30%  { opacity: 1; transform: scaleX(1); }
+  70%  { opacity: 0.6; transform: scaleX(0.8); }
+  100% { opacity: 0; transform: scaleX(0); }
+}
+@keyframes beamSlideBL {
+  0%   { opacity: 0; transform: scaleX(0); }
+  30%  { opacity: 1; transform: scaleX(1); }
+  70%  { opacity: 0.6; transform: scaleX(0.8); }
+  100% { opacity: 0; transform: scaleX(0); }
+}
+@keyframes beamSlideBR {
+  0%   { opacity: 0; transform: scaleX(0); }
+  30%  { opacity: 1; transform: scaleX(1); }
+  70%  { opacity: 0.6; transform: scaleX(0.8); }
+  100% { opacity: 0; transform: scaleX(0); }
+}
+@keyframes beamSlideDiag {
+  0%   { opacity: 0; transform: scaleY(0); }
+  25%  { opacity: 0.8; transform: scaleY(1); }
+  75%  { opacity: 0.4; transform: scaleY(0.6); }
+  100% { opacity: 0; transform: scaleY(0); }
+}
+@keyframes ringExpand {
+  0%   { width: 0; height: 0; opacity: 0; border-color: transparent; }
+  20%  { opacity: 0.8; border-color: rgba(180, 140, 60, 0.6); }
+  80%  { width: 600px; height: 600px; opacity: 0.3; border-color: rgba(180, 140, 60, 0.15); }
+  100% { width: 800px; height: 800px; opacity: 0; border-color: transparent; }
+}
+
+/* ====== 汇聚完成后切入大厅的淡出 ====== */
+.login-fadeout {
+  animation: loginFadeOut 0.6s ease-in forwards;
+}
+@keyframes loginFadeOut {
+  0%   { opacity: 1; filter: blur(0); }
+  100% { opacity: 0; filter: blur(4px); }
+}
+
+/* ====== 阶段二：收尾封合动画（仅执行一次，不循环） ====== */
+#loginLoadingOverlay.closing .parchment-left {
+  animation: parchmentLeftSeal 0.5s ease-in forwards;
+}
+#loginLoadingOverlay.closing .parchment-right {
+  animation: parchmentRightSeal 0.5s ease-in forwards;
+}
+#loginLoadingOverlay.closing .parchment-spine {
+  animation: spineFlash 0.5s ease-out forwards;
+}
+/* 遮罩本身淡出 */
+#loginLoadingOverlay.closing {
+  animation: overlayFadeOut 0.7s ease-in forwards;
+}
+
+@keyframes parchmentLeftSeal {
+  0%   { transform: rotateY(-55deg); opacity: 1; }
+  40%  { transform: rotateY(-85deg); opacity: 1; }
+  100% { transform: rotateY(-90deg); opacity: 0; }
+}
+@keyframes parchmentRightSeal {
+  0%   { transform: rotateY(55deg); opacity: 1; }
+  40%  { transform: rotateY(85deg); opacity: 1; }
+  100% { transform: rotateY(90deg); opacity: 0; }
+}
+@keyframes spineFlash {
+  0%   { opacity: 0.6; }
+  30%  { opacity: 1; background: #d4a843; box-shadow: 0 0 16px rgba(212,168,67,0.7); }
+  100% { opacity: 0; }
+}
+@keyframes overlayFadeOut {
+  0%   { opacity: 1; }
+  60%  { opacity: 0.4; }
+  100% { opacity: 0; }
+}

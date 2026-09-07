@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🗺 地图标点编辑器 · 开发工具</title>
+<link rel="stylesheet" href="/css/main.css">
+<style>
+  :root { --me-bg:#0d0f14; --me-panel:#141824; --me-border:#2a3242; --me-gold:#c9a44b; --me-text:#e2e8f0; --me-dim:#64748b; }
+  * { box-sizing: border-box; margin:0; padding:0; }
+  html, body { height:100%; }
+  body { background:var(--me-bg); color:var(--me-text); font-family:'Segoe UI','Microsoft YaHei','PingFang SC',sans-serif; display:flex; flex-direction:column; overflow:hidden; }
+  #meTop { display:flex; align-items:center; gap:12px; padding:10px 16px; background:var(--me-panel); border-bottom:1px solid var(--me-border); flex-shrink:0; }
+  #meTop h1 { font-size:16px; color:var(--me-gold); }
+  #meTop .me-spacer { flex:1; }
+  #meTop .me-user { font-size:12px; color:var(--me-dim); }
+  #meTop .me-status { font-size:12px; padding:3px 10px; border-radius:12px; border:1px solid var(--me-border); }
+  #meTop .me-status.dirty { color:#ffb020; border-color:#ffb02066; background:#ffb02012; }
+  #meTop .me-status.saved { color:#4ade80; border-color:#4ade8066; background:#4ade8012; }
+  #meTop button, .me-btn { background:#1e2433; color:var(--me-text); border:1px solid var(--me-border); border-radius:6px; padding:6px 12px; cursor:pointer; font-size:13px; }
+  #meTop button:hover, .me-btn:hover { border-color:var(--me-gold); color:var(--me-gold); }
+  .me-btn.danger:hover { border-color:#ef4444; color:#ef4444; }
+  .me-btn.primary { background:linear-gradient(180deg,#e8c766,#c9a44b); color:#1a1200; border:none; font-weight:600; }
+  #meBody { flex:1; display:flex; min-height:0; }
+  #meSide { width:260px; background:var(--me-panel); border-right:1px solid var(--me-border); display:flex; flex-direction:column; flex-shrink:0; min-height:0; }
+  .me-side-tabs { display:flex; border-bottom:1px solid var(--me-border); flex-shrink:0; }
+  .me-side-tabs button { flex:1; background:none; border:none; color:var(--me-dim); padding:9px 0; cursor:pointer; font-size:13px; }
+  .me-side-tabs button.active { color:var(--me-gold); border-bottom:2px solid var(--me-gold); background:#ffffff08; }
+  /* 图片分类下拉 */
+  #meCatBar { padding:8px 10px; border-bottom:1px solid var(--me-border); flex-shrink:0; }
+  #meCatBar select { width:100%; background:#1e2433; color:var(--me-text); border:1px solid var(--me-border); border-radius:6px; padding:6px 8px; font-size:12px; cursor:pointer; }
+  #meCatBar select:hover { border-color:var(--me-gold); }
+  #meCatBar select:focus { outline:none; border-color:var(--me-gold); }
+  .me-side-body { flex:1; overflow-y:auto; min-height:0; }
+  /* 图片库 */
+  #meGallery { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:10px; }
+  .me-thumb { border:1px solid var(--me-border); border-radius:6px; overflow:hidden; cursor:pointer; background:#000; text-align:center; }
+  .me-thumb:hover { border-color:var(--me-gold); }
+  .me-thumb.active { border-color:var(--me-gold); box-shadow:0 0 0 2px var(--me-gold)44; }
+  .me-thumb img { width:100%; height:64px; object-fit:cover; display:block; }
+  .me-thumb span { font-size:10px; color:var(--me-dim); display:block; padding:3px 4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #meGalleryEmpty { color:var(--me-dim); font-size:12px; padding:16px; text-align:center; }
+  /* 标注列表 */
+  #meAnnotList { padding:6px; }
+  .me-annot { display:flex; align-items:center; gap:6px; padding:6px 8px; border-radius:6px; font-size:12px; border-bottom:1px solid #ffffff0a; }
+  .me-annot:hover { background:#ffffff08; }
+  .me-annot .me-ann-coord { color:var(--me-gold); font-family:Consolas,monospace; flex-shrink:0; min-width:40px; }
+  .me-annot .me-ann-label { flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .me-annot .me-ann-ops { display:flex; gap:4px; flex-shrink:0; }
+  .me-annot .me-ann-ops button { background:none; border:none; color:var(--me-dim); cursor:pointer; font-size:12px; padding:1px 3px; }
+  .me-annot .me-ann-ops button:hover { color:var(--me-gold); }
+  .me-annot .me-ann-ops button.del:hover { color:#ef4444; }
+  #meAnnotEmpty { color:var(--me-dim); font-size:12px; padding:16px; text-align:center; }
+  /* 主区 */
+  #meMain { flex:1; display:flex; flex-direction:column; min-width:0; }
+  #meToolbar { display:flex; align-items:center; gap:14px; padding:8px 14px; background:var(--me-panel); border-bottom:1px solid var(--me-border); flex-shrink:0; flex-wrap:wrap; }
+  #meToolbar label { font-size:12px; color:var(--me-dim); display:flex; align-items:center; gap:5px; }
+  #meToolbar select, #meToolbar input[type=text] { background:#1e2433; color:var(--me-text); border:1px solid var(--me-border); border-radius:5px; padding:4px 6px; font-size:12px; }
+  #meToolbar .me-tb-spacer { flex:1; }
+  #meCanvasWrap { flex:1; position:relative; min-height:0; display:flex; align-items:center; justify-content:center; background:#0a0c11; padding:16px; }
+  #mapEditorCanvas { position:relative; width:100%; height:100%; max-width:1200px; border:1px solid var(--me-border); border-radius:8px; overflow:hidden; background:#000; }
+  #mapEditorCanvas .me-bg { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; user-select:none; pointer-events:none; }
+  #mapEditorCanvas #cityMapContainer { position:absolute; inset:0; }
+  /* 底图未选择提示 */
+  #meNoMap { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--me-dim); gap:8px; font-size:14px; }
+  #meNoMap span { font-size:40px; }
+  .me-help { position:absolute; left:10px; bottom:8px; font-size:11px; color:var(--me-dim); background:rgba(0,0,0,.5); padding:4px 8px; border-radius:4px; pointer-events:none; }
+  /* 标注名称输入弹窗 */
+  .me-modal { position:fixed; inset:0; background:rgba(0,0,0,.55); display:flex; align-items:center; justify-content:center; z-index:999; }
+  .me-modal-box { background:var(--me-panel); border:1px solid var(--me-border); border-radius:10px; padding:18px 22px; width:320px; box-shadow:0 8px 30px rgba(0,0,0,.6); }
+  .me-modal-title { font-size:15px; color:var(--me-gold); margin-bottom:6px; }
+  .me-modal-coord { font-size:12px; color:var(--me-dim); margin-bottom:10px; font-family:Consolas,monospace; }
+  .me-modal-box input { width:100%; background:#1e2433; color:var(--me-text); border:1px solid var(--me-border); border-radius:6px; padding:8px 10px; font-size:14px; margin-bottom:12px; }
+  .me-modal-box input:focus { outline:none; border-color:var(--me-gold); }
+  .me-modal-actions { display:flex; gap:8px; justify-content:flex-end; }
+  .me-modal-actions .me-btn { min-width:72px; }
+  @media (max-width: 900px) { #meSide { width:200px; } }
+</style>
+</head>
+<body>
+  <div id="meTop">
+    <h1>🗺 地图标点编辑器</h1>
+    <span class="me-user" id="meUser"></span>
+    <div class="me-spacer"></div>
+    <span class="me-status saved" id="meStatus">就绪</span>
+    <button id="meSave" class="primary">💾 保存</button>
+    <button id="meBack">← 返回</button>
+  </div>
+  <div id="meBody">
+    <div id="meSide">
+      <div class="me-side-tabs">
+        <button id="meTabImages" class="active">🖼 图片库</button>
+        <button id="meTabAnnots">📍 标注点 <span id="meAnnotCount"></span></button>
+      </div>
+      <div id="meCatBar">
+        <select id="meCatFilter" title="切换图片分类"></select>
+      </div>
+      <div class="me-side-body" id="meGalleryWrap"><div id="meGallery"></div></div>
+      <div class="me-side-body" id="meAnnotWrap" style="display:none"><div id="meAnnotList"></div></div>
+    </div>
+    <div id="meMain">
+      <div id="meToolbar">
+        <label>网格 <input type="checkbox" id="meGrid" checked></label>
+        <label>密度
+          <select id="meDensity">
+            <option value="fine">精细</option>
+            <option value="medium">标准</option>
+            <option value="coarse">粗略</option>
+          </select>
+        </label>
+        <label><input type="checkbox" id="meAnnotMode"> 标注模式（点击落点）</label>
+        <label>颜色 <input type="color" id="meColor" value="#e74c3c"></label>
+        <div class="me-tb-spacer"></div>
+        <button class="me-btn" id="meClear">🗑 清空</button>
+      </div>
+      <div id="meCanvasWrap">
+        <div id="mapEditorCanvas">
+          <div id="meNoMap"><span>🗺</span>从左侧图片库选择一张地图开始标点</div>
+          <img class="me-bg" id="meBg" style="display:none" alt="底图">
+          <div id="cityMapContainer"></div>
+          <div class="me-help">标注模式开启后：点击地图 → 输入名称落点 · 拖拽移动 · 双击改名 · 右键删除</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 标注名称输入弹窗 -->
+  <div class="me-modal" id="meNameModal" style="display:none">
+    <div class="me-modal-box">
+      <div class="me-modal-title" id="meNameModalTitle">📍 添加标注</div>
+      <div class="me-modal-coord" id="meNameCoord"></div>
+      <input type="text" id="meNameInput" placeholder="标注名称（可留空，用坐标）" maxlength="30">
+      <div class="me-modal-actions">
+        <button class="me-btn" id="meNameCancel">取消</button>
+        <button class="me-btn primary" id="meNameOk">确定</button>
+      </div>
+    </div>
+  </div>
+  <script>window.MAP_COORD_NO_SOCKET = true;</script>
+  <script src="/js/mapCoordinateSystem.js"></script>
+  <script src="/js/mapEditor.js"></script>
+</body>
+</html>

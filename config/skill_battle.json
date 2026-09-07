@@ -1,0 +1,4615 @@
+{
+  "haidao": {
+    "passive": {
+      "id": "haidao_passive",
+      "name": "朗姆酒之歌",
+      "trigger": "onAttack",
+      "effect": {
+        "lifesteal": 2
+      }
+    },
+    "skills": {
+      "酩酊破击": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "海匪重劈": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.7000000000000001,
+          "hits": 1
+        }
+      },
+      "醉火暴击": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "登船强攻": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.7000000000000001,
+          "hits": 1
+        }
+      },
+      "烈酒穿防": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "醉意固守": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.7000000000000001,
+          "hits": 1
+        }
+      },
+      "双焰齐射": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "双浪格挡": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "physical",
+        "block": 11
+      },
+      "沧浪压制": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "浪风增弹": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "沧火蓄力": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "残浪透支": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "浊酒幻守": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "physical",
+        "block": 9
+      },
+      "断涛强击": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "疯船绝势": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      }
+    }
+  },
+  "jiaodoushi": {
+    "passive": {
+      "id": "jiaodoushi_passive",
+      "name": "嗜血角斗",
+      "trigger": "onAttack",
+      "effect": {
+        "lifesteal": 2
+      }
+    },
+    "skills": {
+      "猛力劈砍": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "伤痛狂化": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.7000000000000001,
+          "hits": 1
+        }
+      },
+      "裂伤连击": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "碎甲重击": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.7000000000000001,
+          "hits": 1
+        }
+      },
+      "浴血坚守": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 18,
+          "scale": "physAtk",
+          "ratio": 0.55
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "撕裂创伤": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.7000000000000001,
+          "hits": 1
+        }
+      },
+      "盾击慑敌": {
+        "ap": 4,
+        "cd": 2,
+        "type": "taunt",
+        "target": "all",
+        "legacy": true,
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "element": "physical"
+      },
+      "双刃突刺": {
+        "ap": 4,
+        "cd": 2,
+        "type": "attack",
+        "target": "single",
+        "legacy": true,
+        "element": "physical",
+        "damage": {
+          "base": 85,
+          "scale": "physAtk",
+          "ratio": 0.5
+        }
+      },
+      "铁壁姿态": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "physical",
+        "block": 9
+      },
+      "苦痛威压": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "角斗狂躯": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "搏命反扑": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "死斗执念": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "殉命死战": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "创伤蔓延": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "屠兽巨斩": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      }
+    }
+  },
+  "fangshi": {
+    "passive": {
+      "id": "fangshi_passive",
+      "name": "玄元炁击",
+      "trigger": "onTurnStart",
+      "effect": {
+        "block": 2
+      }
+    },
+    "skills": {
+      "元炁活血": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "万炁归身": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "heal",
+        "heal": {
+          "base": 8,
+          "scale": "magAtk",
+          "ratio": 0.4
+        },
+        "block": 6,
+        "element": "arcane"
+      },
+      "筋骸淬炁": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "玄躯不灭": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "heal",
+        "heal": {
+          "base": 8,
+          "scale": "magAtk",
+          "ratio": 0.4
+        },
+        "block": 6,
+        "element": "arcane"
+      },
+      "固元守一": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "冲炁击": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "heal",
+        "heal": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.4
+        },
+        "block": 6,
+        "element": "arcane"
+      },
+      "符箓镇邪": {
+        "ap": 4,
+        "cd": 3,
+        "type": "control",
+        "target": "single",
+        "legacy": true,
+        "element": "arcane",
+        "damage": {
+          "base": 15,
+          "scale": "magAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "immobilize",
+            "turns": 1
+          }
+        ]
+      },
+      "丹雾护佑": {
+        "ap": 4,
+        "cd": 4,
+        "type": "heal",
+        "target": "allies",
+        "legacy": true,
+        "heal": {
+          "base": 25,
+          "scale": "magAtk",
+          "ratio": 0.4
+        },
+        "element": "arcane"
+      },
+      "裂炁散": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "九天落炁": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "魂丝缚咒": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "control",
+        "element": "shadow",
+        "effects": [
+          {
+            "id": "immobilize",
+            "value": 1,
+            "turns": 1
+          }
+        ]
+      },
+      "万魂同归": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 30,
+          "scale": "magAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "焚炁蚀骨": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "fire",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "大炁焚野": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "fire",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "离魄幻身": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 20,
+          "scale": "magAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "神陨焚天": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "fire",
+        "damage": {
+          "base": 30,
+          "scale": "magAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "云炁封络": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "灵游探幽": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 20,
+          "scale": "magAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "幽魂陨击": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 30,
+          "scale": "magAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      }
+    }
+  },
+  "qiangshou": {
+    "passive": {
+      "id": "qiangshou_passive",
+      "name": "弹械本能",
+      "trigger": "onAttack",
+      "effect": {
+        "dexUp": 1
+      }
+    },
+    "skills": {
+      "定点锁髓": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "穿甲狙击": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 6,
+          "scale": "physAtk",
+          "ratio": 0.65,
+          "hits": 3
+        }
+      },
+      "连环贯孔": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "锁死要害": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 6,
+          "scale": "physAtk",
+          "ratio": 0.65,
+          "hits": 3
+        }
+      },
+      "弱点洞悉": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "千弹锁命": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.7000000000000001,
+          "hits": 3
+        }
+      },
+      "速射齐发": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "烈焰弹幕": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "瞬影换位": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "掠影追猎": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "爆裂弹匣": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "焚墟炮轰": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "飘忽游走": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "绝命闪击": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "火药增压": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "侧滑规避": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "追猎流弹": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      }
+    }
+  },
+  "qishi": {
+    "passive": {
+      "id": "qishi_passive",
+      "name": "坚铠二重相",
+      "trigger": "onHurt",
+      "effect": {
+        "block": 3
+      }
+    },
+    "skills": {
+      "铁壁号令": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "block": 10,
+        "effects": [
+          {
+            "id": "blockUp",
+            "value": 1,
+            "turns": 1
+          }
+        ],
+        "element": "physical"
+      },
+      "圣铠壁垒": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 8,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "block": 4
+      },
+      "岿然固守": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "block": 10,
+        "effects": [
+          {
+            "id": "blockUp",
+            "value": 1,
+            "turns": 1
+          }
+        ],
+        "element": "physical"
+      },
+      "永戍之躯": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 8,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "block": 4
+      },
+      "锁阵拒敌": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "block": 10,
+        "effects": [
+          {
+            "id": "blockUp",
+            "value": 1,
+            "turns": 1
+          }
+        ],
+        "element": "physical"
+      },
+      "裂锋斩": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55
+        },
+        "block": 4
+      },
+      "摧阵突袭": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "焚骸战歌": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "铠光流转": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "二重共振": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "浴血冲决": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "万钧崩裂": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "进退之衡": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "铠命归一": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "断铠殉战": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "双相瞬切": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "逆命重铸": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      }
+    }
+  },
+  "guanxingzhe": {
+    "passive": {
+      "id": "guanxingzhe_passive",
+      "name": "星辰之力",
+      "trigger": "onTurnStart",
+      "effect": {
+        "block": 2
+      }
+    },
+    "skills": {
+      "五星引・碎金": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "五星引・燎火": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "heal",
+        "heal": {
+          "base": 8,
+          "scale": "magAtk",
+          "ratio": 0.4
+        },
+        "block": 6,
+        "element": "fire"
+      },
+      "五星引・繁木": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "曜日灼光": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "heal",
+        "heal": {
+          "base": 8,
+          "scale": "magAtk",
+          "ratio": 0.4
+        },
+        "block": 6,
+        "element": "holy"
+      },
+      "五星引・寒水": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "ice",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "月华幻幕": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "heal",
+        "heal": {
+          "base": 8,
+          "scale": "magAtk",
+          "ratio": 0.4
+        },
+        "block": 6,
+        "element": "arcane"
+      },
+      "朝暮轮转": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "坍缩枷锁": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "control",
+        "element": "arcane",
+        "effects": [
+          {
+            "id": "immobilize",
+            "value": 1,
+            "turns": 1
+          }
+        ]
+      },
+      "五行归墟": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 20,
+          "scale": "magAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "星骸攫取": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 30,
+          "scale": "magAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "曦光渡厄": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "holy",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "暗影吞噬": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "晨昏逆溯": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 20,
+          "scale": "magAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "万象噬空": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 30,
+          "scale": "magAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "虚空引吸": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "五星引・厚土": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "earth",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "日月同辉": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "holy",
+        "damage": {
+          "base": 20,
+          "scale": "magAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "虚无奇点": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 30,
+          "scale": "magAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      }
+    }
+  },
+  "huanfashi": {
+    "passive": {
+      "id": "huanfashi_passive",
+      "name": "环枢咏唱",
+      "trigger": "onTurnStart",
+      "effect": {
+        "block": 2
+      }
+    },
+    "skills": {
+      "1环・元素飞弹": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "5环・岩崩地裂": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "heal",
+        "heal": {
+          "base": 8,
+          "scale": "magAtk",
+          "ratio": 0.4
+        },
+        "block": 6,
+        "element": "earth"
+      },
+      "2环・冰缚囚笼": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "ice",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "6环・风暴涡旋": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "heal",
+        "heal": {
+          "base": 8,
+          "scale": "magAtk",
+          "ratio": 0.4
+        },
+        "block": 6,
+        "element": "arcane"
+      },
+      "3环・烈焰涌流": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "fire",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "7环・熔火陨星": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "heal",
+        "heal": {
+          "base": 8,
+          "scale": "magAtk",
+          "ratio": 0.4
+        },
+        "block": 6,
+        "element": "fire"
+      },
+      "4环・雷暴链袭": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "lightning",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "8环・元素混沌共振": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "heal",
+        "heal": {
+          "base": 8,
+          "scale": "magAtk",
+          "ratio": 0.4
+        },
+        "block": 6,
+        "element": "arcane"
+      },
+      "1环・耀光弹": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "holy",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "5环・圣裁之矢": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "holy",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "2环・衰朽诅咒": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "7环・腐秽灾疫": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "poison",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "3环・相位移位": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 20,
+          "scale": "magAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "7环・环域重铸": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 30,
+          "scale": "magAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "2环・辉光护罩": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "holy",
+        "block": 8
+      },
+      "7环・天国光幔": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "holy",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "3环・幽影腐蚀": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "poison",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "9环・虚空葬仪": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "4环・环镜回溯": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 20,
+          "scale": "magAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "8环・命运咏叹": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 30,
+          "scale": "magAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "3环・圣光涤罪": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "holy",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "9环・永耀神启": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "holy",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "4环・魂吸锁链": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "control",
+        "element": "shadow",
+        "effects": [
+          {
+            "id": "immobilize",
+            "value": 1,
+            "turns": 1
+          }
+        ]
+      },
+      "1环・幻惑微光": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "control",
+        "element": "shadow",
+        "effects": [
+          {
+            "id": "immobilize",
+            "value": 1,
+            "turns": 1
+          }
+        ]
+      },
+      "5环・心智调和": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 30,
+          "scale": "magAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "4环・曙光结界": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "holy",
+        "block": 8
+      },
+      "1环・暗影蚀牙": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "5环・恐惧幻视": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "control",
+        "element": "shadow",
+        "effects": [
+          {
+            "id": "immobilize",
+            "value": 1,
+            "turns": 1
+          }
+        ]
+      },
+      "2环・魔能流转": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 20,
+          "scale": "magAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "6环・时空滞缓": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "control",
+        "element": "arcane",
+        "effects": [
+          {
+            "id": "immobilize",
+            "value": 1,
+            "turns": 1
+          }
+        ]
+      }
+    }
+  },
+  "lianjinshushi": {
+    "passive": {
+      "id": "lianjinshushi_passive",
+      "name": "贤者炼核",
+      "trigger": "onTurnStart",
+      "effect": {
+        "block": 2
+      }
+    },
+    "skills": {
+      "赤焰爆弹": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "fire",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "强酸腐蚀爆弹": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "heal",
+        "heal": {
+          "base": 8,
+          "scale": "magAtk",
+          "ratio": 0.4
+        },
+        "block": 6,
+        "element": "poison"
+      },
+      "霜凝爆破弹": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "ice",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "毒瘴爆裂罐": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "heal",
+        "heal": {
+          "base": 8,
+          "scale": "magAtk",
+          "ratio": 0.4
+        },
+        "block": 6,
+        "element": "poison"
+      },
+      "惊雷闪爆弹": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "lightning",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "岩崩重锤爆弹": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "heal",
+        "heal": {
+          "base": 8,
+          "scale": "magAtk",
+          "ratio": 0.4
+        },
+        "block": 6,
+        "element": "earth"
+      },
+      "腐蚀酸雾": {
+        "ap": 4,
+        "cd": 3,
+        "type": "attack",
+        "target": "single",
+        "legacy": true,
+        "element": "poison",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        }
+      },
+      "应急爆弹": {
+        "ap": 4,
+        "cd": 3,
+        "type": "attack",
+        "target": "all",
+        "legacy": true,
+        "element": "fire",
+        "damage": {
+          "base": 50,
+          "scale": "physAtk",
+          "ratio": 0.5
+        }
+      },
+      "风涡聚爆弹": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "fire",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "元素终焉陨爆": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "fire",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "承重坚土人偶": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "earth",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "替身粘土身": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "earth",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "献祭爆灵增幅": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "fire",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "神格破圣弹": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "holy",
+        "damage": {
+          "base": 20,
+          "scale": "magAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "虚空星骸萃取": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 30,
+          "scale": "magAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "四象混融爆弹": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "fire",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "小型爆破粘土人": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "earth",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "分裂爆灵人偶": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "fire",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "连环自爆军团": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "fire",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "万土归烬・人偶终爆": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "earth",
+        "damage": {
+          "base": 20,
+          "scale": "magAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "圣域赐福炼药": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "holy",
+        "damage": {
+          "base": 30,
+          "scale": "magAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "连环掷爆弹幕": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "fire",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "牵制诡偶": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "fire",
+        "damage": {
+          "base": 14,
+          "scale": "magAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "追踪噬影人偶": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "巨像撼地人偶": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "earth",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "月辉幻惑药剂": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "control",
+        "element": "shadow",
+        "effects": [
+          {
+            "id": "immobilize",
+            "value": 1,
+            "turns": 1
+          }
+        ]
+      },
+      "焚星陨灭药剂": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "fire",
+        "damage": {
+          "base": 30,
+          "scale": "magAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      }
+    }
+  },
+  "zhentan": {
+    "passive": {
+      "id": "zhentan_passive",
+      "name": "罪证溯源",
+      "trigger": "onAttack",
+      "effect": {
+        "dexUp": 1
+      }
+    },
+    "skills": {
+      "痕迹捕捉": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "罪证固化": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 6,
+          "scale": "physAtk",
+          "ratio": 0.65,
+          "hits": 3
+        }
+      },
+      "伤痕溯源": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "全域警戒": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 6,
+          "scale": "physAtk",
+          "ratio": 0.65,
+          "hits": 3
+        }
+      },
+      "预判设防": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "溯源神佑": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 6,
+          "scale": "physAtk",
+          "ratio": 0.65,
+          "hits": 3
+        }
+      },
+      "弱点解析": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "真伪甄别": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "暗影潜踪": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 20,
+          "scale": "magAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "虚空惑敌": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 30,
+          "scale": "magAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "罪迹洞察": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "破绽锁定": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "control",
+        "element": "shadow",
+        "effects": [
+          {
+            "id": "immobilize",
+            "value": 1,
+            "turns": 1
+          }
+        ]
+      },
+      "声息寂灭": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 20,
+          "scale": "magAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "闭环匿杀": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "arcane",
+        "damage": {
+          "base": 30,
+          "scale": "magAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "层层剥析": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "万罪看破": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 16,
+          "scale": "magAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "踪迹全无": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 20,
+          "scale": "magAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "寂夜无声": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "shadow",
+        "damage": {
+          "base": 30,
+          "scale": "magAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      }
+    }
+  },
+  "baifuzhang": {
+    "passive": {
+      "id": "baifuzhang_passive",
+      "name": "五段战姿",
+      "trigger": "onAttack",
+      "effect": {
+        "lifesteal": 2
+      }
+    },
+    "skills": {
+      "双刃横斩": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "舍命劈砍": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.7000000000000001,
+          "hits": 1
+        }
+      },
+      "破甲刺击": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "奔袭突进": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.7000000000000001,
+          "hits": 1
+        }
+      },
+      "军团狂袭连击": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "旋风绞杀": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.7000000000000001,
+          "hits": 1
+        }
+      },
+      "盾面重击": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "physical",
+        "block": 9
+      },
+      "盾沿扫绊": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "physical",
+        "block": 11
+      },
+      "伺机卸力反击": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "盾墙固守": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "physical",
+        "block": 9
+      },
+      "方阵铁壁结界": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "physical",
+        "block": 11
+      },
+      "压制推进": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "集体嘲讽怒吼": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "taunt",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        }
+      },
+      "攻防交替刺盾": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "physical",
+        "block": 11
+      },
+      "间歇休整": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      }
+    }
+  },
+  "wushi": {
+    "passive": {
+      "id": "wushi_passive",
+      "name": "架势条",
+      "trigger": "onAttack",
+      "effect": {
+        "lifesteal": 2
+      }
+    },
+    "skills": {
+      "凝神蓄势": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "收刀调息": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 6,
+          "scale": "physAtk",
+          "ratio": 0.65,
+          "hits": 1
+        }
+      },
+      "基础居合格挡": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "滴水架式": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 6,
+          "scale": "physAtk",
+          "ratio": 0.65,
+          "hits": 1
+        }
+      },
+      "援护铁壁": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "连环卸力": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 6,
+          "scale": "physAtk",
+          "ratio": 0.65,
+          "hits": 1
+        }
+      },
+      "磐石不动": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "影凝・虚影刀": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "分身诱敌": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "影融堕刃": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "献祭蓄力": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "看破斩": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "二重一闪": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "瞬步影杀": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "噬魂斩击": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "全域阵守": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "physical",
+        "block": 9
+      },
+      "残影旋风斩": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "影缚锁刃": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "control",
+        "element": "physical",
+        "effects": [
+          {
+            "id": "immobilize",
+            "value": 1,
+            "turns": 1
+          }
+        ]
+      },
+      "暗影腐蚀领域": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      }
+    }
+  },
+  "guishuxiaochou": {
+    "passive": {
+      "id": "guishuxiaochou_passive",
+      "name": "戏法铸刃",
+      "trigger": "onAttack",
+      "effect": {
+        "dexUp": 1
+      }
+    },
+    "skills": {
+      "能量铸刃": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "妆容迷惑": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 6,
+          "scale": "physAtk",
+          "ratio": 0.65,
+          "hits": 3
+        }
+      },
+      "基础甩手投掷": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "侧滚腾跃": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 6,
+          "scale": "physAtk",
+          "ratio": 0.65,
+          "hits": 3
+        }
+      },
+      "戏法收束": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "高空翻折规避": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 6,
+          "scale": "physAtk",
+          "ratio": 0.65,
+          "hits": 3
+        }
+      },
+      "杂耍卸力": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "惊魂假身": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "三刃齐发": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "刃影追加": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "千刃储备": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "暗影腐蚀刃": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "毒雾爆刃": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "奥义・堕影双生炼狱": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "绸带缠绕绊足": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "游刃有余": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "扇形散射": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "过载倾泻": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "奥义・漫天流星雨": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "幻影小丑分身": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "暗影吞噬": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "连环杂耍舞步": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "奥义・万花游场": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "刃阵预置": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "破甲淬钢小刀": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "淬毒小刀": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "双分身协战": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "影毒共生": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      }
+    }
+  },
+  "jingguan": {
+    "passive": {
+      "id": "jingguan_passive",
+      "name": "正义处决",
+      "trigger": "onKill",
+      "effect": {
+        "strength": 1
+      }
+    },
+    "skills": {
+      "近身锁控": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "关节拆解": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 6,
+          "scale": "physAtk",
+          "ratio": 0.65,
+          "hits": 3
+        }
+      },
+      "擒抱摔击": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "联防固守": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 6,
+          "scale": "physAtk",
+          "ratio": 0.65,
+          "hits": 3
+        }
+      },
+      "连环卸力反击": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 12,
+          "scale": "physAtk",
+          "ratio": 0.5
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "突进冲撞": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 6,
+          "scale": "physAtk",
+          "ratio": 0.65,
+          "hits": 3
+        }
+      },
+      "公理免伤结界": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "physical",
+        "block": 8
+      },
+      "弱点勘破": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "连斩追诉": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "正义蓄力": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "铜墙铁骨": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "physical",
+        "block": 9
+      },
+      "正义庇护": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "physical",
+        "block": 11
+      },
+      "奥义・终极正义审判": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "群体警戒护佑": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "physical",
+        "block": 8
+      },
+      "雷霆一击": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "威慑逼降": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "control",
+        "element": "physical",
+        "effects": [
+          {
+            "id": "immobilize",
+            "value": 1,
+            "turns": 1
+          }
+        ]
+      },
+      "威慑震慑": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "control",
+        "element": "physical",
+        "effects": [
+          {
+            "id": "immobilize",
+            "value": 1,
+            "turns": 1
+          }
+        ]
+      },
+      "奥义・不败格斗姿态": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 20,
+          "scale": "physAtk",
+          "ratio": 0.7,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "奥义・法理不可侵": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "稳态续航": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "heal",
+        "element": "physical",
+        "heal": {
+          "base": 8,
+          "scale": "physAtk",
+          "ratio": 0.5
+        }
+      },
+      "追猎处决": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 14,
+          "scale": "physAtk",
+          "ratio": 0.55,
+          "hits": 1
+        }
+      },
+      "全域追缉": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "重整姿态": {
+        "ap": 2,
+        "cd": 2,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 16,
+          "scale": "physAtk",
+          "ratio": 0.6,
+          "hits": 1
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      },
+      "正义屏障": {
+        "ap": 2,
+        "cd": 2,
+        "target": "single",
+        "type": "defense",
+        "element": "physical",
+        "block": 11
+      },
+      "裁决馈赠": {
+        "ap": 2,
+        "cd": 3,
+        "target": "all",
+        "type": "attack",
+        "element": "physical",
+        "damage": {
+          "base": 30,
+          "scale": "physAtk",
+          "ratio": 1,
+          "hits": 3
+        },
+        "effects": [
+          {
+            "id": "vulnerable",
+            "value": 1,
+            "turns": 2
+          }
+        ]
+      }
+    }
+  }
+}

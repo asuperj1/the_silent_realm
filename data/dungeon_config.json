@@ -1,0 +1,164 @@
+{
+  "_description": "副本结构配置，每个副本的元数据、房间点位、怪物分布、结算规则",
+  "_version": "1.0.0",
+
+  "废都纪元800｜青峰山虚空列车": {
+    "worldTag": "废都轮回消亡世界",
+    "era": 800,
+    "unlockRequirement": "白色薄层灵魂刻痕",
+    "tier": "beginner",
+    "difficulty": "简单",
+    "maxPlayers": 5,
+    "exp": 25,
+    "mysteryBase": 40,
+
+    "npc": {
+      "id": "chen_hui",
+      "name": "陈慧",
+      "role": "G314列车乘务员·唯一真实幸存者",
+      "hp": 20,
+      "location": "car_7_service",
+      "behavior": "理智清醒、未被污染、主动提供真实情报",
+      "survivalFlag": "chenHuiAlive"
+    },
+
+    "monsters": [
+      {
+        "id": "formless_spawn",
+        "name": "无形之子",
+        "hp": 15,
+        "damageFormula": "CON×0.3",
+        "minDamage": 3,
+        "detectRules": {
+          "sound_dB_20": "范围2节车厢",
+          "light_lumen_50": "范围1节车厢"
+        },
+        "swarmBonus": "3只以上每只HP+5，4只以上群体伤害×1.5",
+        "retreatCondition": "强光照射范围移动速度减半"
+      },
+      {
+        "id": "mi_go",
+        "name": "米·戈",
+        "hp": "不可直接战斗",
+        "abilities": {
+          "memoryRead": "被动能力·无法阻止·读取6人份遇害者记忆",
+          "broadcastForgery": {"accuracy": 0.85, "counterThreshold": "PER≥65"},
+          "voiceMimicry": {"accuracy": 0.70, "counterThreshold": "PER≥70"},
+          "visualMimicry": {"accuracy": 0.60, "counterThreshold": "PER≥60"},
+          "fakeCorpseTrap": {"counterThreshold": "PER≥55"}
+        }
+      },
+      {
+        "id": "proto_shoggoth",
+        "name": "修格斯幼体",
+        "hp": "可被驱退·不可直接击杀",
+        "damageFormula": "CON×0.8",
+        "minDamage": 15,
+        "location": "car_8_cabin",
+        "fearSanLoss": {"default": 15, "wilThreshold": "WIL≥75减免至-5"},
+        "defeatCondition": "3光源同时照射 OR 累计伤害≥50",
+        "deathCondition": "3回合内未驱退→即死判定",
+        "dropItem": "QFSE013 修格斯核心残片(黑装·成长型)"
+      }
+    ],
+
+    "specialRule": "纯属性阈值判定·无掷骰",
+    "sceneSwitchEnable": true,
+
+    "backgroundList": [
+      { "path": "assets/qingfeng_scenes/废都青峰山1号车外隧道正常.png", "label": "青峰山隧道入口" },
+      { "path": "assets/qingfeng_scenes/废都青峰山2号车正常.png", "label": "虚空裂隙车厢" },
+      { "path": "assets/qingfeng_scenes/废都青峰山3号车外隧道正常.png", "label": "青峰山暗夜全景" }
+    ],
+    "chenhuiPortrait": "assets/qingfeng_scenes/废都青峰山7号车配电间.png",
+    "exclusiveMap": "assets/qingfeng_scenes/废都青峰山地图.png",
+
+    "cars": [
+      {"id": "car_1_cab", "name": "1号·驾驶室", "events": ["列车长尸体(米戈拟态)", "电台(假广播+陈慧呼叫)", "虚空裂隙全景"], "sanLoss": 3, "sanWilThreshold": 60},
+      {"id": "car_2_economy", "name": "2号·二等座车厢", "events": ["乘务员尸体(地板·真实死亡)", "无形之子(车顶)", "乘客遗物×5"], "roofMonster": "formless_spawn"},
+      {"id": "car_3_luggage", "name": "3号·行李车厢", "events": ["窗外隧道米戈向1号车移动", "行李箱线索×3", "撬棍道具"], "searchHpLoss": 2},
+      {"id": "car_4_dining", "name": "4号·餐车(初始出生点)", "events": ["初始苏醒地", "备用照明系统", "广播控制面板"], "spawn": true},
+      {"id": "car_5_sleeper", "name": "5号·卧铺车厢", "events": ["幸存者日记×2", "被污染床铺", "手电筒道具"], "diarySanLoss": 5, "diaryWilThreshold": 50},
+      {"id": "car_6_mail", "name": "6号·货物/邮件车厢", "events": ["货物搜刮补给", "未寄出信件", "无形之子×1"], "searchHpLoss": 1},
+      {"id": "car_7_service", "name": "7号·乘务设备车厢", "events": ["陈慧被困末尾设备间", "求救便签", "无形之子×2堵路"], "npcPresent": "chen_hui"},
+      {"id": "car_8_cabin", "name": "8号·尾车厢", "events": ["修格斯幼体(boss盘踞通道口)", "侧壁紧急虚空疏散通道", "虚空毒雾"], "bossMonster": "proto_shoggoth", "poisonDmgPerTurn": 3, "crawlDmgReduction": 2}
+    ],
+
+    "clues": [
+      {"id": "L1", "location": "car_3_luggage", "content": "散落的乘客护照，日期均为废都799年", "condition": "翻找行李"},
+      {"id": "L2", "location": "car_2_economy", "content": "某乘客手写便签：'广播里说去7号车集合——但我刚刚看到7号车门外有东西在动，乘务员倒在了过道上'", "condition": "PER≥50"},
+      {"id": "L3", "location": "car_1_cab", "content": "列车长尸体颈部黑色粘液（无形之子残留）", "condition": "检查尸体"},
+      {"id": "L4", "location": "car_5_sleeper", "content": "幸存者日记：'它们能模仿声音，我已经分不清谁在说话了'", "condition": "阅读床铺日记"},
+      {"id": "L5", "location": "car_5_sleeper", "content": "日记后页：'陈姐说往7号车跑，她被困在末尾的设备间里'", "condition": "阅读同一本日记后页"},
+      {"id": "L6", "location": "car_4_dining", "content": "广播控制面板：系统日志显示广播在23:47被外部信号劫持", "condition": "PER≥55"},
+      {"id": "L7", "location": "car_7_service", "content": "陈慧本人——掌握全部真相(8号车修格斯幼体+8号车尾逃生路径)", "condition": "找到并对话陈慧"},
+      {"id": "L8", "location": "car_3_luggage", "content": "隧道工程图——标注侧壁紧急疏散通道位置在8号车尾", "condition": "撬开上锁工具箱(STR≥60或使用撬棍)"}
+    ],
+
+    "truthTiers": {
+      "tier1_cluesNeeded": 3,
+      "tier1_effect": "解锁「真相碎片」：提示广播不可信",
+      "tier2_cluesNeeded": 5,
+      "tier2_effect": "解锁「真相拼图」：地图标注陈慧位置+逃生通道位置",
+      "tier3_cluesNeeded": 7,
+      "tier3_effect": "解锁「完全真相」：自动识破一切米·戈伪装"
+    },
+
+    "escapeRules": {
+      "correctPath": "4号餐车→5号卧铺→6号货物厢→7号乘务设备厢→8号尾车厢侧壁紧急虚空疏散通道",
+      "gatewayStrThreshold": 60,
+      "gatewayWeakStr": "STR<60需3回合开启·每回合HP-3",
+      "crawlDamage": 5,
+      "chenHuiCrawlDamage": 3
+    },
+
+    "endings": {
+      "S": {
+        "name": "完全解救",
+        "conditions": "陈慧存活 + 线索≥7 + 未触发修格斯遭遇战",
+        "exp": 30,
+        "mysteryPoint": 60,
+        "trait": "虚实洞察者",
+        "traitEffect": "PER永久+3",
+        "easterEgg": "陈慧跨世界彩蛋链完整开启"
+      },
+      "A": {
+        "name": "安全撤离",
+        "conditions": "陈慧存活 + 成功从紧急通道撤离",
+        "exp": 25,
+        "mysteryPoint": 40,
+        "easterEgg": "陈慧跨世界彩蛋链开启"
+      },
+      "B": {
+        "name": "艰难撤离",
+        "conditions": "陈慧存活但触发修格斯遭遇战·成功驱退后撤离",
+        "exp": 20,
+        "mysteryPoint": 25,
+        "easterEgg": "陈慧存活但受伤·彩蛋内容削减50%"
+      },
+      "C": {
+        "name": "独自撤离",
+        "conditions": "玩家撤离成功但陈慧未找到或遇害",
+        "exp": 15,
+        "mysteryPoint": 15,
+        "easterEgg": "彩蛋永久关闭"
+      },
+      "D": {
+        "name": "失败撤离",
+        "conditions": "HP归零或触发修格斯即死",
+        "exp": 0,
+        "mysteryPoint": 0,
+        "easterEgg": "副本失败·自动退出时序"
+      }
+    },
+
+    "easterEgg": {
+      "prerequisite": "结局S或A（陈慧存活）",
+      "targetWorld": "深海潮汐消亡世界",
+      "targetEra": 1200,
+      "targetLocation": "印斯茅斯渔村",
+      "content": "陈慧经虚空漂流隐居渔村·遗留个人日记、G314车票碎片、虚空漂流观测记录",
+      "linkedSwitch": "日之塔1100年终局抉择——洛雅净化失败→彩蛋完整；净化成功→彩蛋痕迹消失"
+    }
+  }
+}

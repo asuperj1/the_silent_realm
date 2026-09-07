@@ -1,0 +1,83 @@
+{
+  "_description": "青峰山虚空列车·6节车厢点位、道具刷新、触发事件",
+  "_worldTag": "废都轮回消亡世界",
+  "_era": 800,
+
+  "cars": [
+    {
+      "id": "car_1_cab",
+      "name": "1号·驾驶室",
+      "position": 0,
+      "connections": ["car_2_economy"],
+      "mapPoints": [
+        {"id": "pt_cab_body", "type": "interactable", "label": "列车长尸体", "trigger": "inspect_body", "clue": "L3"},
+        {"id": "pt_cab_radio", "type": "device", "label": "列车电台", "trigger": "use_radio", "effect": "接收米·戈假广播 + 可搜索陈慧呼叫频率"},
+        {"id": "pt_cab_window", "type": "observe", "label": "驾驶室车窗", "trigger": "look_window", "effect": "可见虚空裂隙全景·自动SAN-3(WIL≥60豁免)"}
+      ]
+    },
+    {
+      "id": "car_2_economy",
+      "name": "2号·二等座车厢",
+      "position": 1,
+      "connections": ["car_1_cab", "car_3_luggage"],
+      "mapPoints": [
+        {"id": "pt_eco_seats", "type": "search", "label": "混乱座位区", "trigger": "search_seats", "items": ["乘客遗物×5", "便签线索L2(PER≥50)"], "hint": "无形之子粘液痕迹"},
+        {"id": "pt_eco_attic", "type": "danger", "label": "天花板夹层入口", "trigger": "enter_attic", "effect": "触发原始修格斯遭遇战", "warning": "米·戈假情报指向此处"},
+        {"id": "pt_eco_corpses", "type": "interactable", "label": "拟态尸体", "trigger": "inspect_corpses", "counterThreshold": "PER≥55察觉无腐化气味"}
+      ]
+    },
+    {
+      "id": "car_3_luggage",
+      "name": "3号·行李车厢",
+      "position": 2,
+      "connections": ["car_2_economy", "car_4_dining"],
+      "spawnPoint": true,
+      "mapPoints": [
+        {"id": "pt_lug_bags", "type": "search", "label": "散落行李箱", "trigger": "search_luggage", "clue": "L1", "hpLoss": 2, "hint": "玻璃碎片划伤"},
+        {"id": "pt_lug_tools", "type": "loot", "label": "上锁工具箱", "trigger": "pry_toolbox", "requirement": "STR≥60 或 使用撬棍", "items": ["撬棍", "手电筒×2"], "clue": "L8"},
+        {"id": "pt_lug_vent", "type": "observe", "label": "通风口", "trigger": "inspect_vent", "hint": "无形之子渗透通道·可见黑色粘液痕迹"}
+      ]
+    },
+    {
+      "id": "car_4_dining",
+      "name": "4号·餐车",
+      "position": 3,
+      "connections": ["car_3_luggage", "car_5_sleeper"],
+      "mapPoints": [
+        {"id": "pt_din_pantry", "type": "npc", "label": "储物间(陈慧躲藏处)", "trigger": "knock_pantry", "npc": "chen_hui", "clue": "L7", "unlockMethods": ["敲门表明来意(自动通过)", "STR≥55撬门"]},
+        {"id": "pt_din_panel", "type": "device", "label": "广播控制面板", "trigger": "inspect_panel", "clue": "L6", "threshold": "PER≥55"},
+        {"id": "pt_din_lights", "type": "device", "label": "备用照明系统", "trigger": "activate_lights", "effect": "获取额外光源道具·可用于驱退修格斯"}
+      ]
+    },
+    {
+      "id": "car_5_sleeper",
+      "name": "5号·卧铺车厢",
+      "position": 4,
+      "connections": ["car_4_dining", "car_6_tail"],
+      "mapPoints": [
+        {"id": "pt_slp_diary1", "type": "readable", "label": "幸存者日记(上铺)", "trigger": "read_diary_1", "clue": "L4", "sanLoss": 5, "wilThreshold": 50},
+        {"id": "pt_slp_diary2", "type": "readable", "label": "幸存者日记(下铺后页)", "trigger": "read_diary_2", "clue": "L5", "sanLoss": 5, "wilThreshold": 50,
+          "requirement": "已阅读L4后自动解锁"},
+        {"id": "pt_slp_bed", "type": "observe", "label": "被污染床铺", "trigger": "inspect_bed", "hint": "无形之子粘液痕迹·床位编号线索"}
+      ]
+    },
+    {
+      "id": "car_6_tail",
+      "name": "6号·尾车厢",
+      "position": 5,
+      "connections": ["car_5_sleeper"],
+      "exitPoint": true,
+      "mapPoints": [
+        {"id": "pt_tail_spawn", "type": "combat", "label": "无形之子渗透区", "trigger": "enter_tail", "enemies": ["formless_spawn×3+"], "poisonDmgPerTurn": 3, "crawlDmg": 1},
+        {"id": "pt_tail_gate", "type": "exit", "label": "侧壁紧急虚空疏散通道", "trigger": "open_gateway", "requirement": "STR≥60→1回合开启; STR<60→3回合开启"},
+        {"id": "pt_tail_crawl", "type": "escape", "label": "贴地撤离路线", "trigger": "crawl_escape", "fixedDmg": 5, "chenHuiDmg": 3}
+      ]
+    }
+  ],
+
+  "itemDrops": {
+    "crowbar": {"id": "crowbar", "name": "撬棍", "type": "tool", "effect": "可撬开门/工具箱·STR视为+10"},
+    "flashlight": {"id": "flashlight", "name": "手电筒", "type": "light_source", "effect": "驱退无形之子·修格斯驱退光源×1计数"},
+    "first_aid": {"id": "first_aid", "name": "急救包", "type": "consumable", "effect": "恢复HP+20"}
+  }
+}

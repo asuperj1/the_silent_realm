@@ -1,0 +1,627 @@
+[
+  {
+    "id": "fangshi",
+    "name": "方士",
+    "tag": "新职业",
+    "hidden": false,
+    "emoji": "🔮",
+    "color": "#7b68ee",
+    "bonus": {
+      "wil": 15,
+      "per": 10,
+      "con": 5
+    },
+    "passive": {
+      "name": "玄元炁击",
+      "desc": "进入遗迹类副本时预警陷阱，降低畸变诅咒附着概率",
+      "icon": "👁️",
+      "effect": {
+        "trapWarn": true,
+        "curseResist": 0.3
+      }
+    },
+    "skills": [
+      {
+        "name": "符箓镇邪",
+        "desc": "投掷封印符箓，单体禁锢畸变怪物4秒并持续神圣伤害",
+        "icon": "📜",
+        "cooldown": 15,
+        "type": "control",
+        "effect": {
+          "immobilize": 4,
+          "holyDmg": 15,
+          "target": "single"
+        }
+      },
+      {
+        "name": "丹雾护佑",
+        "desc": "释放药雾，小队全员回血并清除疫病类负面状态",
+        "icon": "🌿",
+        "cooldown": 20,
+        "type": "heal",
+        "effect": {
+          "healAll": 25,
+          "cureDisease": true,
+          "target": "all"
+        }
+      }
+    ],
+    "skillTreeId": "fangshi",
+    "mainAttr": "wil",
+    "resource": "炁",
+    "energyDice": "3D6"
+  },
+  {
+    "id": "jiaodoushi",
+    "name": "角斗士",
+    "tag": "新职业",
+    "hidden": false,
+    "emoji": "⚔️",
+    "color": "#c0392b",
+    "bonus": {
+      "str": 15,
+      "con": 10,
+      "dex": 5
+    },
+    "passive": {
+      "name": "嗜血角斗",
+      "desc": "生命值低于40%时物理抗性显著提升，残血坦度增强",
+      "icon": "🛡️",
+      "effect": {
+        "hpThreshold": 0.4,
+        "physResist": 0.35
+      }
+    },
+    "skills": [
+      {
+        "name": "盾击慑敌",
+        "desc": "近战范围重击，击退群怪并强制吸引怪物仇恨",
+        "icon": "🔰",
+        "cooldown": 12,
+        "type": "taunt",
+        "effect": {
+          "knockback": true,
+          "taunt": true,
+          "target": "aoe"
+        }
+      },
+      {
+        "name": "双刃突刺",
+        "desc": "向前冲刺斩击，对前排单体打出高额爆发物理伤害",
+        "icon": "🗡️",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 85,
+          "dash": true,
+          "target": "single"
+        }
+      }
+    ],
+    "skillTreeId": "jiaodoushi",
+    "mainAttr": "str",
+    "resource": "战意",
+    "energyDice": "3D6"
+  },
+  {
+    "id": "lianjinshushi",
+    "name": "炼金术士",
+    "tag": "新职业",
+    "hidden": false,
+    "emoji": "⚗️",
+    "color": "#27ae60",
+    "bonus": {
+      "wil": 15,
+      "per": 10,
+      "con": 5
+    },
+    "passive": {
+      "name": "贤者炼核",
+      "desc": "自身饮用药剂效果时长翻倍，药剂负面副作用免疫",
+      "icon": "🧪",
+      "effect": {
+        "potionDuration": 2,
+        "sideEffectImmune": true
+      }
+    },
+    "skills": [
+      {
+        "name": "腐蚀酸雾",
+        "desc": "抛洒腐蚀药剂形成范围雾区，持续灼烧区域内怪物护甲",
+        "icon": "☠️",
+        "cooldown": 14,
+        "type": "attack",
+        "effect": {
+          "corrosionDmg": 12,
+          "armorShred": 0.2,
+          "duration": 6,
+          "target": "area"
+        }
+      },
+      {
+        "name": "应急爆弹",
+        "desc": "投掷炼金爆弹，造成范围爆炸同时残留灼烧地面",
+        "icon": "🧨",
+        "cooldown": 16,
+        "type": "attack",
+        "effect": {
+          "explosionDmg": 50,
+          "burnGround": true,
+          "burnDmg": 8,
+          "duration": 4,
+          "target": "aoe"
+        }
+      }
+    ],
+    "skillTreeId": "lianjinshushi",
+    "mainAttr": "per",
+    "resource": "剂量",
+    "energyDice": "4D6"
+  },
+  {
+    "id": "haidao",
+    "name": "海盗",
+    "tag": "新职业",
+    "hidden": false,
+    "emoji": "🏴‍☠️",
+    "color": "#b8860b",
+    "skillTreeId": "haidao",
+    "mainAttr": "str",
+    "resource": "酒意",
+    "bonus": {
+      "str": 15,
+      "con": 10,
+      "dex": 5
+    },
+    "passive": {
+      "name": "朗姆酒之歌",
+      "desc": "远程攻击命中叠加增伤层数，酒意越浓输出越烈",
+      "icon": "✨",
+      "effect": {}
+    },
+    "skills": [
+      {
+        "name": "酩酊破击",
+        "desc": "远程流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      },
+      {
+        "name": "醉火暴击",
+        "desc": "近战流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      }
+    ],
+    "energyDice": "3D6"
+  },
+  {
+    "id": "qiangshou",
+    "name": "枪手",
+    "tag": "新职业",
+    "hidden": false,
+    "emoji": "🔫",
+    "color": "#c0392b",
+    "skillTreeId": "qiangshou",
+    "mainAttr": "dex",
+    "resource": "子弹",
+    "bonus": {
+      "dex": 15,
+      "per": 10,
+      "con": 5
+    },
+    "passive": {
+      "name": "弹械本能",
+      "desc": "子弹体系：枪膛上限 6，溢出转为必爆过载",
+      "icon": "✨",
+      "effect": {}
+    },
+    "skills": [
+      {
+        "name": "定点锁髓",
+        "desc": "精准流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "control",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      },
+      {
+        "name": "连环贯孔",
+        "desc": "重火流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      }
+    ],
+    "energyDice": "3D6"
+  },
+  {
+    "id": "qishi",
+    "name": "骑士",
+    "tag": "新职业",
+    "hidden": false,
+    "emoji": "🛡️",
+    "color": "#f1c40f",
+    "skillTreeId": "qishi",
+    "mainAttr": "str",
+    "resource": "怒气",
+    "bonus": {
+      "str": 15,
+      "con": 15
+    },
+    "passive": {
+      "name": "坚铠二重相",
+      "desc": "覆甲/爆甲双形态，切换获得对应增益",
+      "icon": "✨",
+      "effect": {}
+    },
+    "skills": [
+      {
+        "name": "铁壁号令",
+        "desc": "守御流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "defense",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      },
+      {
+        "name": "岿然固守",
+        "desc": "破阵流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "defense",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      }
+    ],
+    "energyDice": "3D6"
+  },
+  {
+    "id": "guanxingzhe",
+    "name": "观星者",
+    "tag": "新职业",
+    "hidden": false,
+    "emoji": "🌌",
+    "color": "#8e44ad",
+    "skillTreeId": "guanxingzhe",
+    "mainAttr": "wil",
+    "resource": "星能",
+    "bonus": {
+      "wil": 15,
+      "per": 10,
+      "con": 5
+    },
+    "passive": {
+      "name": "星辰之力",
+      "desc": "施放技能叠加五行/日月/黑洞印记，强化对应体系",
+      "icon": "✨",
+      "effect": {}
+    },
+    "skills": [
+      {
+        "name": "五星引・碎金",
+        "desc": "五行流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      },
+      {
+        "name": "五星引・繁木",
+        "desc": "日月流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      }
+    ],
+    "energyDice": "3D6"
+  },
+  {
+    "id": "huanfashi",
+    "name": "环法师",
+    "tag": "新职业",
+    "hidden": false,
+    "emoji": "🌀",
+    "color": "#3498db",
+    "skillTreeId": "huanfashi",
+    "mainAttr": "wil",
+    "resource": "魔能",
+    "bonus": {
+      "wil": 20,
+      "per": 10
+    },
+    "passive": {
+      "name": "环枢咏唱",
+      "desc": "每回合随机抽取法术，按环数解锁更强法术",
+      "icon": "✨",
+      "effect": {}
+    },
+    "skills": [
+      {
+        "name": "1环・元素飞弹",
+        "desc": "元素流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      },
+      {
+        "name": "2环・冰缚囚笼",
+        "desc": "光辉流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "control",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      }
+    ],
+    "energyDice": "3D6"
+  },
+  {
+    "id": "zhentan",
+    "name": "侦探",
+    "tag": "新职业",
+    "hidden": false,
+    "emoji": "🔍",
+    "color": "#8e44ad",
+    "skillTreeId": "zhentan",
+    "mainAttr": "per",
+    "resource": "探知值",
+    "bonus": {
+      "per": 20,
+      "wil": 10
+    },
+    "passive": {
+      "name": "罪证溯源",
+      "desc": "收集线索提升全队伤害与减伤，探知真相",
+      "icon": "✨",
+      "effect": {}
+    },
+    "skills": [
+      {
+        "name": "痕迹捕捉",
+        "desc": "溯源免疫流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      },
+      {
+        "name": "伤痕溯源",
+        "desc": "洞悉看破流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      }
+    ],
+    "energyDice": "3D6"
+  },
+  {
+    "id": "baifuzhang",
+    "name": "百夫长",
+    "tag": "新职业",
+    "hidden": false,
+    "emoji": "🏛️",
+    "color": "#e67e22",
+    "skillTreeId": "baifuzhang",
+    "mainAttr": "str",
+    "resource": "战力",
+    "bonus": {
+      "str": 15,
+      "con": 10,
+      "dex": 5
+    },
+    "passive": {
+      "name": "五段战姿",
+      "desc": "五段战姿：刀盾姿态切换，攻防数值随之变化",
+      "icon": "✨",
+      "effect": {}
+    },
+    "skills": [
+      {
+        "name": "双刃横斩",
+        "desc": "狂刃持刀流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      },
+      {
+        "name": "破甲刺击",
+        "desc": "坚壁持盾流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      }
+    ],
+    "energyDice": "3D6"
+  },
+  {
+    "id": "wushi",
+    "name": "武士",
+    "tag": "新职业",
+    "hidden": false,
+    "emoji": "🗡️",
+    "color": "#2c3e50",
+    "skillTreeId": "wushi",
+    "mainAttr": "dex",
+    "resource": "禅意",
+    "bonus": {
+      "dex": 15,
+      "wil": 10,
+      "con": 5
+    },
+    "passive": {
+      "name": "架势条",
+      "desc": "架势条：格挡/招架/反击三态，禅意转化",
+      "icon": "✨",
+      "effect": {}
+    },
+    "skills": [
+      {
+        "name": "凝神蓄势",
+        "desc": "招架守势流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      },
+      {
+        "name": "基础居合格挡",
+        "desc": "影刃无双流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      }
+    ],
+    "energyDice": "2D6"
+  },
+  {
+    "id": "guishuxiaochou",
+    "name": "诡术小丑",
+    "tag": "新职业",
+    "hidden": false,
+    "emoji": "🎭",
+    "color": "#ff6b35",
+    "skillTreeId": "guishuxiaochou",
+    "mainAttr": "dex",
+    "resource": "狂欢能量",
+    "bonus": {
+      "dex": 15,
+      "per": 10,
+      "con": 5
+    },
+    "passive": {
+      "name": "戏法铸刃",
+      "desc": "能量铸就必中小刀，暴击时伤害翻倍",
+      "icon": "✨",
+      "effect": {}
+    },
+    "skills": [
+      {
+        "name": "能量铸刃",
+        "desc": "杂技闪避流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      },
+      {
+        "name": "基础甩手投掷",
+        "desc": "狂刃小刀流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      }
+    ],
+    "energyDice": "2D6"
+  },
+  {
+    "id": "jingguan",
+    "name": "警官",
+    "tag": "新职业",
+    "hidden": false,
+    "emoji": "⭐",
+    "color": "#2980b9",
+    "skillTreeId": "jingguan",
+    "mainAttr": "str",
+    "resource": "正义值",
+    "bonus": {
+      "str": 15,
+      "con": 15
+    },
+    "passive": {
+      "name": "正义处决",
+      "desc": "正义处决：对生命低于 15% 的敌人直接斩杀",
+      "icon": "✨",
+      "effect": {}
+    },
+    "skills": [
+      {
+        "name": "近身锁控",
+        "desc": "铁壁格挡流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "control",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      },
+      {
+        "name": "擒抱摔击",
+        "desc": "正义壁垒流派技能（normal品级）",
+        "icon": "✦",
+        "cooldown": 10,
+        "type": "attack",
+        "effect": {
+          "physDmg": 40,
+          "target": "single"
+        }
+      }
+    ],
+    "energyDice": "2D6"
+  }
+]
