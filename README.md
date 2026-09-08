@@ -6,9 +6,8 @@
 >
 > 本仓库 `main` 现封存 **Web 页游版**（原生 HTML/CSS/JS 前端 + Node/Express/Socket.IO 服务器 + DeepSeek AI(KP)）。
 >
-> - 📦 封存提交/标签：`v2026.09-web-legacy`
-> - 🌿 只读存档分支：`archive/web-page`
-> - 🚧 下一步：项目将启动 **C++ + 游戏引擎（Epic 发布 · 饥荒式联机）桌面重构**，重构将在独立开发分支进行（此 Web 版仅作历史存档与玩法对照）。
+> - 📦 封存标签：`v2026.09-web-legacy`
+> - 🚧 下一步：**C++ + 游戏引擎（Epic 发布 · 饥荒式联机）桌面重构**将在**另建的独立仓库**中进行；本仓库仅为历史存档与玩法对照。详见 [`MIGRATION.md`](MIGRATION.md)。
 > - ▶️ 运行本版：`npm install && npm start` → 浏览器访问 `http://localhost:3000`
 
 ---
