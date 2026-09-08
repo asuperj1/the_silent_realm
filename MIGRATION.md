@@ -7,9 +7,26 @@
 | 项 | 说明 |
 | --- | --- |
 | 当前内容 | Web 页游版：原生 HTML/CSS/JS 前端 + Node/Express/Socket.IO 服务器 + DeepSeek AI(KP) |
-| 封存点 | 提交 `d87b1d8` · 标签 `v2026.09-web-legacy` · 分支 `main`（唯一分支） |
+| 封存点 | 提交 `d87b1d8` · 标签 `v2026.09-web-legacy` · 分支 `main` |
 | 维护状态 | **只读存档**，不再迭代功能 |
 | 下一版本 | C++ + 游戏引擎（Epic 发布 · 饥荒式联机）桌面重构 → 将**另建独立仓库**开发 |
+
+## 分支结构
+
+仓库按「类别」拆成 **1 个全量分支 + 6 个模块归档分支**（均派生自同一封存点，历史同源）：
+
+| 分支 | 内容 |
+| --- | --- |
+| `main` | **全量存档**（所有模块，完整可运行，默认/完整浏览入口） |
+| `module/server` | 仅 `server/`（Node 服务端） |
+| `module/frontend` | 仅 `frontend/` + `public/`（前端） |
+| `module/config` | 仅 `config/`（职业/技能/怪物/物品数值配置） |
+| `module/assets` | 仅 `assets/` + `bgm/`（2D 美术 / 音乐） |
+| `module/docs` | 仅 `docs/`（设计文档） |
+| `module/native` | 仅 `native/`（C++ ECS 预研） |
+
+> - 每个模块分支只含对应类别文件 + 一份说明 `README.md`，用于按类浏览 / 备份。
+> - **完整项目与运行请用 `main`**（模块分支为归档视图，不可单独运行）。
 
 ## 为什么另建仓库
 
@@ -39,8 +56,9 @@ npm test           # 运行测试（24 项）
 ## 从封存版恢复/对照
 
 ```bash
-git checkout main            # 本仓库唯一分支
-git tag v2026.09-web-legacy  # 封存锚点（已存在）
+git checkout main             # 全量存档分支（完整可运行）
+git checkout module/server    # 查看服务端归档视图（其余 module/* 同理）
+git tag v2026.09-web-legacy   # 封存锚点（已存在）
 ```
 
 下一版本开发请使用新建仓库；如需复用现有资产（`assets/` 美术、`config/` 数值、`docs/` 方案），从本仓库直接拷贝即可。
