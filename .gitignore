@@ -38,3 +38,7 @@ logs/
 # 运行时用户数据（账号 / 角色存档）
 data/users.json
 data/characters/
+
+# 运行时会话 / 市场状态（每次运行产生，不入库）
+data/rooms/
+data/market.json

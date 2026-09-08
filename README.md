@@ -1,4 +1,19 @@
 <p align="center">
+  <img src="https://img.shields.io/badge/status-%E5%B0%81%E5%AD%98%20%7C%20Web%20%E9%A1%B5%E6%B8%B8%E7%89%88-8A8F98" alt="status"/>
+</p>
+
+> ## 🏷️ 版本封存公告
+>
+> 本仓库 `main` 现封存 **Web 页游版**（原生 HTML/CSS/JS 前端 + Node/Express/Socket.IO 服务器 + DeepSeek AI(KP)）。
+>
+> - 📦 封存提交/标签：`v2026.09-web-legacy`
+> - 🌿 只读存档分支：`archive/web-page`
+> - 🚧 下一步：项目将启动 **C++ + 游戏引擎（Epic 发布 · 饥荒式联机）桌面重构**，重构将在独立开发分支进行（此 Web 版仅作历史存档与玩法对照）。
+> - ▶️ 运行本版：`npm install && npm start` → 浏览器访问 `http://localhost:3000`
+
+---
+
+<p align="center">
   <img src="https://img.shields.io/badge/平台-Web-blueviolet" alt="platform"/>
   <img src="https://img.shields.io/badge/Node.js-%3E%3D18-339933?logo=nodedotjs&logoColor=white" alt="node"/>
   <img src="https://img.shields.io/badge/Socket.IO-4.x-010101?logo=socket.io" alt="socketio"/>
